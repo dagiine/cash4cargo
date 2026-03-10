@@ -1,0 +1,94 @@
+body{
+    font-family: 'Inter', sans-serif;
+    background:#0B0C10;
+    color:white;
+    margin:0;
+}
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 60px;
+    border-bottom:1px solid #333;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#ffd900;
+}
+
+nav{
+    display:flex;
+    gap:30px;
+}
+
+nav a{
+    color:#ccc;
+    text-decoration:none;
+    font-weight:600;
+}
+
+nav a:hover{
+    color:#ffd900;
+}
+
+.primary-btn{
+    background:#ffd900;
+    border:none;
+    padding:10px 20px;
+    font-weight:bold;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.hero{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:80px 60px;
+    gap:60px;
+}
+
+.hero-text h1{
+    font-size:60px;
+    font-weight:900;
+}
+
+.hero-text span{
+    color:#ffd900;
+}
+
+.hero-text p{
+    color:#aaa;
+    margin-top:10px;
+    max-width:500px;
+}
+
+.track-box{
+    margin-top:30px;
+    display:flex;
+}
+
+.track-box input{
+    padding:12px;
+    width:250px;
+    border:none;
+    border-radius:6px 0 0 6px;
+}
+
+.track-box button{
+    background:#ffd900;
+    border:none;
+    padding:12px 20px;
+    font-weight:bold;
+    border-radius:0 6px 6px 0;
+    cursor:pointer;
+}
+
+.hero-image img{
+    width:500px;
+    border-radius:16px;
+}
