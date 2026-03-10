@@ -1,55 +1,151 @@
 <!DOCTYPE html>
 <html class="dark" lang="en">
+
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
 <link rel="stylesheet" href="style.css">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet"/>
 
 <title>China2MN Cargo | Shipping Simplified</title>
 </head>
 
-<body class="font-display bg-deep-black text-white min-h-screen">
+<body class="font-display dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen bg-deep-black">
+
+<div class="container-main">
 
 <header class="header">
-    <div class="logo">
-        <span class="material-symbols-outlined">local_shipping</span>
-        <h2>China2MN Cargo</h2>
-    </div>
+<div class="logo">
+<div class="logo-icon">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<h2>China2MN Cargo</h2>
+</div>
 
-    <nav>
-        <a href="#">Home</a>
-        <a href="#">Track</a>
-        <a href="#">Create Order</a>
-        <a href="#">Pricing</a>
-        <a href="#">Support</a>
-    </nav>
+<nav class="nav">
+<a href="#">Home</a>
+<a href="#">Track</a>
+<a href="#">Create Order</a>
+<a href="#">Pricing</a>
+<a href="#">Support</a>
+</nav>
 
-    <button class="primary-btn">Get Started</button>
+<button class="btn-primary">Get Started</button>
 </header>
 
+
 <section class="hero">
-    <div class="hero-text">
-        <h1>China to Mongolia <span>Shipping Simplified</span></h1>
-        <p>
-        Fast, secure, and transparent cargo solutions. The bridge between your business and the Mongolian market.
-        </p>
 
-        <div class="track-box">
-            <input type="text" placeholder="Enter Tracking Code (e.g. MN-12345)">
-            <button>Search</button>
-        </div>
-    </div>
+<div class="hero-text">
 
-    <div class="hero-image">
-        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqtTwBGCPnmLUOgkb7CkIQfhbNxdCX8lrzXNCinAkkNq4sAKdGpPSf4SXlHSxwQ1lXvJPaGPNUTDDxwjKtk7rt3SLKANHlqsJhmyjcEUG0QjV0SyAefMMbUxSdI9WSfDUjIuIViCKnL74fNetIwn_4IinxOr1nLQug3y3TB9_PySJ4oOS2fYA42k8qF_Ou14OD6TICSWtybZhv7xxM1tPEDi_g493sdexyHRPgvFC8nsDP39pQy0fEP-VFfD5Ly3uTUHOVXUqIA-kj">
-    </div>
+<h1>
+China to Mongolia
+<span>Shipping Simplified</span>
+</h1>
+
+<p>
+Fast, secure, and transparent cargo solutions. The bridge between your business and the Mongolian market.
+</p>
+
+<div class="track-box">
+
+<label>Quick Track</label>
+
+<div class="track-input">
+<input type="text" placeholder="Enter Tracking Code (e.g. MN-12345)">
+<button>
+<span class="material-symbols-outlined">search</span>
+</button>
+</div>
+
+</div>
+
+<button class="btn-big">Create New Order</button>
+
+</div>
+
+
+<div class="hero-image">
+<img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqtTwBGCPnmLUOgkb7CkIQfhbNxdCX8lrzXNCinAkkNq4sAKdGpPSf4SXlHSxwQ1lXvJPaGPNUTDDxwjKtk7rt3SLKANHlqsJhmyjcEUG0QjV0SyAefMMbUxSdI9WSfDUjIuIViCKnL74fNetIwn_4IinxOr1nLQug3y3TB9_PySJ4oOS2fYA42k8qF_Ou14OD6TICSWtybZhv7xxM1tPEDi_g493sdexyHRPgvFC8nsDP39pQy0fEP-VFfD5Ly3uTUHOVXUqIA-kj">
+</div>
+
 </section>
+
+
+<section class="stats">
+
+<div class="stat">
+<h3>5000+</h3>
+<p>Shipments</p>
+</div>
+
+<div class="stat">
+<h3>1200+</h3>
+<p>Clients</p>
+</div>
+
+<div class="stat">
+<h3>3-7</h3>
+<p>Delivery Days</p>
+</div>
+
+</section>
+
+
+<section class="price">
+
+<h2>Shipping Price Calculator</h2>
+<p>Get an instant estimate for your shipment from China to Mongolia.</p>
+
+<div class="price-grid">
+
+<div>
+<label>Weight (kg)</label>
+<input type="number" placeholder="0.00">
+</div>
+
+<div>
+<label>Length (cm)</label>
+<input type="number" placeholder="0">
+</div>
+
+<div>
+<label>Width (cm)</label>
+<input type="number" placeholder="0">
+</div>
+
+<div>
+<label>Height (cm)</label>
+<input type="number" placeholder="0">
+</div>
+
+</div>
+
+<button class="btn-big">Calculate Quote</button>
+
+</section>
+
+
+<footer class="footer">
+
+<h3>China2MN Cargo</h3>
+
+<p>
+The leading logistics provider specializing in seamless trade between China and Mongolia.
+</p>
+
+<p class="copyright">
+© 2024 China2MN Cargo. All rights reserved.
+</p>
+
+</footer>
+
+</div>
 
 </body>
 </html>
