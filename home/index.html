@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>China2MN Cargo</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <header>
+    <a href="/" class="logo">
+      <span class="logo-icon">
+        <img src="logo.png" alt="China2MN Cargo Logo" />
+      </span>
+      China2MN Cargo
+    </a>
+
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Track</a></li>
+        <li><a href="#">Create Order</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Support</a></li>
+      </ul>
+    </nav>
+
+    <button class="btn">Sign In</button>
+    <!-- <button class="btn" onclick="document.getElementById('signin-modal').style.display='flex'">Sign in</button> -->
+  </header>
+
+  <!-- Sign In hiih tsonh (claude)
+  <div id="signin-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;">
+    <div style="background:#fff;padding:32px;border-radius:12px;min-width:320px;position:relative;">
+      <button onclick="document.getElementById('signin-modal').style.display='none'" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.2rem;cursor:pointer;">✕</button>
+      <h2>Sign In</h2>
+      <p>Sign in to your China2MN Cargo account.</p>
+      <label>Email<br/><input type="email" placeholder="you@example.com" style="width:100%;margin:8px 0 16px;padding:8px;" /></label>
+      <label>Password<br/><input type="password" placeholder="••••••••" style="width:100%;margin:8px 0 16px;padding:8px;" /></label>
+      <button class="btn" style="width:100%;">Sign In</button>
+    </div>
+  </div>
+  -->
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-text">
+        <h1>China to Mongolia <span>Shipping Simplified</span></h1>
+        <p>Fast, secure, and transparent cargo solutions. The bridge between your business and the Mongolian market.</p>
+
+        <div class="track">
+          <label>Quick Track</label>
+          <div class="track-input">
+            <input type="text" placeholder="Enter Tracking Code (e.g. MN-12345)" />
+            <button>
+              <span class="material-symbols-outlined">search</span>
+            </button>
+          </div>
+        </div>
+
+        <a href="#" class="btn big">Create New Order</a>
+      </div>
+
+      <div class="hero-img">
+        <img src="hero-img.png" alt="Cargo warehouse"/>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+      <article class="stat">
+        <strong>5000+</strong>
+        <span>Shipments</span>
+      </article>
+      <article class="stat">
+        <strong>1200+</strong>
+        <span>Clients</span>
+      </article>
+      <article class="stat">
+        <strong>3–7</strong>
+        <span>Delivery Days</span>
+      </article>
+    </section>
+
+    <!-- Calculator -->
+    <section class="calc">
+      <h2>Shipping Price Calculator</h2>
+      <p>Get an instant estimate for your shipment from China to Mongolia.</p>
+
+      <form>
+        <div class="fields">
+          <div class="field">
+            <label for="weight">Weight (kg)</label>
+            <input id="weight" type="number" placeholder="0.00" />
+          </div>
+          <div class="field">
+            <label for="length">Length (cm)</label>
+            <input id="length" type="number" placeholder="0" />
+          </div>
+          <div class="field">
+            <label for="width">Width (cm)</label>
+            <input id="width" type="number" placeholder="0" />
+          </div>
+          <div class="field">
+            <label for="height">Height (cm)</label>
+            <input id="height" type="number" placeholder="0" />
+          </div>
+        </div>
+        <button type="submit" class="btn big">Calculate Quote</button>
+      </form>
+    </section>
+
+    <!-- Services -->
+    <section class="services">
+      <h2>Premium Logistics Services</h2>
+      <p>We've optimized every mile of the journey to ensure your supply chain never stops.</p>
+
+      <div class="cards">
+        <article class="card">
+          <span class="material-symbols-outlined">bolt</span>
+          <h3>Fast Delivery</h3>
+          <p>Optimized routes and priority customs clearance ensure your goods arrive in record time across the border.</p>
+        </article>
+        <article class="card">
+          <span class="material-symbols-outlined">verified_user</span>
+          <h3>Secure Cargo</h3>
+          <p>Full insurance coverage and professional handling protocols for peace of mind from pickup to drop-off.</p>
+        </article>
+        <article class="card">
+          <span class="material-symbols-outlined">monitoring</span>
+          <h3>Real-time Tracking</h3>
+          <p>Advanced GPS monitoring and automated status updates so you always know exactly where your shipment is.</p>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="/" class="logo">
+          <span class="logo-icon">
+            <span class="material-symbols-outlined">
+              <img src="logo.png" alt="China2MN Cargo Logo" />
+            </span>
+          </span>
+          China2MN Cargo
+        </a>
+        <p>The leading logistics provider specializing in seamless trade between China and Mongolia.</p>
+      </div>
+
+      <div class="footer-links">
+        <section>
+          <h4>Solutions</h4>
+          <a href="#">Air Freight</a>
+          <a href="#">Road Transport</a>
+          <a href="#">Warehousing</a>
+        </section>
+        <section>
+          <h4>Company</h4>
+          <a href="#">About Us</a>
+          <a href="#">Contact</a>
+          <a href="#">Careers</a>
+        </section>
+        <section>
+          <h4>Legal</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </section>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <small>© 2026 China2MN Cargo. All rights reserved.</small>
+    </div>
+  </footer>
+
+</body>
+</html>
