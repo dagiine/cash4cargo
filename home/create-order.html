@@ -7,52 +7,71 @@
       <link rel="stylesheet" href="create-order.css" />
 </head>
 <body>
-    <main class="create-order-page">
-  <article class="order-card">
+    <header>
+    <a href="#" class="logo">
+      <span class="logo-icon">
+        <img src="logo.png" alt="Cash 4 Cargo Logo" />
+      </span>
+      Cash 4 Cargo
+    </a>
+
+    <nav>
+      <ul>
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="#">Track</a></li>
+        <li><a href="./create-order.html">Create Order</a></li>
+        <li><a href="#">Pricing</a></li>
+        <li><a href="#">Support</a></li>
+      </ul>
+    </nav>
+
+    <button class="btn">Sign In</button>
+    <!-- <button class="btn" onclick="document.getElementById('signin-modal').style.display='flex'">Sign in</button> -->
+  </header>
+  
+  <main class="create-order-page">
+    <article class="order-card">
     
-    <div class="order-header">
       <h1>Create New Order</h1>
       <p>Enter your shipment details from China to Mongolia.</p>
-    </div>
 
-    <form class="order-form">
-      
-      <div class="field">
-        <label for="phone">Phone Number</label>
-        <div class="input-box">
-          <span class="input-icon">📞</span>
-          <input type="text" id="phone" placeholder="+976 XXXX XXXX">
+      <form class="order-form">
+        <div class="field">
+          <label for="phone">Phone Number</label>
+            <div class="input-box">
+              <span class="input-icon">📞</span>
+              <input type="text" id="phone" placeholder="+976 XXXX XXXX">
+            </div>
+        </div>  
+
+        <div class="field">
+          <label for="tracking">China Tracking Code</label>
+          <div class="input-box">
+            <span class="input-icon">📦</span>
+            <input type="text" id="tracking" placeholder="Enter 12-digit tracking number">
+          </div>
         </div>
-      </div>
 
-      <div class="field">
-        <label for="tracking">China Tracking Code</label>
-        <div class="input-box">
-          <span class="input-icon">📦</span>
-          <input type="text" id="tracking" placeholder="Enter 12-digit tracking number">
+        <div class="field">
+          <label for="description">Item Description</label>
+          <div class="input-box">
+            <span class="input-icon">📄</span>
+            <textarea id="description" placeholder="List the items in your package..."></textarea>
+          </div>
         </div>
-      </div>
 
-      <div class="field">
-        <label for="description">Item Description</label>
-        <div class="input-box textarea-box">
-          <span class="input-icon">📄</span>
-          <textarea id="description" placeholder="List the items in your package..."></textarea>
-        </div>
-      </div>
+        <button type="submit" class="btn">
+          ✔ Confirm Order
+        </button>
 
-      <button type="submit" class="btn big">
-        ✔ Confirm Order
-      </button>
+        <small class="order-note">
+          By confirming, you agree to our Terms of Service and Shipping Policies.
+        </small>
 
-      <small class="order-note">
-        By confirming, you agree to our Terms of Service and Shipping Policies.
-      </small>
+      </form>
 
-    </form>
-
-  </article>
-</main>
+    </article>
+  </main>
     
 </body>
 </html>
