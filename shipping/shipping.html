@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>China2MN Cargo — Shipping Rates</title>
+
+  <!--
+    ДАРААЛАЛ ЧУХАЛ:
+    1. styles.css  — variables, reset, .btn, header, logo
+    2. shipping.css — энэ хуудасны тусгай стилүүд
+  -->
+  <link rel="stylesheet" href="../home/styles.css" />
+  <link rel="stylesheet" href="shipping.css" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../js/shipping.js">
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       HEADER  (styles.css-ийн header, .logo, .btn)
+  ═══════════════════════════════════════════════ -->
+  <header>
+    <a href="./index.html" class="logo">
+      <span class="logo-icon">
+        <img src="./pics/logo.png" alt="Cash 4 Cargo Logo" />
+      </span>
+      Cash 4 Cargo
+    </a>
+
+    <nav>
+      <ul>
+        <li><a href="../home/index.html" class="active">Нүүр</a></li>
+        <li><a href="../track/track.html">Захиалга хянах</a></li>
+        <li><a href="../create-order/create-order.html">Захиалга үүсгэх</a></li>
+        <li><a href="../shipping/shipping.html">Үнэ</a></li>
+        <li><a href="../support/support.html">Тусламж</a></li>
+      </ul>
+    </nav>
+
+    <label for="signin-toggle" class="btn">Нэвтрэх</label>
+  </header>
+
+
+  <!-- ══════════════════════════════════════════
+       MAIN
+  ═══════════════════════════════════════════════ -->
+  <main class="sh-main">
+
+    <!-- HERO -->
+    <div class="sh-hero">
+      <h1>Shipping Rates &amp; Calculator</h1>
+      <p>Transparent and competitive pricing for all your logistics needs from China to Mongolia. Calculate your costs in seconds.</p>
+    </div>
+
+    <!-- TWO-COLUMN LAYOUT -->
+    <div class="sh-layout">
+
+      <!-- ════ LEFT — Price Calculator ════ -->
+      <section class="sh-calc" aria-labelledby="calc-title">
+
+        <h2 id="calc-title" class="sh-calc__title">
+          <span class="sh-calc__icon" aria-hidden="true">
+            <span class="material-symbols-outlined" style="font-size:16px;line-height:1">calculate</span>
+          </span>
+          Price Calculator
+        </h2>
+
+        <form id="calc-form" class="sh-calc__form" novalidate>
+
+          <div class="field">
+            <label for="sh-weight">Weight (kg)</label>
+            <input id="sh-weight" type="number" placeholder="0.0" min="0" step="0.1" />
+          </div>
+
+          <div class="sh-dims">
+            <div class="field">
+              <label for="sh-length">Length (cm)</label>
+              <input id="sh-length" type="number" placeholder="0" min="0" />
+            </div>
+            <div class="field">
+              <label for="sh-width">Width (cm)</label>
+              <input id="sh-width" type="number" placeholder="0" min="0" />
+            </div>
+            <div class="field">
+              <label for="sh-height">Height (cm)</label>
+              <input id="sh-height" type="number" placeholder="0" min="0" />
+            </div>
+          </div>
+
+          <button type="submit" class="btn big">Calculate Shipping →</button>
+        </form>
+
+        <!-- JS энд result бичнэ -->
+        <div id="calc-result" class="calc-result" aria-live="polite"></div>
+
+      </section>
+
+
+      <!-- ════ RIGHT COLUMN ════ -->
+      <div class="sh-right">
+
+        <!-- AVAILABLE SHIPPING METHODS -->
+        <section class="sh-methods" aria-labelledby="methods-title">
+          <h2 id="methods-title" class="sh-section-title">Available Shipping Methods</h2>
+          <p id="methods-summary" class="sh-methods__summary"></p>
+
+          <div class="sh-table" role="table" aria-label="Тээврийн аргууд">
+            <div class="sh-table__head" role="row">
+              <span role="columnheader">Method</span>
+              <span role="columnheader">Delivery Time</span>
+              <span role="columnheader">Price Per KG</span>
+              <span role="columnheader">Action</span>
+            </div>
+            <!-- JS мөрүүдийг энд оруулна -->
+            <div id="methods-body" role="rowgroup"></div>
+          </div>
+        </section>
+
+        <!-- PROHIBITED ITEMS -->
+        <section class="sh-prohibited" aria-labelledby="prohibited-title">
+          <h2 id="prohibited-title" class="sh-section-title">
+            <span class="sh-warn" aria-label="Анхааруулга">⚠</span>
+            Prohibited Items
+          </h2>
+          <p class="sh-prohibited__desc">
+            To ensure safe and legal transport, the following items cannot be shipped under any circumstances:
+          </p>
+          <!-- JS карт үүсгэнэ -->
+          <div id="prohibited-grid" class="sh-prohibited__grid"></div>
+        </section>
+
+      </div><!-- /.sh-right -->
+    </div><!-- /.sh-layout -->
+  </main>
+
+
+  <!-- ══════════════════════════════════════════
+       FOOTER  (styles.css-ийн footer стиль)
+  ═══════════════════════════════════════════════ -->
+  <footer>
+    <section class="footer-top">
+
+      <!-- Brand -->
+      <section class="footer-brand">
+        <a href="/" class="logo">
+          <span class="logo-icon">
+            <img src="pics/logo.png" alt="Cash 4 Cargo Logo" />
+          </span>
+          Cash 4 Cargo
+        </a>
+        <p>
+          Хятадаас Монгол руу найдвартай, хурдан мэргэжлийн үйлчилгээ.
+        </p>
+      </section>
+
+      <address class="footer-contact">
+
+        <ul>
+          <li class="footer-contact-item">
+            <span class="material-symbols-outlined">call</span>
+            <p>
+              <a href="tel:+97699447176">99447176</a>
+            </p>
+          </li>
+
+          <li class="footer-contact-item">
+            <span class="material-symbols-outlined">schedule</span>
+            <p>
+              Даваа–Баасан: 09:00–18:00<br>
+              Бямба: 10:00–15:00<br>
+              Ням: Амарна
+            </p>
+          </li>
+
+          <li class="footer-contact-item">
+            <span class="material-symbols-outlined">language</span>
+            <p>
+              <a href="https://www.kingcargo.mn" target="_blank">
+                www.kingcargo.mn
+              </a>
+            </p>
+          </li>
+
+          <li class="footer-contact-item">
+            <span class="material-symbols-outlined">thumb_up</span>
+            <p>
+              <a href="https://facebook.com/kingcargo" target="_blank">
+                kingcargo
+              </a>
+            </p>
+          </li>
+        </ul>
+
+      </address>
+
+    </section>
+
+    <!-- Bottom copyright -->
+    <section class="footer-bottom">
+      <small>
+        © 2026 Cash 4 Cargo. Бүх эрх хуулиар хамгаалагдсан.
+      </small>
+    </section>
+
+  </footer>
+  <script src="../js/shipping.js"></script>
+
+</body>
+</html>

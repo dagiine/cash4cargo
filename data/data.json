@@ -1,0 +1,30 @@
+[
+  {
+    "trackCode": "MN-12345",
+    "phone": "99112233",
+    "status": "Улаанбаатарт ирсэн",
+    "weight": 12.5,
+    "price": 35000
+  },
+  {
+    "trackCode": "MN-67890",
+    "phone": "99447176",
+    "status": "Замын Үүд дээр",
+    "weight": 5.0,
+    "price": 15000
+  },
+  {
+    "trackCode": "MN-11111",
+    "phone": "99447176",
+    "status": "Хятадын агуулахад",
+    "weight": 2.5,
+    "price": 8000
+  },
+  {
+    "trackCode": "MN-22222",
+    "phone": "88990011",
+    "status": "Олгогдсон",
+    "weight": 8.0,
+    "price": 24000
+  }
+]
