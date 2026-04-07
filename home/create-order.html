@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="create-order.css" />
+  </head>
+  <body>
+    <header>
+      <a href="#" class="logo">
+        <span class="logo-icon">
+          <img src="logo.png" alt="Cash 4 Cargo Logo" />
+        </span>
+        Cash 4 Cargo
+      </a>
+
+      <nav>
+        <ul>
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="#">Track</a></li>
+          <li><a href="./create-order.html">Create Order</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+      </nav>
+
+      <button class="btn">Sign In</button>
+      <!-- <button class="btn" onclick="document.getElementById('signin-modal').style.display='flex'">Sign in</button> -->
+    </header>
+
+    <main class="create-order-page">
+      <article class="order-card">
+        <h1>Create New Order</h1>
+        <p>Enter your shipment details from China to Mongolia.</p>
+
+        <form class="order-form">
+          <div class="field">
+            <label for="phone">Phone Number</label>
+            <div class="input-box">
+              <span class="input-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                  ></path>
+                </svg>
+              </span>
+              <input type="text" id="phone" placeholder="+976 XXXX XXXX" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="tracking">China Tracking Code</label>
+            <div class="input-box">
+              <span class="input-icon"
+                ><svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <!-- Corner Brackets -->
+                  <path
+                    d="M7 3H5a2 2 0 0 0-2 2v2M17 3h2a2 2 0 0 1 2 2v2M7 21H5a2 2 0 0 1-2-2v-2M17 21h2a2 2 0 0 0 2-2v-2"
+                  />
+                  <!-- QR Box Area -->
+                  <rect x="7" y="7" width="3" height="3" />
+                  <rect x="14" y="7" width="3" height="3" />
+                  <rect x="7" y="14" width="3" height="3" />
+                  <rect x="14" y="14" width="3" height="3" />
+                </svg>
+              </span>
+              <input
+                type="text"
+                id="tracking"
+                placeholder="Enter 12-digit tracking number"
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="description">Item Description</label>
+            <div class="input-box">
+              <span class="input-icon"
+                ><svg
+                  class="w-6 h-6 text-gray-800 dark:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M10 3v4a1 1 0 0 1-1 1H5m14-4v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z"
+                  />
+                </svg>
+              </span>
+              <textarea
+                id="description"
+                placeholder="List the items in your package..."
+              ></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+  <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z" clip-rule="evenodd"/>
+</svg>
+ Confirm Order</button>
+
+          <small class="order-note">
+            By confirming, you agree to our Terms of Service and Shipping
+            Policies.
+          </small>
+        </form>
+      </article>
+    </main>
+  </body>
+</html>
