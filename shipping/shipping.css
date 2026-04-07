@@ -1,16 +1,3 @@
-/* =============================================
-   SHIPPING RATES PAGE — shipping.css
-   Load ORDER: styles.css FIRST, then this file.
-   <link rel="stylesheet" href="styles.css" />
-   <link rel="stylesheet" href="shipping.css" />
-   ============================================= */
-
-
-/* ─────────────────────────────────────────────
-   1. HEADER EXTRAS
-   (styles.css already covers header layout,
-    .logo, .btn — we only add the login variant)
-   ───────────────────────────────────────────── */
 
 .btn-login {
   background:  transparent !important;
@@ -24,9 +11,7 @@
 }
 
 
-/* ─────────────────────────────────────────────
-   2. HERO
-   ───────────────────────────────────────────── */
+
 
 .sh-hero {
   padding:    48px var(--space-page) 28px;
@@ -47,10 +32,7 @@
 }
 
 
-/* ─────────────────────────────────────────────
-   3. TWO-COLUMN LAYOUT
-   left: sticky calculator  |  right: sections
-   ───────────────────────────────────────────── */
+
 
 .sh-layout {
   display:               grid;
@@ -67,9 +49,6 @@
 }
 
 
-/* ─────────────────────────────────────────────
-   4. PRICE CALCULATOR  (left panel)
-   ───────────────────────────────────────────── */
 
 .sh-calc {
   /*background:    var(--color-surface);*/
@@ -108,8 +87,6 @@
   gap:            16px;
 }
 
-/* ── Field — scoped to .sh-calc to avoid
-      conflicting with styles.css .calc .field ── */
 
 .sh-calc .field {
   display:        flex;
@@ -153,9 +130,7 @@
 }
 
 
-/* ─────────────────────────────────────────────
-   5. CALCULATOR RESULT BOX
-   ───────────────────────────────────────────── */
+
 
 .calc-result { margin-top: 18px; }
 
@@ -200,9 +175,7 @@
 }
 
 
-/* ─────────────────────────────────────────────
-   6. SHARED SECTION TITLE
-   ───────────────────────────────────────────── */
+
 
 .sh-section-title {
   display:       flex;
@@ -225,9 +198,7 @@
 }
 
 
-/* ─────────────────────────────────────────────
-   7. AVAILABLE SHIPPING METHODS
-   ───────────────────────────────────────────── */
+
 
 .sh-methods {
   /*background:    var(--color-surface);*/
@@ -258,7 +229,7 @@
   letter-spacing:        0.07em;
 }
 
-/* rows injected by JS */
+
 .sh-row {
   display:               grid;
   grid-template-columns: 2fr 1.6fr 1.4fr 1fr;
@@ -291,7 +262,7 @@
   color:       var(--color-yellow);
 }
 
-/* SELECT button — must beat .btn { background: var(--btn-bg) } */
+
 .sh-row__action .btn {
   height:         34px;
   font-size:      12px;
@@ -309,9 +280,6 @@
 }
 
 
-/* ─────────────────────────────────────────────
-   8. PROHIBITED ITEMS
-   ───────────────────────────────────────────── */
 
 .sh-prohibited {
   /*background:    var(--color-surface);*/
@@ -368,15 +336,6 @@
   line-height:  1.4;
   padding-left: 27px;
 }
-
-
-/* ─────────────────────────────────────────────
-   9. FOOTER EXTRAS
-   (footer, .footer-top, .footer-brand, .footer-bottom
-    are already in styles.css — we add the link columns
-    and social icons used only on this page)
-   ───────────────────────────────────────────── */
-
 .footer-links {
   display: flex;
   gap:     48px;
@@ -432,9 +391,6 @@
 }
 
 
-/* ─────────────────────────────────────────────
-   10. RESPONSIVE
-   ───────────────────────────────────────────── */
 
 @media (max-width: 960px) {
   .sh-layout { grid-template-columns: 1fr; }
@@ -490,4 +446,19 @@
 .card:hover {
   transform: translateY(-6px);
   box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+main {
+  
+  max-width: 1200px; 
+  
+  margin: 0 auto; 
+  
+  padding: 40px 20px; 
+}
+
+
+@media (max-width: 768px) {
+  main {
+    padding: 20px 15px;
+  }
 }

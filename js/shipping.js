@@ -14,7 +14,7 @@ const METHODS = [
     ];
 
     const methodsBody = document.getElementById('methods-body');
-    methodsBody.innerHTML = '';          // clear any loading placeholder
+    methodsBody.innerHTML = '';         
 
     METHODS.forEach(function(m) {
       const row = document.createElement('div');
@@ -45,7 +45,7 @@ const METHODS = [
     ];
 
     const grid = document.getElementById('prohibited-grid');
-    grid.innerHTML = '';                 // clear any loading placeholder
+    grid.innerHTML = '';                 
 
     PROHIBITED.forEach(function(p) {
       const card = document.createElement('div');
@@ -59,7 +59,7 @@ const METHODS = [
     });
 
 
-    /* ── 3. Price calculator ──────────────────── */
+    
     document.getElementById('calc-form').addEventListener('submit', function(e) {
       e.preventDefault();
 
@@ -70,7 +70,7 @@ const METHODS = [
 
       var volWeight  = (l * wd * h) / 5000;
       var chargeable = Math.max(w, volWeight);
-      var ratePerKg  = 8.00;                           /* Standard Cargo */
+      var ratePerKg  = 8.00;                           
       var total      = (chargeable * ratePerKg).toFixed(2);
 
       var resultEl = document.getElementById('calc-result');
