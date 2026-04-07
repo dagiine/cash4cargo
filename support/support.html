@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="mn">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Help Center</title>
+  <title>Тусламж</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="support.css" />
@@ -13,41 +13,37 @@
   <header>
     <a href="index.html" class="logo">
       <span class="logo-icon">
-        <img src="logo.png" alt="Cash 4 Cargo Logo" />
+        <img src="../pics/logo.png" alt="Cash 4 Cargo Logo" />
       </span>
       Cash 4 Cargo
     </a>
 
     <nav>
       <ul>
-        <li><a href="../home/index.html" class="active">Нүүр</a></li>
+        <li><a href="../home/index.html">Нүүр</a></li>
         <li><a href="../track/track.html">Захиалга хянах</a></li>
         <li><a href="../create-order/create-order.html">Захиалга үүсгэх</a></li>
         <li><a href="../pricing/pricing.html">Үнэ</a></li>
-        <li><a href="../support/support.html">Тусламж</a></li>
+        <li><a href="../support/support.html" class="active">Тусламж</a></li>
       </ul>
     </nav>
 
-    <button class="btn">Sign In</button>
+    <button class="btn">Нэвтрэх</button>
   </header>
 
   <main>
 
-    <!-- Hero -->
-    <h1>Help Center</h1>
-    <p>How can we help you with your cargo today?</p>
+    <h1>Тусламж</h1>
+    <p>Түгээмэл асуугддаг асуултууд болон, таньд хэрэгтэй мэдээлэлүүд</p>
 
-    <!-- Search -->
     <label class="search">
       <span class="material-symbols-outlined">search</span>
-      <input type="search" placeholder="Search for help articles, tracking info, and more..." />
+      <input type="search" placeholder="Захиалгын мэдээлэл болон бусад  хайх..." />
     </label>
 
-    <!-- FAQ Article -->
     <article>
 
-      <!-- Category tabs using radio inputs -->
-       <input type="radio" name="faq" id="faq-all" checked hidden />
+      <input type="radio" name="faq" id="faq-all" checked hidden />
       <input type="radio" name="faq" id="faq-ordering" hidden />
       <input type="radio" name="faq" id="faq-shipping" hidden />
       <input type="radio" name="faq" id="faq-payments" hidden />
@@ -55,109 +51,133 @@
       <div class="categories">
         <label for="faq-all">
           <span class="material-symbols-outlined">view_list</span>
-          All
+          Бүгд
         </label>
         <label for="faq-ordering">
           <span class="material-symbols-outlined">shopping_cart</span>
-          Ordering
+          Захиалга
         </label>
         <label for="faq-shipping">
           <span class="material-symbols-outlined">local_shipping</span>
-          Shipping
+          Тээвэрлэлт
         </label>
         <label for="faq-payments">
           <span class="material-symbols-outlined">payments</span>
-          Payments
+          Төлбөр
         </label>
       </div>
 
-      <!-- FAQ Section -->
       <section>
-        <h2>Frequently Asked Questions</h2>
+        <h2>Түгээмэл асуултууд</h2>
 
-        <!-- Ordering questions -->
+        <!-- Захиалгатай холбоотой асуултууд -->
         <div class="faq-group" id="faq-ordering">
           <article>
             <details>
-              <summary>How do I place an order?</summary>
-              <p>Register an account, fill in your item details and delivery address, then confirm your order. You'll receive a tracking code via SMS once the order is placed.</p>
+              <summary>Яаж захиалга өгөх вэ?</summary>
+              <p>Бүртгэл үүсгээд барааны мэдээлэл болон хүргэх хаягаа бөглөж, захиалгаа баталгаажуулна. Захиалга үүссэний дараа танд SMS-ээр хяналтын код илгээгдэнэ.</p>
             </details>
           </article>
+
           <article>
             <details>
-              <summary>Can I order from any Chinese website?</summary>
-              <p>Yes — we support orders from Taobao, 1688, JD.com, Pinduoduo, and most other major Chinese e-commerce platforms. Just paste the product URL when creating your order.</p>
+              <summary>Ямар ч Хятадын сайтаас захиалж болох уу?</summary>
+              <p>Тийм — бид Taobao, 1688, JD.com, Pinduoduo болон ихэнх томоохон Хятадын онлайн худалдааны сайтуудаас захиалга дэмждэг. Захиалга үүсгэхдээ барааны холбоос (URL)-ийг оруулахад хангалттай.</p>
             </details>
           </article>
+
           <article>
             <details>
-              <summary>What items are prohibited?</summary>
-              <p>Prohibited items include flammable goods, lithium batteries over 100Wh, counterfeit products, narcotics, and live animals. Contact support if you're unsure about a specific item.</p>
+              <summary>Ямар барааг хориглодог вэ?</summary>
+              <p>Шатамхай бүтээгдэхүүн, 100Wh-аас дээш литийн зай, хуурамч бүтээгдэхүүн, мансууруулах бодис, амьд амьтад зэрэг бараа хориглогдоно. Тодорхой бараанд эргэлзэж байвал манай тусламжийн багтай холбогдоно уу.</p>
             </details>
           </article>
+
           <article>
             <details>
-              <summary>Can I modify or cancel my order?</summary>
-              <p>Orders can be modified or cancelled before the item is picked up from the seller. Once in transit, cancellations are not possible. Contact support as soon as possible.</p>
+              <summary>Захиалгаа өөрчлөх эсвэл цуцлах боломжтой юу?</summary>
+              <p>Барааг худалдагчаас авахаас өмнө захиалгыг өөрчлөх эсвэл цуцлах боломжтой. Тээвэрлэлт эхэлсний дараа цуцлах боломжгүй тул аль болох хурдан холбогдоно уу.</p>
+            </details>
+          </article>
+
+          <article>
+            <details>
+              <summary>Хагарч гэмтэх барааг хэрхэн захиалах вэ?</summary>
+              <p>Ширээний тавцан, зурагт, шил толин эд зүйл гэх мэт хагарч гэмтэх барааг захиалсан хятад дэлгүүртэйгээ харьцан гадуур нь модон торхтой явуулбал хагарч гэмтэхгүй ирдэг.</p>
             </details>
           </article>
         </div>
 
-        <!-- Shipping questions -->
+
+        <!-- Тээвэрлэлттэй холбоотой асуултууд -->
         <div class="faq-group" id="faq-shipping">
           <article>
             <details>
-              <summary>What are the estimated delivery times?</summary>
-              <p>Express shipping takes 3–5 business days. Standard freight takes 10–15 business days. Times may vary during public holidays in China or Mongolia.</p>
+              <summary>Захиалсан бараа хэд хоногт Улаанбаатарт ирэх вэ?</summary>
+              <p>Эрээнд хүргэгдсэн бараа 3-5 хоногт улаанбаатарт ирнэ. Хил гаалийн шалгалт, ачаалал дараалал, бороо цас орох, замд машин эвдэрч саатах зэргээс хамаарч удах тохиолдол гардаг.</p>
             </details>
           </article>
+
           <article>
             <details>
-              <summary>How do I track my shipment?</summary>
-              <p>Enter your 6-character tracking code and phone number on our Track page. Real-time updates are provided as your cargo moves through our network hubs.</p>
+              <summary>Ачаагаа хэрхэн хянах вэ?</summary>
+              <p>Манай Track хуудсанд 6 тэмдэгттэй хяналтын код эсвэл утасны дугаараа оруулна. Таны ачаа манай агуулахуудаар дамжих үед бодит цагийн мэдээлэл шинэчлэгдэнэ.</p>
             </details>
           </article>
+
           <article>
             <details>
-              <summary>Where do I pick up my cargo in Mongolia?</summary>
-              <p>We have warehouses in Ulaanbaatar (Zaisan, Bayanzürkh) and partner pickup points in major provincial centers. Your SMS notification will include the nearest location.</p>
+              <summary>Ачаагаа улаанбаатарт ирэхээр нь хаанаас авах вэ?</summary>
+              <p>Бид Улаанбаатар хотод (Зайсан, Баянзүрх) агуулахтай бөгөөд аймгийн төвүүдэд хамтран ажиллах авах цэгүүдтэй. SMS мэдэгдэлд танд хамгийн ойр байршил мэдээлэгдэнэ.</p>
             </details>
           </article>
+
           <article>
             <details>
-              <summary>What happens if my package is delayed?</summary>
-              <p>If your shipment exceeds the estimated delivery window by more than 3 days, contact our 24/7 support team. We will investigate and provide an updated ETA within 24 hours.</p>
+              <summary>Миний бараа тээвэрлэлт төлөвтэй болохгүй байна. Шалгаад өгөөч?</summary>
+              <p>Бид эрээнд таны захиалсан барааг хүлээж аваад машин дээр жин, овор хэмжээгээр нь үнийг тогтоогоод монгол руу ачиж явуулдаг. Том овортой барааг ингэж уншуулах боломжгүй тул барааны төлөв нь “бүртгэсэн” гэдгээс шууд “улаанбаатарт ирсэн” болдог</p>
             </details>
           </article>
         </div>
 
-        <!-- Payments questions -->
+        <!-- Төлбөртэй холбоотой асуултууд -->
         <div class="faq-group" id="faq-payments">
           <article>
             <details>
-              <summary>Which payment methods do you accept?</summary>
-              <p>We accept Visa, MasterCard, QPay, SocialPay, and direct bank transfer. Corporate accounts can also request monthly invoicing.</p>
+              <summary>Барааны үнээ хэрхэн боддог вэ?</summary>
+              <p>Таны захиалсан бараанаас шалтгаалаад кг нь 2500, м3 нь 750 юань-р бодно. Утасны case-с томгүй барааг 1500-р бодно. Та үнэ тооцоолох хэсэгт тооцоолж бодох боломжтой.</p>
             </details>
           </article>
+
           <article>
             <details>
-              <summary>When am I charged for my order?</summary>
-              <p>Payment is collected after your items arrive at our China warehouse and the final weight and volume are confirmed. You'll receive an invoice before payment is processed.</p>
+              <summary>Ямар төлбөрийн хэрэгслүүдийг хүлээн авдаг вэ?</summary>
+              <p>Бид Visa, MasterCard, QPay, SocialPay болон банкны шууд шилжүүлгийг хүлээн авдаг. Байгууллагын харилцагчид сар бүрийн нэхэмжлэл авах боломжтой.</p>
             </details>
           </article>
+
           <article>
             <details>
-              <summary>Can I insure my high-value cargo?</summary>
-              <p>Yes. Insurance can be added during checkout or by contacting support for an existing shipment. Coverage is calculated based on the declared item value.</p>
+              <summary>Төлбөрөө хэзээ хийдэг   вэ?</summary>
+              <p>Бараа Хятад дахь манай агуулахад ирж жин, хэмжээ баталгаажсаны дараа төлбөр авна. Төлбөр хийхээс өмнө танд нэхэмжлэл илгээгдэнэ.</p>
             </details>
           </article>
+
           <article>
             <details>
-              <summary>Are there customs duties or taxes?</summary>
-              <p>Customs duties apply for shipments over the duty-free threshold set by Mongolian customs. We provide duty estimates during checkout and handle all customs paperwork on your behalf.</p>
+              <summary>Өндөр үнэ бүхий ачааг даатгуулах боломжтой юу?</summary>
+              <p>Тийм. Даатгалыг төлбөр хийх үед нэмэх эсвэл аль хэдийн илгээгдсэн ачаанд тусламжийн багтай холбогдон нэмэх боломжтой. Даатгалын үнэ нь барааны зарласан үнээс хамаарна.</p>
+            </details>
+          </article>
+
+          <article>
+            <details>
+              <summary>Гаалийн татвар ногдох уу?</summary>
+              <p>Монгол Улсын гаалийн татваргүй дүнгээс давсан ачаанд гаалийн татвар ногдоно. Бид төлбөр хийх үед урьдчилсан тооцоог харуулж, бүх гаалийн бичиг баримтыг таны өмнөөс бүрдүүлнэ.</p>
             </details>
           </article>
         </div>
+
       </section>
     </article>
   </main>
