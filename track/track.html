@@ -1,86 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="mn">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Track Shipment | Cash 4 Cargo</title>
+  
+  <title>Захиалга хянах | Cash 4 Cargo</title>
+  
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="track.css" />
 </head>
+
 <body>
 
-  <header>
-    <a href="../home/index.html" class="logo">
-      <span class="logo-icon">
-        <img src="../pics/logo.png" alt="Cash 4 Cargo Logo" />
-      </span>
-      Cash 4 Cargo
-    </a>
+<header>
 
-    <nav>
-      <ul>
-        <li><a href="../home/index.html">Нүүр</a></li>
-        <li><a href="../track/track.html" class="active">Захиалга хянах</a></li>
-        <li><a href="../create-order/create-order.html">Захиалга үүсгэх</a></li>
-        <li><a href="../pricing/pricing.html">Үнэ</a></li>
-        <li><a href="../support/support.html">Тусламж</a></li>
-      </ul>
-    </nav>
+  <a href="../home/index.html" class="logo">
+    <span class="logo-icon">
+      <img src="../pics/logo.png" alt="Cash 4 Cargo Logo">
+    </span>
+    Cash 4 Cargo
+  </a>
 
-    <button class="btn">Нэвтрэх</button>
-  </header>
+  <nav>
+    <ul>
+      <li><a href="../home/index.html">Нүүр</a></li>
+      <li><a href="../track/track.html" class="active">Захиалга хянах</a></li>
+      <li><a href="../create-order/create-order.html">Захиалга үүсгэх</a></li>
+      <li><a href="../pricing/pricing.html">Үнэ</a></li>
+      <li><a href="../support/support.html">Тусламж</a></li>
+    </ul>
+  </nav>
 
-  <main>
-    <!-- <span class="material-symbols-outlined">location_searching</span> -->
-    <h1>Захиалга хянах</h1>
-    <p>Хяналтын код эсвэл утасны дугаарыг оруулаад захиалгаагаа хянаарай.</p>
+  <button class="btn">Нэвтрэх</button>
 
-    <form>
+</header>
+
+<main>
+  <h1>Захиалга хянах</h1>
+  <p>Хяналтын код эсвэл утасны дугаараар захиалга хайх боломжтой.</p>
+
+  <form>
+
+    <input type="radio" name="track" id="tab-code" checked hidden>
+    <input type="radio" name="track" id="tab-phone" hidden>
+
+    <div class="tab-switcher">
+
+      <label for="tab-code" class="tab-btn">
+        Хяналтын код
+      </label>
+      <label for="tab-phone" class="tab-btn">
+        Утасны дугаар
+      </label>
+
+    </div>
+
+    <div class="tab-panel tab-panel--code">
       <label>
         6 тэмдэгттэй хяналтын код
-        <span class="material-symbols-outlined">qr_code_scanner</span>
-        <input type="text" placeholder="Жишээ нь: AB1234" maxlength="6" />
-      </label>
+        <span class="material-symbols-outlined">
+          qr_code_scanner
+        </span>
 
+        <input type="text" placeholder="Жишээ: AB1234" maxlength="6">
+      </label>
+    </div>
+
+    <div class="tab-panel tab-panel--phone">
       <label>
         Утасны дугаар
-        <span class="material-symbols-outlined">phone_iphone</span>
-        <input type="tel" placeholder="+976 XXXX XXXX" />
+        <span class="material-symbols-outlined">
+          phone_iphone
+        </span>
+        <input type="tel" placeholder="+976 XXXX XXXX">
       </label>
-
-      <button type="submit" class="btn">
-        <span class="material-symbols-outlined">search</span>
-        Хайх
-      </button>
-    </form>
-
-    <div>
-      <article>
-        <span class="material-symbols-outlined">support_agent</span>
-        <div class="text">
-          <h3>24/7 туслах</h3>
-          <p>+976 7000 0000</p>
-        </div>
-      </article>
-
-      <article>
-        <span class="material-symbols-outlined">verified_user</span>
-        <div class="text">
-          <h3>Найдвартай</h3>
-          <p>Баталгаат тээвэрлэлт</p>
-        </div>
-      </article>
-
-      <article>
-        <span class="material-symbols-outlined">schedule</span>
-        <div class="text">
-          <h3>Хурдан тээвэрлэлт</h3>
-          <p>3–7 ажлын өдөр</p>
-        </div>
-      </article>
     </div>
-  </main>
 
+    <button type="submit">
+      <span class="material-symbols-outlined"> search </span>
+      Хайх
+    </button>
+
+  </form>
+
+  <div class="info-strip">
+
+    <article>
+      <span class="material-symbols-outlined">
+        support_agent
+      </span>
+      <div class="text">
+        <h3>24/7 туслах</h3>
+        <p>+976 7000 0000</p>
+      </div>
+
+    </article>
+
+
+    <article>
+      <span class="material-symbols-outlined">
+        verified_user
+      </span>
+      <div class="text">
+        <h3>Найдвартай</h3>
+        <p>Баталгаат тээвэр</p>
+      </div>
+    </article>
+
+
+    <article>
+      <span class="material-symbols-outlined">
+        schedule
+      </span>
+      <div class="text">
+        <h3>Хурдан</h3>
+        <p>3–7 ажлын өдөр</p>
+      </div>
+    </article>
+
+  </div>
+</main>
 </body>
 </html>
