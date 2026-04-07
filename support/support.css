@@ -1,3 +1,5 @@
+/* Variables, reset, logo, header, footer, button styles бүх хуудсан дээр байна */
+
 /* ============================================= 
    VARIABLES
    ============================================= */
@@ -120,7 +122,6 @@ header {
   z-index: 50;
 }
 
-/* Hide nav by default (shown on desktop below) */
 header nav {
   display: none;
 }
@@ -143,7 +144,7 @@ header nav ul li a.active {
   color: var(--color-yellow);
 }
 
-/* On mobile: nav bar sticks to the bottom of the screen */
+/* Утсан дээр доoд талд нь гарч ирэх */
 @media (max-width: 767px) {
   header nav {
     display: flex;
@@ -436,3 +437,46 @@ details p {
     padding-bottom: 100px;
   }
 }
+
+/* =============================================
+   FOOTER
+   ============================================= */
+
+footer { border-top: 1px solid var(--border-default); padding: 40px var(--space-page) 24px; }
+
+.footer-top {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto 32px;
+}
+@media (min-width: 960px) {
+  .footer-top { flex-direction: row; justify-content: space-between; align-items: flex-start; }
+}
+
+.footer-brand { max-width: 260px; display: flex; flex-direction: column; gap: 12px; }
+.footer-brand p { color: var(--color-muted); font-size: 14px; }
+
+.footer-contact { display: flex; flex-direction: column; gap: 26px; width: 25%; min-width: 240px; }
+.footer-contact h4 { font-size: 14px; font-weight: 700; }
+
+.footer-contact-item { display: flex; align-items: flex-start; gap: 20px; }
+.footer-contact-item .material-symbols-outlined { font-size: 18px; color: var(--color-yellow); flex-shrink: 0; margin-top: 2px; }
+.footer-contact-item p { color: var(--color-muted); font-size: 14px; line-height: 2; }
+.footer-contact-item a { color: var(--color-muted); transition: color 0.2s; }
+.footer-contact-item a:hover { color: var(--color-yellow); }
+
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-footer-faint);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+@media (min-width: 640px) { .footer-bottom { flex-direction: row; justify-content: space-between; } }
+
+.footer-bottom small { font-size: 13px; color: var(--color-muted); }
