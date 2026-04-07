@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Help Center</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="support.css" />
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo">
+      <span class="logo-icon">
+        <img src="logo.png" alt="Cash 4 Cargo Logo" />
+      </span>
+      Cash 4 Cargo
+    </a>
+
+    <nav>
+      <ul>
+        <li><a href="../home/index.html" class="active">Нүүр</a></li>
+        <li><a href="../track/track.html">Захиалга хянах</a></li>
+        <li><a href="../create-order/create-order.html">Захиалга үүсгэх</a></li>
+        <li><a href="../pricing/pricing.html">Үнэ</a></li>
+        <li><a href="../support/support.html">Тусламж</a></li>
+      </ul>
+    </nav>
+
+    <button class="btn">Sign In</button>
+  </header>
+
+  <main>
+
+    <!-- Hero -->
+    <h1>Help Center</h1>
+    <p>How can we help you with your cargo today?</p>
+
+    <!-- Search -->
+    <label class="search">
+      <span class="material-symbols-outlined">search</span>
+      <input type="search" placeholder="Search for help articles, tracking info, and more..." />
+    </label>
+
+    <!-- FAQ Article -->
+    <article>
+
+      <!-- Category tabs using radio inputs -->
+       <input type="radio" name="faq" id="faq-all" checked hidden />
+      <input type="radio" name="faq" id="faq-ordering" hidden />
+      <input type="radio" name="faq" id="faq-shipping" hidden />
+      <input type="radio" name="faq" id="faq-payments" hidden />
+
+      <div class="categories">
+        <label for="faq-all">
+          <span class="material-symbols-outlined">view_list</span>
+          All
+        </label>
+        <label for="faq-ordering">
+          <span class="material-symbols-outlined">shopping_cart</span>
+          Ordering
+        </label>
+        <label for="faq-shipping">
+          <span class="material-symbols-outlined">local_shipping</span>
+          Shipping
+        </label>
+        <label for="faq-payments">
+          <span class="material-symbols-outlined">payments</span>
+          Payments
+        </label>
+      </div>
+
+      <!-- FAQ Section -->
+      <section>
+        <h2>Frequently Asked Questions</h2>
+
+        <!-- Ordering questions -->
+        <div class="faq-group" id="faq-ordering">
+          <article>
+            <details>
+              <summary>How do I place an order?</summary>
+              <p>Register an account, fill in your item details and delivery address, then confirm your order. You'll receive a tracking code via SMS once the order is placed.</p>
+            </details>
+          </article>
+          <article>
+            <details>
+              <summary>Can I order from any Chinese website?</summary>
+              <p>Yes — we support orders from Taobao, 1688, JD.com, Pinduoduo, and most other major Chinese e-commerce platforms. Just paste the product URL when creating your order.</p>
+            </details>
+          </article>
+          <article>
+            <details>
+              <summary>What items are prohibited?</summary>
+              <p>Prohibited items include flammable goods, lithium batteries over 100Wh, counterfeit products, narcotics, and live animals. Contact support if you're unsure about a specific item.</p>
+            </details>
+          </article>
+          <article>
+            <details>
+              <summary>Can I modify or cancel my order?</summary>
+              <p>Orders can be modified or cancelled before the item is picked up from the seller. Once in transit, cancellations are not possible. Contact support as soon as possible.</p>
+            </details>
+          </article>
+        </div>
+
+        <!-- Shipping questions -->
+        <div class="faq-group" id="faq-shipping">
+          <article>
+            <details>
+              <summary>What are the estimated delivery times?</summary>
+              <p>Express shipping takes 3–5 business days. Standard freight takes 10–15 business days. Times may vary during public holidays in China or Mongolia.</p>
+            </details>
+          </article>
+          <article>
+            <details>
+              <summary>How do I track my shipment?</summary>
+              <p>Enter your 6-character tracking code and phone number on our Track page. Real-time updates are provided as your cargo moves through our network hubs.</p>
+            </details>
+          </article>
+          <article>
+            <details>
+              <summary>Where do I pick up my cargo in Mongolia?</summary>
+              <p>We have warehouses in Ulaanbaatar (Zaisan, Bayanzürkh) and partner pickup points in major provincial centers. Your SMS notification will include the nearest location.</p>
+            </details>
+          </article>
+          <article>
+            <details>
+              <summary>What happens if my package is delayed?</summary>
+              <p>If your shipment exceeds the estimated delivery window by more than 3 days, contact our 24/7 support team. We will investigate and provide an updated ETA within 24 hours.</p>
+            </details>
+          </article>
+        </div>
+
+        <!-- Payments questions -->
+        <div class="faq-group" id="faq-payments">
+          <article>
+            <details>
+              <summary>Which payment methods do you accept?</summary>
+              <p>We accept Visa, MasterCard, QPay, SocialPay, and direct bank transfer. Corporate accounts can also request monthly invoicing.</p>
+            </details>
+          </article>
+          <article>
+            <details>
+              <summary>When am I charged for my order?</summary>
+              <p>Payment is collected after your items arrive at our China warehouse and the final weight and volume are confirmed. You'll receive an invoice before payment is processed.</p>
+            </details>
+          </article>
+          <article>
+            <details>
+              <summary>Can I insure my high-value cargo?</summary>
+              <p>Yes. Insurance can be added during checkout or by contacting support for an existing shipment. Coverage is calculated based on the declared item value.</p>
+            </details>
+          </article>
+          <article>
+            <details>
+              <summary>Are there customs duties or taxes?</summary>
+              <p>Customs duties apply for shipments over the duty-free threshold set by Mongolian customs. We provide duty estimates during checkout and handle all customs paperwork on your behalf.</p>
+            </details>
+          </article>
+        </div>
+      </section>
+    </article>
+  </main>
+</body>
+</html>

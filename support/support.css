@@ -1,0 +1,438 @@
+/* ============================================= 
+   VARIABLES
+   ============================================= */
+
+:root {
+  --color-yellow:     #ffd900;
+  --color-yellow-dim: rgba(255, 217, 0, 0.10);
+
+  --color-bg:      #0b0c10;
+  --color-surface: #1f2833;
+  --color-text:    #f1f5f9;
+  --color-muted:   #94a3b8;
+
+  --border-default: rgba(255, 255, 255, 0.12);
+  --border-accent:  var(--color-yellow);
+
+  --font-base: 'Inter', sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --space-page: 40px;
+
+  --btn-height:    40px;
+  --btn-font-size: 15px;
+  --btn-padding:   0 24px;
+  --btn-radius:    var(--radius-md);
+  --btn-bg:        var(--color-yellow);
+  --btn-color:     var(--color-bg);
+
+  --logo-icon-size:   32px;
+  --logo-icon-bg:     var(--color-yellow);
+  --logo-icon-radius: var(--radius-sm);
+
+  --card-bg:     var(--color-surface);
+  --card-border: var(--border-default);
+  --card-radius: var(--radius-lg);
+
+  --input-bg:     var(--color-bg);
+  --input-border: var(--border-default);
+}
+
+
+/* ============================================= 
+   RESET — remove default browser spacing
+   ============================================= */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-base);
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-base);
+  border: none;
+  background: none;
+}
+
+
+/* ============================================= 
+   LOGO
+   ============================================= */
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.logo-icon {
+  width: var(--logo-icon-size);
+  height: var(--logo-icon-size);
+  background: var(--logo-icon-bg);
+  border-radius: var(--logo-icon-radius);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* ============================================= 
+   HEADER
+   ============================================= */
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px var(--space-page);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--border-default);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+/* Hide nav by default (shown on desktop below) */
+header nav {
+  display: none;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 32px;
+}
+
+header nav ul li a {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-muted);
+  transition: color 0.2s;
+}
+
+header nav ul li a:hover,
+header nav ul li a.active {
+  color: var(--color-yellow);
+}
+
+/* On mobile: nav bar sticks to the bottom of the screen */
+@media (max-width: 767px) {
+  header nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: var(--color-bg);
+    border-top: 1px solid var(--border-default);
+  }
+
+  header nav ul {
+    width: 100%;
+    justify-content: space-around;
+    gap: 0;
+  }
+
+  header nav ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 0;
+    font-size: 12px;
+  }
+}
+
+/* On desktop: show nav in the header */
+@media (min-width: 768px) {
+  header nav {
+    display: flex;
+  }
+}
+
+
+/* ============================================= 
+   BUTTON
+   ============================================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--btn-height);
+  padding: var(--btn-padding);
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  font-size: var(--btn-font-size);
+  font-weight: 700;
+  border-radius: var(--btn-radius);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+
+/* ============================================= 
+   MAIN — page content wrapper
+   ============================================= */
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding: 60px var(--space-page) 80px;
+  max-width: 860px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+main > h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  text-align: center;
+}
+
+main > p {
+  color: var(--color-muted);
+  text-align: center;
+  margin-top: -12px;
+}
+
+
+/* ============================================= 
+   SEARCH BAR
+   ============================================= */
+
+label.search {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: var(--card-bg);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+/* Yellow outline when typing */
+label.search:focus-within {
+  border-color: var(--border-accent);
+  box-shadow: 0 0 0 3px rgba(255, 217, 0, 0.12);
+}
+
+label.search .material-symbols-outlined {
+  padding: 0 14px;
+  font-size: 22px;
+  color: var(--color-muted);
+}
+
+label.search input {
+  flex: 1;
+  height: 52px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-text);
+  font-family: var(--font-base);
+  font-size: 15px;
+}
+
+label.search input::placeholder {
+  color: var(--color-muted);
+  opacity: 0.6;
+}
+
+
+/* ============================================= 
+   FAQ ARTICLE — wraps the whole FAQ block
+   ============================================= */
+
+main > article {
+  width: 100%;
+}
+
+/* Hide the radio inputs — they work invisibly */
+input[name="faq"] {
+  display: none;
+}
+
+
+/* ============================================= 
+   CATEGORY TABS
+   ============================================= */
+
+.categories {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+
+/* Each tab looks like a button */
+.categories label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: var(--btn-height);
+  padding: var(--btn-padding);
+  border-radius: var(--btn-radius);
+  font-size: var(--btn-font-size);
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--color-muted);
+  transition: all 0.2s;
+}
+
+.categories label:hover {
+  border-color: var(--border-accent);
+  color: var(--color-text);
+}
+
+/* Highlight the selected tab in yellow */
+#faq-all:checked      ~ .categories label[for="faq-all"],
+#faq-ordering:checked ~ .categories label[for="faq-ordering"],
+#faq-shipping:checked ~ .categories label[for="faq-shipping"],
+#faq-payments:checked ~ .categories label[for="faq-payments"] {
+  background: var(--color-yellow);
+  color: var(--color-bg);
+  border-color: var(--color-yellow);
+}
+
+
+/* ============================================= 
+   FAQ SECTION
+   ============================================= */
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+section > h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+/* Hide all groups by default */
+.faq-group {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Show all groups when "All" is selected */
+#faq-all:checked ~ section .faq-group {
+  display: flex;
+}
+
+/* Show only the matching group for each tab */
+#faq-ordering:checked ~ section #faq-ordering { display: flex; }
+#faq-shipping:checked ~ section #faq-shipping { display: flex; }
+#faq-payments:checked ~ section #faq-payments { display: flex; }
+
+
+/* ============================================= 
+   FAQ CARDS
+   ============================================= */
+
+section article {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+section article:hover {
+  border-color: var(--border-accent);
+}
+
+/* Question row */
+details summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  transition: background 0.15s;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary:hover {
+  background: var(--color-yellow-dim);
+}
+
+/* Arrow icon — added with CSS, no extra HTML */
+details summary::after {
+  content: 'expand_more';
+  font-family: 'Material Symbols Outlined';
+  font-size: 22px;
+  color: var(--color-yellow);
+  transition: transform 0.25s;
+}
+
+/* Rotate arrow when question is open */
+details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+/* Answer text */
+details p {
+  padding: 0 20px 18px;
+  font-size: 14px;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+
+/* ============================================= 
+   MOBILE — extra space for the bottom nav bar
+   ============================================= */
+
+@media (max-width: 767px) {
+  main {
+    padding-bottom: 100px;
+  }
+}

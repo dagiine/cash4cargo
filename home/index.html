@@ -4,68 +4,75 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cash 4 Cargo</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
 </head>
 <body>
 
+  <input type="checkbox" id="signin-toggle" hidden />
+
   <header>
-    <a href="#" class="logo">
+    <a href="./index.html" class="logo">
       <span class="logo-icon">
-        <img src="logo.png" alt="Cash 4 Cargo Logo" />
+        <img src="./pics/logo.png" alt="Cash 4 Cargo Logo" />
       </span>
       Cash 4 Cargo
     </a>
 
     <nav>
       <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Track</a></li>
-        <li><a href="#">Create Order</a></li>
-        <li><a href="#">Pricing</a></li>
-        <li><a href="#">Support</a></li>
+        <li><a href="../home/index.html" class="active">Нүүр</a></li>
+        <li><a href="../track/track.html">Захиалга хянах</a></li>
+        <li><a href="../create-order/create-order.html">Захиалга үүсгэх</a></li>
+        <li><a href="../pricing/pricing.html">Үнэ</a></li>
+        <li><a href="../support/support.html">Тусламж</a></li>
       </ul>
     </nav>
 
-    <button class="btn">Sign In</button>
-    <!-- <button class="btn" onclick="document.getElementById('signin-modal').style.display='flex'">Sign in</button> -->
+    <label for="signin-toggle" class="btn">Нэвтрэх</label>
   </header>
 
-  <!-- Sign In hiih tsonh (claude)
-  <div id="signin-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;">
-    <div style="background:#fff;padding:32px;border-radius:12px;min-width:320px;position:relative;">
-      <button onclick="document.getElementById('signin-modal').style.display='none'" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:1.2rem;cursor:pointer;">✕</button>
-      <h2>Sign In</h2>
-      <p>Sign in to your China2MN Cargo account.</p>
-      <label>Email<br/><input type="email" placeholder="you@example.com" style="width:100%;margin:8px 0 16px;padding:8px;" /></label>
-      <label>Password<br/><input type="password" placeholder="••••••••" style="width:100%;margin:8px 0 16px;padding:8px;" /></label>
-      <button class="btn" style="width:100%;">Sign In</button>
-    </div>
+  <div class="signin-panel">
+    <label for="signin-toggle" class="signin-close">
+      <span class="material-symbols-outlined">close</span>
+    </label>
+
+    <h2>Нэвтрэх</h2>
+
+    <form>
+      <input type="email" placeholder="Имэйл хаяг эсвэл утасны дугаар" />
+      <input type="password" placeholder="Нууц үг" />
+      <button type="submit" class="btn signin-btn">Нэвтрэх</button>
+      <a href="#" class="signin-forgot">Нууц үгээ мартсан?</a>
+      <hr />
+      <button type="button" class="btn signin-create">Шинэ хаяг үүсгэх</button>
+    </form>
   </div>
-  -->
+
+  <label for="signin-toggle" class="signin-backdrop"></label>
 
   <main>
     <!-- Hero -->
     <section class="hero">
       <div class="hero-text">
-        <h1>China to Mongolia <span>Shipping Simplified</span></h1>
-        <p>Fast, secure, and transparent cargo solutions. The bridge between your business and the Mongolian market.</p>
+        <h1>Хятадаас Монгол Улс руу <span>Тээвэрлэлтийг хялбарчлана</span></h1>
+        <p>Шуурхай, найдвартай, ил тод карго шийдэл. Таны бизнес болон Монголын зах зээлийг холбох гүүр.</p>
 
         <div class="track">
-          <label>Quick Track</label>
+          <label>Хурдан хяналт</label>
           <div class="track-input">
-            <input type="text" placeholder="Enter Tracking Code (e.g. MN-12345)" />
+            <input type="text" placeholder="Хяналтын код оруулах (жишээ: MN-12345)" />
             <button>
               <span class="material-symbols-outlined">search</span>
-            </button>
+            </buttonac>
           </div>
         </div>
 
-        <a href="#" class="btn big">Create New Order</a>
+        <a href="#" class="btn big">Шинэ захиалга үүсгэх</a>
       </div>
-
-      <div class="hero-img">
-        <img src="hero-img.png" alt="Cargo warehouse"/>
+      <div>
+        <img src="../pics/truck.png" alt="Truck" class="car-img" =/>
       </div>
     </section>
 
@@ -73,43 +80,43 @@
     <section class="stats">
       <article class="stat">
         <strong>5000+</strong>
-        <span>Shipments</span>
+        <span>Илгээмж</span>
       </article>
       <article class="stat">
         <strong>1200+</strong>
-        <span>Clients</span>
+        <span>Харилцагч</span>
       </article>
       <article class="stat">
         <strong>3–7</strong>
-        <span>Delivery Days</span>
+        <span>Хоногт хүргэнэ</span>
       </article>
     </section>
 
     <!-- Calculator -->
     <section class="calc">
-      <h2>Shipping Price Calculator</h2>
-      <p>Get an instant estimate for your shipment from China to Mongolia.</p>
+      <h2>Тээврийн зардлын тооцоолуур</h2>
+      <p>Хятадаас Монголд ирэх ачаа тээврийн зардлаа шууд тооцоолж үзээрэй.</p>
 
       <form>
         <div class="fields">
           <div class="field">
-            <label for="weight">Weight (kg)</label>
+            <label for="weight">Жин (kg)</label>
             <input id="weight" type="number" placeholder="0.00" />
           </div>
           <div class="field">
-            <label for="length">Length (cm)</label>
+            <label for="length">Урт (cm)</label>
             <input id="length" type="number" placeholder="0" />
           </div>
           <div class="field">
-            <label for="width">Width (cm)</label>
+            <label for="width">Өргөн (cm)</label>
             <input id="width" type="number" placeholder="0" />
           </div>
           <div class="field">
-            <label for="height">Height (cm)</label>
+            <label for="height">Өндөр (cm)</label>
             <input id="height" type="number" placeholder="0" />
           </div>
         </div>
-        <button type="submit" class="btn big">Calculate Quote</button>
+        <button type="submit" class="btn big">Тооцоолох</button>
       </form>
     </section>
 
@@ -136,48 +143,73 @@
         </article>
       </div>
     </section>
-
   </main>
 
-  <footer>
-    <div class="footer-top">
-      <div class="footer-brand">
+    <footer>
+    <section class="footer-top">
+
+      <!-- Brand -->
+      <section class="footer-brand">
         <a href="/" class="logo">
           <span class="logo-icon">
-            <span class="material-symbols-outlined">
-              <img src="logo.png" alt="China2MN Cargo Logo" />
-            </span>
+            <img src="pics/logo.png" alt="Cash 4 Cargo Logo" />
           </span>
-          China2MN Cargo
+          Cash 4 Cargo
         </a>
-        <p>The leading logistics provider specializing in seamless trade between China and Mongolia.</p>
-      </div>
+        <p>
+          Хятадаас Монгол руу найдвартай, хурдан мэргэжлийн үйлчилгээ.
+        </p>
+      </section>
 
-      <div class="footer-links">
-        <section>
-          <h4>Solutions</h4>
-          <a href="#">Air Freight</a>
-          <a href="#">Road Transport</a>
-          <a href="#">Warehousing</a>
-        </section>
-        <section>
-          <h4>Company</h4>
-          <a href="#">About Us</a>
-          <a href="#">Contact</a>
-          <a href="#">Careers</a>
-        </section>
-        <section>
-          <h4>Legal</h4>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">Cookie Policy</a>
-        </section>
-      </div>
-    </div>
+      <address class="footer-contact">
 
-    <div class="footer-bottom">
-      <small>© 2026 China2MN Cargo. All rights reserved.</small>
-    </div>
+        <ul>
+          <li class="footer-contact-item">
+            <span class="material-symbols-outlined">call</span>
+            <p>
+              <a href="tel:+97699447176">99447176</a>
+            </p>
+          </li>
+
+          <li class="footer-contact-item">
+            <span class="material-symbols-outlined">schedule</span>
+            <p>
+              Даваа–Баасан: 09:00–18:00<br>
+              Бямба: 10:00–15:00<br>
+              Ням: Амарна
+            </p>
+          </li>
+
+          <li class="footer-contact-item">
+            <span class="material-symbols-outlined">language</span>
+            <p>
+              <a href="https://www.kingcargo.mn" target="_blank">
+                www.kingcargo.mn
+              </a>
+            </p>
+          </li>
+
+          <li class="footer-contact-item">
+            <span class="material-symbols-outlined">thumb_up</span>
+            <p>
+              <a href="https://facebook.com/kingcargo" target="_blank">
+                kingcargo
+              </a>
+            </p>
+          </li>
+        </ul>
+
+      </address>
+
+    </section>
+
+    <!-- Bottom copyright -->
+    <section class="footer-bottom">
+      <small>
+        © 2026 Cash 4 Cargo. Бүх эрх хуулиар хамгаалагдсан.
+      </small>
+    </section>
+
   </footer>
 
 </body>

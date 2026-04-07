@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Track Shipment | Cash 4 Cargo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="track.css" />
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="logo">
+      <span class="logo-icon">
+        <img src="logo.png" alt="Cash 4 Cargo Logo" />
+      </span>
+      Cash 4 Cargo
+    </a>
+
+    <nav>
+      <ul>
+        <li><a href="../home/index.html" class="active">Нүүр</a></li>
+        <li><a href="../track/track.html">Захиалга хянах</a></li>
+        <li><a href="../create-order/create-order.html">Захиалга үүсгэх</a></li>
+        <li><a href="../pricing/pricing.html">Үнэ</a></li>
+        <li><a href="../support/support.html">Тусламж</a></li>
+      </ul>
+    </nav>
+
+    <button class="btn">Sign In</button>
+  </header>
+
+  <main>
+    <!-- <span class="material-symbols-outlined">location_searching</span> -->
+    <h1>Track Your Shipment</h1>
+    <p>Enter your tracking details below for real-time updates on your cargo from China to Mongolia.</p>
+
+    <form>
+      <label>
+        6-Character Tracking Code
+        <span class="material-symbols-outlined">qr_code_scanner</span>
+        <input type="text" placeholder="e.g. AB1234" maxlength="6" />
+      </label>
+
+      <label>
+        Phone Number
+        <span class="material-symbols-outlined">phone_iphone</span>
+        <input type="tel" placeholder="+976 XXXX XXXX" />
+      </label>
+
+      <button type="submit" class="btn">
+        <span class="material-symbols-outlined">search</span>
+        Track Shipment
+      </button>
+    </form>
+
+    <div>
+      <article>
+        <span class="material-symbols-outlined">support_agent</span>
+        <div class="text">
+          <h3>24/7 Support</h3>
+          <p>+976 7000 0000</p>
+        </div>
+      </article>
+
+      <article>
+        <span class="material-symbols-outlined">verified_user</span>
+        <div class="text">
+          <h3>Secure Handling</h3>
+          <p>Guaranteed Delivery</p>
+        </div>
+      </article>
+
+      <article>
+        <span class="material-symbols-outlined">schedule</span>
+        <div class="text">
+          <h3>Fast Transit</h3>
+          <p>3–7 Business Days</p>
+        </div>
+      </article>
+    </div>
+  </main>
+
+</body>
+</html>

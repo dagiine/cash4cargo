@@ -1,0 +1,399 @@
+/* =============================================
+   VARIABLES
+   ============================================= */
+
+:root {
+  --color-yellow:           #ffd900;
+  --color-yellow-dim:       rgba(255, 217, 0, 0.10);
+
+  --color-bg:      #0b0c10;
+  --color-surface: #1f2833;
+  --color-text:    #f1f5f9;
+  --color-muted:   #94a3b8;
+
+  --border-default:      rgba(255, 255, 255, 0.12);
+  --border-accent:       var(--color-yellow);
+  --border-footer-faint: rgba(255, 217, 0, 0.06);
+
+  --font-base: 'Inter', sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --space-page: 40px;
+
+  --btn-height:     40px;
+  --btn-height-big: 52px;
+  --btn-font-size:  15px;
+  --btn-padding:    0 24px;
+  --btn-radius:     var(--radius-md);
+  --btn-bg:         var(--color-yellow);
+  --btn-color:      var(--color-bg);
+
+  --logo-icon-size:   32px;
+  --logo-icon-bg:     var(--color-yellow);
+  --logo-icon-radius: var(--radius-sm);
+  --logo-icon-color:  var(--color-bg);
+
+  --card-bg:     var(--color-surface);
+  --card-border: var(--border-default);
+  --card-radius: var(--radius-lg);
+
+  --input-bg:     var(--color-bg);
+  --input-border: var(--border-default);
+  --input-radius: var(--radius-sm);
+}
+
+
+/* =============================================
+   RESET — remove default browser spacing
+   ============================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-base);
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-base);
+  border: none;
+  background: none;
+}
+
+
+/* =============================================
+   LOGO
+   ============================================= */
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
+  font-size: 18px;
+}
+
+.logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--logo-icon-size);
+  height: var(--logo-icon-size);
+  background: var(--logo-icon-bg);
+  border-radius: var(--logo-icon-radius);
+  overflow: hidden;
+}
+
+.logo-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* =============================================
+   HEADER
+   ============================================= */
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 16px var(--space-page);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--border-default);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+/* Hide nav by default — shown on desktop below */
+header nav {
+  display: none;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 32px;
+}
+
+header nav ul a {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-muted);
+  transition: color 0.2s;
+}
+
+header nav ul a:hover,
+header nav ul a.active {
+  color: var(--color-yellow);
+}
+
+/* On mobile: nav sticks to the bottom of the screen */
+@media (max-width: 767px) {
+  header nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: var(--color-bg);
+    border-top: 1px solid var(--border-default);
+  }
+
+  header nav ul {
+    width: 100%;
+    justify-content: space-around;
+    gap: 0;
+  }
+
+  header nav ul a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 0;
+    font-size: 12px;
+  }
+}
+
+/* On desktop: show nav in the header */
+@media (min-width: 768px) {
+  header nav {
+    display: flex;
+  }
+}
+
+
+/* =============================================
+   BUTTON
+   ============================================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: var(--btn-height);
+  padding: var(--btn-padding);
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  font-size: var(--btn-font-size);
+  font-weight: 700;
+  border-radius: var(--btn-radius);
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+
+/* =============================================
+   MAIN — centers all page content
+   ============================================= */
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  padding: 60px var(--space-page) 80px;
+  max-width: 680px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Page title */
+main > h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* Subtitle */
+main > p {
+  color: var(--color-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+  max-width: 460px;
+}
+
+
+/* =============================================
+   FORM — tracking code + phone number inputs
+   ============================================= */
+
+form {
+  width: 100%;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* two inputs side by side */
+  gap: 20px;
+  text-align: left;
+}
+
+/* Stack inputs on small screens */
+@media (max-width: 559px) {
+  form {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Submit button spans the full width */
+form button[type="submit"] {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: var(--btn-height-big);
+  font-size: 16px;
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  font-weight: 700;
+  border-radius: var(--btn-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: opacity 0.2s;
+}
+
+form button[type="submit"]:hover {
+  opacity: 0.85;
+}
+
+/* Label text above each input */
+form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-muted);
+  position: relative;
+}
+
+/* Icon sitting inside the input on the left */
+form label .material-symbols-outlined {
+  position: absolute;
+  left: 14px;
+  bottom: 15px;
+  font-size: 20px;
+  color: var(--color-muted);
+  pointer-events: none; /* so clicking the icon focuses the input */
+}
+
+/* The actual input field */
+form input {
+  width: 100%;
+  height: var(--btn-height-big);
+  padding: 0 16px 0 44px; /* left padding makes room for the icon */
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: var(--input-radius);
+  color: var(--color-text);
+  font-family: var(--font-base);
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+form input::placeholder {
+  color: var(--color-muted);
+  opacity: 0.6;
+}
+
+/* Yellow glow when the user clicks into an input */
+form input:focus {
+  border-color: var(--border-accent);
+  box-shadow: 0 0 0 3px rgba(255, 217, 0, 0.12);
+}
+
+
+/* =============================================
+   INFO STRIP — 3 cards at the bottom
+   ============================================= */
+
+/* The outer div — a thin top border separates it from the form */
+main > div {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  gap: 12px;
+  border-top: 1px solid var(--border-footer-faint);
+  padding-top: 20px;
+}
+
+/* Stack cards on small screens */
+@media (max-width: 559px) {
+  main > div {
+    grid-template-columns: 1fr;
+  }
+}
+
+main > div > article {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  margin-top: 26px;
+}
+
+main > div > article .material-symbols-outlined {
+  font-size: 28px;
+  color: var(--color-yellow);
+  flex-shrink: 0; /* icon never shrinks */
+}
+
+main > div > article .text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+
+main > div > article h3 {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+main > div > article p {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+@media (max-width: 767px) {
+  main {
+    padding-bottom: 100px;
+  }
+}
