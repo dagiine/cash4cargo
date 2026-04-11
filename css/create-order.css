@@ -1,0 +1,138 @@
+body {
+  margin: 0;
+  background-image: url('../pics/map.png');
+  background-size: cover;        
+  background-position: center;   
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+.form-wrapper {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 60px var(--space-page) 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+}
+
+.form-wrapper h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.form-wrapper p {
+  color: var(--color-muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 620px;
+  margin: 0;
+}
+
+.form-wrapper form {
+  width: 100%;
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 217, 0, 0.2);
+  border-radius: var(--card-radius);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+
+.form-wrapper label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-muted);
+  position: relative;
+}
+
+.form-wrapper label .material-symbols-outlined {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  font-size: 20px;
+  color: var(--color-muted);
+  pointer-events: none;
+}
+
+.form-wrapper input,
+.form-wrapper textarea {
+  width: 100%;
+  height: var(--btn-height-big);
+  padding: 0 16px 0 44px;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: var(--input-radius);
+  color: var(--color-text);
+  font-size: 15px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.form-wrapper textarea {
+  height: 80px;
+  padding-top: 12px;
+  resize: vertical;
+  line-height: 1.6;
+  font-family: var(--font--base);
+}
+
+.form-wrapper input:focus,
+.form-wrapper textarea:focus {
+  border-color: var(--border-accent);
+  box-shadow: 0 0 0 3px rgba(255, 217, 0, 0.12);
+}
+
+p.field-error {
+  position: relative;
+  left: 40px;
+  display: none;
+  font-size: 12px;
+  color: var(--color--error);
+}
+
+.input-error {
+  border: 1px solid var(--color--error) !important;
+}
+
+p.form-message {
+  margin-top: 12px;
+  font-size: 16px;
+}
+
+.form-wrapper button {
+  width: 100%;
+  height: var(--btn-height-big);
+  font-size: 16px;
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  font-weight: 700;
+  border-radius: var(--btn-radius);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.form-wrapper button:hover {
+  opacity: 0.85;
+}
+
+small {
+  font-size: 13px;
+  color: var(--color-muted);
+  text-align: center;
+  line-height: 1.6;
+}

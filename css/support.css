@@ -1,0 +1,209 @@
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding: 60px var(--space-page) 80px;
+  max-width: 860px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+main > h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  text-align: center;
+}
+
+main > p {
+  color: var(--color-muted);
+  text-align: center;
+  margin-top: -12px;
+}
+
+
+/* ============================================= 
+   SEARCH BAR
+   ============================================= */
+
+label.search {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: var(--card-bg);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+label.search:focus-within {
+  border-color: var(--border-accent);
+  box-shadow: 0 0 0 3px rgba(255, 217, 0, 0.12);
+}
+
+label.search .material-symbols-outlined {
+  padding: 0 14px;
+  font-size: 22px;
+  color: var(--color-muted);
+}
+
+label.search input {
+  flex: 1;
+  height: 52px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-text);
+  font-family: var(--font-base);
+  font-size: 15px;
+}
+
+label.search input::placeholder {
+  color: var(--color-muted);
+  opacity: 0.6;
+}
+
+main > article {
+  width: 100%;
+}
+
+input[name="faq"] {
+  display: none;
+}
+
+
+/* ============================================= 
+   CATEGORY TABS
+   ============================================= */
+
+.categories {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+
+.categories label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: var(--btn-height);
+  padding: var(--btn-padding);
+  border-radius: var(--btn-radius);
+  font-size: var(--btn-font-size);
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  color: var(--color-muted);
+  transition: all 0.2s;
+}
+
+.categories label:hover {
+  border-color: var(--border-accent);
+  color: var(--color-text);
+}
+
+#faq-all:checked      ~ .categories label[for="faq-all"],
+#faq-ordering:checked ~ .categories label[for="faq-ordering"],
+#faq-shipping:checked ~ .categories label[for="faq-shipping"],
+#faq-payments:checked ~ .categories label[for="faq-payments"] {
+  background: var(--color-yellow);
+  color: var(--color-bg);
+  border-color: var(--color-yellow);
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+section > h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.faq-group {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#faq-all:checked ~ section .faq-group {
+  display: flex;
+}
+
+#faq-ordering:checked ~ section #faq-ordering { display: flex; }
+#faq-shipping:checked ~ section #faq-shipping { display: flex; }
+#faq-payments:checked ~ section #faq-payments { display: flex; }
+
+
+/* ============================================= 
+   FAQ CARDS
+   ============================================= */
+
+section article {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+section article:hover {
+  border-color: var(--border-accent);
+}
+
+details summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+  transition: background 0.15s;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary:hover {
+  background: var(--color-yellow-dim);
+}
+
+details summary::after {
+  content: 'expand_more';
+  font-family: 'Material Symbols Outlined';
+  font-size: 22px;
+  color: var(--color-yellow);
+  transition: transform 0.25s;
+}
+
+details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+/* Answer text */
+details p {
+  padding: 0 20px 18px;
+  font-size: 14px;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+
+/* ============================================= 
+   MOBILE — extra space for the bottom nav bar
+   ============================================= */
+
+@media (max-width: 767px) {
+  main {
+    padding-bottom: 100px;
+  }
+}

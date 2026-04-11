@@ -1,44 +1,11 @@
-<!DOCTYPE html>
-<html lang="mn">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Тусламж</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="support.css" />
-</head>
-<body>
-
-  <header>
-    <a href="index.html" class="logo">
-      <span class="logo-icon">
-        <img src="../pics/logo.png" alt="Cash 4 Cargo Logo" />
-      </span>
-      Cash 4 Cargo
-    </a>
-
-    <nav>
-      <ul>
-        <li><a href="../home/index.html">Нүүр</a></li>
-        <li><a href="../track/track.html">Захиалга хянах</a></li>
-        <li><a href="../create-order/create-order.html">Захиалга үүсгэх</a></li>
-        <li><a href="../pricing/pricing.html">Үнэ</a></li>
-        <li><a href="../support/support.html" class="active">Тусламж</a></li>
-      </ul>
-    </nav>
-
-    <button class="btn">Нэвтрэх</button>
-  </header>
-
-  <main>
-
+export default function support() {
+  return `
     <h1>Тусламж</h1>
-    <p>Түгээмэл асуугддаг асуултууд болон, таньд хэрэгтэй мэдээллүүд</p>
+    <p>Түгээмэл асуугддаг асуултууд болон таньд хэрэгтэй мэдээллүүд</p>
 
     <label class="search">
       <span class="material-symbols-outlined">search</span>
-      <input type="search" placeholder="Захиалгын мэдээлэл болон бусад хайх..." />
+      <input type="search" id="faq-search" placeholder="Захиалгын мэдээлэл болон бусад хайх..." />
     </label>
 
     <article>
@@ -48,7 +15,7 @@
       <input type="radio" name="faq" id="faq-shipping" hidden />
       <input type="radio" name="faq" id="faq-payments" hidden />
 
-      <div class="categories">
+      <div class="categories" id="faq-categories">
         <label for="faq-all">
           <span class="material-symbols-outlined">view_list</span>
           Бүгд
@@ -68,9 +35,9 @@
       </div>
 
       <section>
-        <h2>Түгээмэл асуултууд</h2>
+        <h2 id="faq-section-title">Түгээмэл асуултууд</h2>
 
-        <!-- Захиалгатай холбоотой асуултууд -->
+        <!-- Захиалгатай холбоотой -->
         <div class="faq-group" id="faq-ordering">
           <article>
             <details>
@@ -99,7 +66,7 @@
               <p>Барааг худалдагчаас авахаас өмнө захиалгыг өөрчлөх эсвэл цуцлах боломжтой. Тээвэрлэлт эхэлсний дараа цуцлах боломжгүй тул аль болох хурдан холбогдоно уу.</p>
             </details>
           </article>
-
+          
           <article>
             <details>
               <summary>Хагарч гэмтэх барааг хэрхэн захиалах вэ?</summary>
@@ -108,8 +75,7 @@
           </article>
         </div>
 
-
-        <!-- Тээвэрлэлттэй холбоотой асуултууд -->
+        <!-- Тээвэрлэлттэй холбоотой -->
         <div class="faq-group" id="faq-shipping">
           <article>
             <details>
@@ -135,16 +101,16 @@
           <article>
             <details>
               <summary>Миний бараа тээвэрлэлт төлөвтэй болохгүй байна. Шалгаад өгөөч?</summary>
-              <p>Бид эрээнд таны захиалсан барааг хүлээж аваад машин дээр жин, овор хэмжээгээр нь үнийг тогтоогоод монгол руу ачиж явуулдаг. Том овортой барааг ингэж уншуулах боломжгүй тул барааны төлөв нь “бүртгэсэн” гэдгээс шууд “улаанбаатарт ирсэн” болдог</p>
+              <p>Бид эрээнд таны захиалсан барааг хүлээж аваад машин дээр жин, овор хэмжээгээр нь үнийг тогтоогоод монгол руу ачиж явуулдаг. Том овортой барааг ингэж уншуулах боломжгүй тул барааны төлөв нь "бүртгэсэн" гэдгээс шууд "улаанбаатарт ирсэн" болдог.</p>
             </details>
           </article>
         </div>
 
-        <!-- Төлбөртэй холбоотой асуултууд -->
+        <!-- Төлбөртэй холбоотой -->
         <div class="faq-group" id="faq-payments">
           <article>
             <details>
-              <summary>Барааны үнээ хэрхэн боддог вэ?</summary>
+              <summary>Барааны үнээс хэрхэн боддог вэ?</summary>
               <p>Таны захиалсан бараанаас шалтгаалаад кг нь 2500, м3 нь 750 юань-р бодно. Утасны case-с томгүй барааг 1500-р бодно. Та үнэ тооцоолох хэсэгт тооцоолж бодох боломжтой.</p>
             </details>
           </article>
@@ -158,7 +124,7 @@
 
           <article>
             <details>
-              <summary>Төлбөрөө хэзээ хийдэг   вэ?</summary>
+              <summary>Төлбөрөө хэзээ хийдэг вэ?</summary>
               <p>Бараа Хятад дахь манай агуулахад ирж жин, хэмжээ баталгаажсаны дараа төлбөр авна. Төлбөр хийхээс өмнө танд нэхэмжлэл илгээгдэнэ.</p>
             </details>
           </article>
@@ -178,71 +144,12 @@
           </article>
         </div>
 
+        <!-- Хайлтад тохирох асуулт олдоогүй -->
+        <p id="faq-no-results" style="display:none; color: var(--color-muted); text-align:center; padding: 32px 0;">
+          Хайлтад тохирох асуулт олдсонгүй.
+        </p>
+
       </section>
     </article>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <section class="footer-top">
-
-      <section class="footer-brand">
-        <a href="../home/index.html" class="logo">
-          <span class="logo-icon">
-            <img src="../pics/logo.png" alt="Cash 4 Cargo Logo" />
-          </span>
-          Cash 4 Cargo
-        </a>
-        <p>
-          Хятадаас Монгол руу найдвартай, хурдан мэргэжлийн үйлчилгээ.
-        </p>
-      </section>
-
-      <address class="footer-contact">
-
-        <ul>
-          <li class="footer-contact-item">
-            <span class="material-symbols-outlined">call</span>
-            <p>
-              <a href="tel:+97699447176">99447176</a>
-            </p>
-          </li>
-
-          <li class="footer-contact-item">
-            <span class="material-symbols-outlined">schedule</span>
-            <p>
-              Даваа–Баасан: 09:00–18:00<br>
-              Бямба: 10:00–15:00<br>
-              Ням: Амарна
-            </p>
-          </li>
-
-          <li class="footer-contact-item">
-            <span class="material-symbols-outlined">language</span>
-            <p>
-              <a href="https://www.kingcargo.mn" target="_blank">
-                www.kingcargo.mn
-              </a>
-            </p>
-          </li>
-
-          <li class="footer-contact-item">
-            <span class="material-symbols-outlined">thumb_up</span>
-            <p>
-              <a href="https://facebook.com/kingcargo" target="_blank">
-                kingcargo
-              </a>
-            </p>
-          </li>
-        </ul>
-      </address>
-    </section>
-
-    <div class="footer-bottom">
-      <small>
-        © 2026 Cash 4 Cargo. Бүх эрх хуулиар хамгаалагдсан.
-      </small>
-    </div>
-  </footer>
-</body>
-</html>
+  `;
+}

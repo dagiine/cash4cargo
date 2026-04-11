@@ -1,0 +1,253 @@
+body {
+  margin: 0;
+  background-image: url('../pics/map.png');
+  background-size: cover;        
+  background-position: center;   
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  padding: 60px var(--space-page) 80px;
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+main > h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+main > p {
+  color: var(--color-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+  max-width: 460px;
+}
+
+
+/* =============================================
+   FORM WRAPPER
+   ============================================= */
+
+.form-wrapper { width: 100%; margin-top: 8px; }
+
+#tab-code,
+#tab-phone { display: none; }
+
+
+/* =============================================
+   FOLDER TAB STRIP
+   ============================================= */
+
+.tab-strip {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  padding: 0;
+}
+
+.tab-strip label {
+  position: static;
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-muted);
+  cursor: pointer;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid rgba(255, 217, 0, .10);
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  margin-bottom: -1px;
+  transition: color .18s, background .18s;
+}
+
+.tab-strip label .material-symbols-outlined {
+  position: static;
+  font-size: 18px;
+  color: inherit;
+}
+
+.tab-strip label:hover {
+  color: var(--color-text);
+  background: var(--color-surface);
+}
+
+#tab-code:checked  ~ .tab-strip label[for="tab-code"],
+#tab-phone:checked ~ .tab-strip label[for="tab-phone"] {
+  background: var(--color-surface);
+  color: var(--color-yellow);
+  border-color: rgba(255, 217, 0, .25);
+  border-bottom-color: var(--color-surface);
+}
+
+
+/* =============================================
+   FORM BOX
+   ============================================= */
+
+.form-box {
+  width: 100%;
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 217, 0, .20);
+  border-radius: 0 var(--card-radius) var(--card-radius) var(--card-radius);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
+}
+
+
+/* =============================================
+   TAB PANELS
+   ============================================= */
+
+.tab-panel { display: none; }
+
+#tab-code:checked  ~ .form-box .tab-panel--code,
+#tab-phone:checked ~ .form-box .tab-panel--phone {
+  display: block;
+}
+
+
+/* =============================================
+   INPUT
+   ============================================= */
+
+.tab-panel label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-muted);
+  position: relative;
+}
+
+.tab-panel label .material-symbols-outlined {
+  position: absolute;
+  left: 14px;
+  bottom: 15px;
+  font-size: 20px;
+  color: var(--color-muted);
+  pointer-events: none;
+}
+
+.tab-panel input {
+  width: 100%;
+  height: var(--btn-height-big);
+  padding: 0 16px 0 44px;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: var(--input-radius);
+  color: var(--color-text);
+  font-family: var(--font-base);
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.tab-panel input::placeholder {
+  color: var(--color-muted);
+  opacity: 0.6;
+}
+
+.tab-panel input:focus {
+  border-color: var(--border-accent);
+  box-shadow: 0 0 0 3px rgba(255, 217, 0, 0.12);
+}
+
+
+/* =============================================
+   SUBMIT
+   ============================================= */
+
+.form-box button[type="submit"] {
+  width: 100%;
+  height: var(--btn-height-big);
+  font-size: 16px;
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  font-weight: 700;
+  border-radius: var(--btn-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: opacity 0.2s;
+}
+
+.form-box button[type="submit"]:hover { opacity: 0.85; }
+
+
+/* =============================================
+   INFO STRIP
+   ============================================= */
+
+.info-strip {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  border-top: 1px solid var(--border-footer-faint);
+  padding-top: 20px;
+}
+
+@media (max-width: 559px) {
+  .info-strip { grid-template-columns: 1fr; }
+}
+
+.info-strip article {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+}
+
+.info-strip article .material-symbols-outlined {
+  font-size: 28px;
+  color: var(--color-yellow);
+  flex-shrink: 0;
+}
+
+.info-strip article .text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+
+.info-strip article h3 {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+.info-strip article p {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+@media (max-width: 767px) {
+  main { padding-bottom: 100px; }
+}
