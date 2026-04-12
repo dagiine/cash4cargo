@@ -201,12 +201,13 @@
 .stat strong {
   font-size: 36px;
   font-weight: 900;
+  height: 60px;
   color: var(--color-yellow-label);
   transition: color 0.2s, font-size 0.2s;
 }
 
 .stat:hover strong {
-  font-size: 40px;
+  font-size: 38px;
   color: var(--color-yellow);
 }
 

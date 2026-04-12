@@ -1,0 +1,27 @@
+.container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  padding: 20px;
+}
+
+/* LEFT */
+.shipment-progress article {
+  background: #111;
+  padding: 16px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+}
+
+/* ACTIVE STEP */
+.shipment-progress .active {
+  border-left: 4px solid gold;
+}
+
+/* RIGHT */
+aside section {
+  background: #111;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
