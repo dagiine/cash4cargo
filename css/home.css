@@ -11,39 +11,38 @@
   margin: 0 auto;
 }
 
-.hero-text {
+.hero > div {
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-.hero-text h1 {
+.hero h1 {
   font-size: 56px;
   font-weight: 900;
   line-height: 1.1;
 }
 
-.hero-text h1 span {
+.hero h1 span {
   color: var(--color-yellow);
 }
 
-.hero-text > p {
+.hero p {
   font-size: 17px;
   color: var(--color-muted);
   max-width: 500px;
 }
 
-.track label {
-  display: block;
+.hero label {
   font-size: 11px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 2px;
   color: var(--color-yellow);
-  margin-bottom: 8px;
 }
 
-.track-input {
+/* track input */
+.track {
   display: flex;
   max-width: 26rem;
   background: var(--color-surface);
@@ -52,47 +51,32 @@
   overflow: hidden;
 }
 
-.track-input:focus-within {
+.track:focus-within {
   border-color: var(--border-accent);
 }
 
-.track-input input {
+.track input {
   flex: 1;
   padding: 12px 16px;
-  font-size: 14px;
-  font-family: inherit;
-  color: var(--color-text);
-  background: none;
   border: none;
   outline: none;
+  background: none;
 }
 
-.track-input input::placeholder {
-  color: var(--color-muted);
-}
-
-.track-input button {
-  display: flex;
-  align-items: center;
+.track button {
   padding: 0 16px;
-  color: var(--color-bg);
   background: var(--color-yellow);
   border: none;
   cursor: pointer;
 }
 
-.car-img-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.car-img {
+/* image */
+.hero img {
   width: 100%;
   max-width: 520px;
-  position: relative;
-  left: 50px;
-  animation: run 1s linear 1;
+  align-self: center;
+  transform: translateX(50px);
+  animation: run 1s linear;
 }
 
 /* =============================================
@@ -101,7 +85,7 @@
 
 @keyframes run {
   from { transform: translateX(200px); }
-  to   { transform: translateX(0); }
+  to   { transform: translateX(50px); }
 }
 
 @keyframes slideInLeft {
@@ -114,20 +98,19 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-.hero-text h1,
-.hero-text > p,
-.hero-text .track,
-.hero-text .btn {
+.hero > div > * {
   opacity: 0;
   animation-fill-mode: forwards;
-  animation-duration: 1s;
+  animation-duration: 0.9s;
   animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.hero-text h1     { animation-name: slideInLeft; animation-delay: 0.10s; }
-.hero-text > p    { animation-name: slideInLeft; animation-delay: 0.30s; }
-.hero-text .track { animation-name: fadeInUp;    animation-delay: 0.55s; }
-.hero-text .btn   { animation-name: fadeInUp;    animation-delay: 0.75s; }
+.hero > div > h1 { animation-name: slideInLeft; animation-delay: 0.1s; }
+.hero > div > p { animation-name: slideInLeft; animation-delay: 0.3s; }
+.hero > div > label { animation-name: fadeInUp; animation-delay: 0.45s; }
+.hero > div > .track { animation-name: fadeInUp; animation-delay: 0.6s; }
+.hero > div > #track-message { animation-name: fadeInUp; animation-delay: 0.7s; }
+.hero > div > .btn { animation-name: fadeInUp; animation-delay: 0.85s; }
 
 /* =============================================
    STATS
@@ -222,7 +205,7 @@
   gap: 8px;
 }
 
-.warehouse > div > div {
+.warehouse > article > div {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -237,7 +220,7 @@
   transition: border-color 0.2s;
 }
 
-.warehouse > div > div:hover {
+.warehouse > article > div:hover {
   border-color: var(--card-border-hover);
 }
 
