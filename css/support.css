@@ -64,18 +64,17 @@ label.search input::placeholder {
   opacity: 0.6;
 }
 
-main > article {
-  width: 100%;
-}
+/* ============================================= 
+   CATEGORY TABS
+   ============================================= */
 
 input[name="faq"] {
   display: none;
 }
 
-
-/* ============================================= 
-   CATEGORY TABS
-   ============================================= */
+main > article {
+  width: 100%;
+}
 
 .categories {
   display: flex;
@@ -105,7 +104,7 @@ input[name="faq"] {
   color: var(--color-text);
 }
 
-#faq-all:checked      ~ .categories label[for="faq-all"],
+#faq-all:checked ~ .categories label[for="faq-all"],
 #faq-ordering:checked ~ .categories label[for="faq-ordering"],
 #faq-shipping:checked ~ .categories label[for="faq-shipping"],
 #faq-payments:checked ~ .categories label[for="faq-payments"] {
@@ -189,7 +188,6 @@ details[open] summary::after {
   transform: rotate(180deg);
 }
 
-/* Answer text */
 details p {
   padding: 0 20px 18px;
   font-size: 14px;
@@ -197,10 +195,6 @@ details p {
   line-height: 1.7;
 }
 
-
-/* ============================================= 
-   MOBILE — extra space for the bottom nav bar
-   ============================================= */
 
 @media (max-width: 767px) {
   main {

@@ -49,17 +49,19 @@ export function initHomeTracking() {
 }
 
 export function initAddressCopy() {
-  const buttons = document.querySelectorAll(".warehouse-copy-btn");
+  const buttons = document.querySelectorAll(".warehouse button");
 
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
 
       // Товчны байгаа мөрийг олно
-      const row = btn.closest(".warehouse-copy-row");
+      const row = btn.closest("div");
 
-      // Текстийг олно
-      const textElement = row.querySelector(".warehouse-value");
-      const text = textElement.textContent;
+      // Текстийг олно (button-ны textNode-г хасч авна)
+      const text = Array.from(row.childNodes)
+        .filter(node => node.nodeType === Node.TEXT_NODE)
+        .map(node => node.textContent.trim())
+        .join("");
 
       // Clipboard руу хуулна
       navigator.clipboard.writeText(text);

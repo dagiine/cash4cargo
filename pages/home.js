@@ -45,50 +45,50 @@ export default function home() {
     </section>
 
     <section class="warehouse">
-      <div class="warehouse-header">
-        <h2 class="warehouse-title">Хаяг холбох заавар</h2>
+      <div>
+        <h2>Хаяг холбох заавар</h2>
         <p>Илгээмжээ Хятад Улс дахь манай агуулахтай холбоорой.</p>
       </div>
 
-      <article class="warehouse-item">
+      <div>
         <h3>收件人 / Хүлээн авагч</h3>
-        <div class="warehouse-copy-row warehouse-copy-row-inline">
-          <span class="warehouse-value warehouse-value-nowrap">Cash4Cargo (утасны дугаар)</span>
-          <button type="button" class="warehouse-copy-btn" aria-label="Хүлээн авагчийг хуулах">
+        <div>
+          Cash4Cargo (утасны дугаар)
+          <button type="button" aria-label="Хүлээн авагч хуулах">
             <span class="material-symbols-outlined">content_copy</span>
           </button>
         </div>
-      </article>
+      </div>
 
-      <article class="warehouse-item warehouse-item-wide">
+      <div class="wide">
         <h3>街道地址 / Хаяг</h3>
-        <div class="warehouse-copy-row">
-          <span class="warehouse-value">义乌市场西文都苏旅店 Cash4Cargo (17547558506)</span>
-          <button type="button" class="warehouse-copy-btn" aria-label="Хаягийг хуулах">
+        <div>
+          义乌市场西文都苏旅店 Cash4Cargo (17547558506)
+          <button type="button" aria-label="Хаяг хуулах">
             <span class="material-symbols-outlined">content_copy</span>
           </button>
         </div>
-      </article>
+      </div>
 
-      <article class="warehouse-item">
+      <div>
         <h3>电话 / Утасны дугаар</h3>
-        <div class="warehouse-copy-row warehouse-copy-row-inline">
-          <span class="warehouse-value warehouse-value-nowrap">17547558506</span>
-          <button type="button" class="warehouse-copy-btn" aria-label="Утасны дугаарыг хуулах">
+        <div>
+          17547558506
+          <button type="button" aria-label="Утасны дугаар хуулах">
             <span class="material-symbols-outlined">content_copy</span>
           </button>
         </div>
-      </article>
+      </div>
 
-      <article class="warehouse-item warehouse-item-wide">
+      <div class="wide">
         <h3>所在地区 / Бүс нутаг</h3>
-        <div class="warehouse-copy-row">
-          <span class="warehouse-value">内蒙古自治区锡林郭勒盟二连浩特市二连浩特市社区建设管理局</span>
-          <button type="button" class="warehouse-copy-btn" aria-label="Бүс нутгийг хуулах">
+        <div>
+          内蒙古自治区锡林郭勒盟二连浩特市二连浩特市社区建设管理局
+          <button type="button" aria-label="Бүс нутаг хуулах">
             <span class="material-symbols-outlined">content_copy</span>
           </button>
         </div>
-      </article>
+      </div>
     </section>
 
     <section class="services">

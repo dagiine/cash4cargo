@@ -1,7 +1,7 @@
 export default function support() {
   return `
     <h1>Тусламж</h1>
-    <p>Түгээмэл асуугддаг асуултууд болон таньд хэрэгтэй мэдээллүүд</p>
+    <p>Түгээмэл асуудаг асуултууд болон таньд хэрэгтэй мэдээллүүд</p>
 
     <label class="search">
       <span class="material-symbols-outlined">search</span>
