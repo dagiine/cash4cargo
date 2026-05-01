@@ -96,20 +96,11 @@ export class TrackUI {
 
   async init() {
     this.resultsEl = document.getElementById("track-results");
-    this.searchBtn = document.querySelector(".form-box button");
+    this.searchBtn = document.querySelector(".form button");
     this.codeInput = document.getElementById("track-code-input");
     this.phoneInput = document.getElementById("track-phone-input");
     this.tabCode = document.getElementById("tab-code");
     this.tabPhone = document.getElementById("tab-phone");
-
-    console.log("Track DOM:", {
-      resultsEl: this.resultsEl,
-      searchBtn: this.searchBtn,
-      codeInput: this.codeInput,
-      phoneInput: this.phoneInput,
-      tabCode: this.tabCode,
-      tabPhone: this.tabPhone,
-    });
 
     if (
       !this.resultsEl ||

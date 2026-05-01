@@ -9,7 +9,6 @@ export default function support() {
     </label>
 
     <article>
-
       <input type="radio" name="faq" id="faq-all" checked hidden />
       <input type="radio" name="faq" id="faq-ordering" hidden />
       <input type="radio" name="faq" id="faq-shipping" hidden />
