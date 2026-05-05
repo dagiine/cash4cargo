@@ -1,24 +1,30 @@
+// Icon map — route.lnk-тэй тохирч байна
+const NAV_ICONS = {
+  "#/"            : "home",
+  "#/track"       : "search",
+  "#/create-order": "edit_square",
+  "#/pricing"     : "sell",
+  "#/support"     : "help"
+};
+
 function buildNav(routes, currentHash) {
   let html = "";
 
   routes.forEach(function(route) {
-    // Одоогийн link нь идэвхтэй page мөн эсэхийг шалгана
-    const isActive = 
-      route.lnk === currentHash;
-      
-    // Active байвал class="active" нэмнэ
-    const activeClass =
-      isActive ? ' class="active"' : "";
+    const isActive   = route.lnk === currentHash;
+    const activeClass = isActive ? ' class="active"' : "";
+    const icon       = NAV_ICONS[route.lnk] || "circle";
 
     html += `
       <li>
-        <a href="${route.lnk}" ${activeClass}>
-          ${route.item}
+        <a href="${route.lnk}"${activeClass}>
+          <span class="nav-icon material-symbols-outlined">${icon}</span>
+          <span class="nav-label">${route.item}</span>
         </a>
       </li>
     `;
-
   });
+
   return html;
 }
 
