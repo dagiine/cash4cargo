@@ -8,13 +8,13 @@
   
   --color--error: #ef4444;
   --color--success: #4ade80;
-  --color-bg:      #0b0c10;
-  --color-surface: #1f2833;
+  --color-bg:      #141720;
+  --color-surface: #1e2433;
   --color-text:    #f1f5f9;
-  --color-muted:   #94a3b8;
+  --color-muted:   #a8b8cc;
 
   /* Borders */
-  --border-default:      rgba(255, 255, 255, 0.12);
+  --border-default:      rgba(255, 255, 255, 0.16);
   --border-accent:       var(--color-yellow);
   --border-footer-faint: rgba(255, 217, 0, 0.06);
 
@@ -76,11 +76,35 @@
   padding: 0;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   font-family: var(--font-base);
   background: var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── Mobile global overrides ──────────────────
+   Shrink page-level padding (used by every page
+   via var(--space-page)) and reserve room for
+   the fixed bottom nav bar.
+   ─────────────────────────────────────────── */
+@media (max-width: 767px) {
+  :root {
+    --space-page: 16px;
+  }
+
+  body {
+    padding-bottom: 64px;
+  }
+
+  .btn.big {
+    max-width: 100%;
+  }
 }
 
 a {

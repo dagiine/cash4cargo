@@ -198,6 +198,8 @@ details p {
 
 @media (max-width: 767px) {
   main {
+    padding-top: 36px;
     padding-bottom: 100px;
+    gap: 20px;
   }
 }

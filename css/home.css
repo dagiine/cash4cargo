@@ -22,7 +22,7 @@
 }
 
 .hero-text h1 {
-  font-size: 56px;
+  font-size: clamp(2rem, 8.5vw, 56px);
   font-weight: 900;
   line-height: 1.1;
 }
@@ -440,4 +440,30 @@
   color: var(--color-muted);
   font-size: 14px;
   line-height: 1.7;
+}
+
+/* ── Mobile vertical-padding reductions ─────── */
+@media (max-width: 767px) {
+  .hero {
+    padding-top: 36px;
+    padding-bottom: 36px;
+    gap: 24px;
+  }
+
+  .stats {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    gap: 10px;
+  }
+
+  .warehouse {
+    padding-top: 24px;
+    padding-bottom: 24px;
+    gap: 12px;
+  }
+
+  .services {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
 }

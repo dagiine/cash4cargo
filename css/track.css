@@ -101,7 +101,7 @@ main > p {
   font-weight: 600;
   color: var(--color-muted);
   cursor: pointer;
-  background: rgba(255, 255, 255, .04);
+  background: rgba(255, 255, 255, .07);
   border: 1px solid rgba(255, 217, 0, .10);
   border-bottom: none;
   border-radius: 10px 10px 0 0;
@@ -249,8 +249,14 @@ main > p {
 
 /* media queries */
 @media (max-width: 767px) {
+  body {
+    background-attachment: scroll;
+  }
+
   main {
+    padding-top: 36px;
     padding-bottom: 100px;
+    gap: 14px;
   }
 }
 

@@ -35,6 +35,13 @@ const routes = [
     lnk: "#/support",
     component: "support",
     mainClass: "support-main"
+  },
+
+  {
+    item: "Бидний тухай",
+    lnk: "#/about",
+    component: "about",
+    mainClass: ""
   }
 ];
 

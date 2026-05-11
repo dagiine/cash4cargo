@@ -39,6 +39,17 @@ footer {
   min-width: 240px;
 }
 
+@media (max-width: 959px) {
+  .footer-contact {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .footer-brand {
+    max-width: 100%;
+  }
+}
+
 .footer-contact ul {
   list-style: none;
   display: flex;

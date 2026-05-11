@@ -4,7 +4,8 @@ const NAV_ICONS = {
   "#/track"       : "search",
   "#/create-order": "edit_square",
   "#/pricing"     : "sell",
-  "#/support"     : "help"
+  "#/support"     : "help",
+  "#/about"       : "info"
 };
 
 function buildNav(routes, currentHash) {
