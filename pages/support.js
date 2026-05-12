@@ -1,8 +1,10 @@
 export default function support() {
   return `
-    <h1>Тусламж</h1>
-    <p>Түгээмэл асуудаг асуултууд болон таньд хэрэгтэй мэдээллүүд</p>
-
+    <div class="page-header">
+      <h1>Тусламж</h1>
+      <p>Түгээмэл асуудаг асуултууд болон таньд хэрэгтэй мэдээллүүд</p>
+    </div>
+    
     <label class="search">
       <span class="material-symbols-outlined">search</span>
       <input type="search" id="faq-search" placeholder="Захиалгын мэдээлэл болон бусад хайх..." />

@@ -98,18 +98,8 @@ export class TrackUI {
     this.resultsEl = document.getElementById("track-results");
     this.searchBtn = document.querySelector(".form button");
     this.codeInput = document.getElementById("track-code-input");
-    this.phoneInput = document.getElementById("track-phone-input");
-    this.tabCode = document.getElementById("tab-code");
-    this.tabPhone = document.getElementById("tab-phone");
 
-    if (
-      !this.resultsEl ||
-      !this.searchBtn ||
-      !this.codeInput ||
-      !this.phoneInput ||
-      !this.tabCode ||
-      !this.tabPhone
-    ) {
+    if (!this.resultsEl || !this.searchBtn || !this.codeInput) {
       console.error("TrackUI: DOM elements missing");
       return;
     }
@@ -126,18 +116,15 @@ export class TrackUI {
   bindEvents() {
     this.searchBtn.addEventListener("click", () => this.onSearch());
 
-    [this.codeInput, this.phoneInput].forEach((input) => {
-      input.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-          e.preventDefault();
-          this.onSearch();
-        }
-      });
+    this.codeInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        this.onSearch();
+      }
     });
   }
 
   applyHash() {
-    // URL hash-г авна
     const hash = window.location.hash;
     const queryString = hash.includes("?") ? hash.split("?")[1] : "";
     const params = new URLSearchParams(queryString);
@@ -147,52 +134,44 @@ export class TrackUI {
 
     console.log("Hash query params:", { type, query });
 
-    if (!query) 
-      return;
+    if (!query) return;
 
-    if (type === "phone") {
-      // phone таб идэвхжүүлнэ
-      this.tabPhone.checked = true;
-      this.phoneInput.value = query;
-    } else {
-      // code таб идэвхжүүлнэ
-      this.tabCode.checked = true;
-      this.codeInput.value = query;
-    }
-
+    // Нэг input-д утгыг оруулна
+    this.codeInput.value = query;
     this.onSearch();
   }
 
-  
-
   onSearch() {
-    // Аль таб сонгогдсон, ямар утгаар хайхыг тодорхойлно
-    const byCode = this.tabCode.checked;
-    const query = byCode 
-      ? this.codeInput.value 
-      : this.phoneInput.value;
+    let value = this.codeInput.value.trim().toUpperCase();
 
-    console.log("Search mode:", byCode ? "code" : "phone");
-    console.log("Query:", query);
-
-    if (!query.trim()) {
-      this.showError("Хайлтын утга оруулна уу.");
+    if (!value) {
+      this.showError("Хайх утга оруулна уу.");
       return;
     }
-    
+
+    // MN12345 -> MN-12345 болгоно
+    if (/^MN\d{5}$/.test(value)) {
+      value = value.replace(/^MN/, "MN-");
+    }
+
     let results;
 
-    if (byCode) {
-      results = this.tracker.findByCode(query);
+    if (/^MN-\d{5}$/.test(value)) {
+      // Хяналтын кодоор хайна
+      results = this.tracker.findByCode(value);
+    } else if (/^[6-9]\d{7}$/.test(value)) {
+      // Утасны дугаараар хайна
+      results = this.tracker.findByPhone(value);
     } else {
-      results = this.tracker.findByPhone(query);
+      this.showError("Утасны дугаар эсвэл хяналтын код буруу байна.");
+      return;
     }
 
     if (results.length === 0) {
-      this.showEmpty(query);
+      this.showEmpty(value);
       return;
     }
-    
+
     this.renderResults(results);
   }
 

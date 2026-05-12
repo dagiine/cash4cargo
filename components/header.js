@@ -1,11 +1,9 @@
-// Icon map — route.lnk-тэй тохирч байна
 const NAV_ICONS = {
   "#/"            : "home",
   "#/track"       : "search",
   "#/create-order": "edit_square",
-  "#/pricing"     : "sell",
   "#/support"     : "help",
-  "#/about"       : "info"
+  "#/about-us"    : "info"
 };
 
 function buildNav(routes, currentHash) {
@@ -45,7 +43,50 @@ export function renderHeader(routes, currentHash) {
         </ul>
       </nav>
 
-      <label for="signin-toggle" class="btn">Нэвтрэх</label>
+      <section class="header-actions">
+        <input type="checkbox" id="call-toggle" hidden />
+
+        <label for="call-toggle" class="header-call-btn">
+          <span class="material-symbols-outlined">call</span>
+          <span>Холбоо барих</span>
+        </label>
+
+        <aside class="call-panel">
+          <h2>Холбоо барих</h2>
+
+          <article class="call-card">
+            <div class="call-info">
+              <strong>УБ салбар</strong>
+              <span>+976 9944 7176</span>
+            </div>
+            <a href="tel:+97699447176" class="call-link" aria-label="УБ салбар руу залгах">
+              <span class="material-symbols-outlined">call</span>
+            </a>
+          </article>
+
+          <article class="call-card">
+            <div class="call-info">
+              <strong>Эрээн агуулах</strong>
+              <span>+86 175 4755 8506</span>
+            </div>
+            <a href="tel:+8617547558506" class="call-link" aria-label="Эрээн агуулах руу залгах">
+              <span class="material-symbols-outlined">call</span>
+            </a>
+          </article>
+
+          <article class="call-card">
+            <div class="call-info">
+              <strong>Жолооч</strong>
+              <span>+976 9911 2233</span>
+            </div>
+            <a href="tel:+97699112233" class="call-link" aria-label="Жолооч руу залгах">
+              <span class="material-symbols-outlined">call</span>
+            </a>
+          </article>
+        </aside>
+
+        <label for="signin-toggle" class="btn signin-open-btn">Нэвтрэх</label>
+      </section>
     </header>
   `;
 }
@@ -81,6 +122,24 @@ export function initSignin() {
   const panel = document.querySelector(".signin-panel");
   const message = document.querySelector("#signin-message");
   const toggle = document.querySelector("#signin-toggle");
+
+  const callToggle = document.querySelector("#call-toggle");
+
+  if (toggle) {
+    toggle.addEventListener("change", function () {
+      if (toggle.checked && callToggle) {
+        callToggle.checked = false;
+      }
+    });
+  }
+
+  if (callToggle) {
+    callToggle.addEventListener("change", function () {
+      if (callToggle.checked && toggle) {
+        toggle.checked = false;
+      }
+    });
+  }
 
   if (!form) 
     return;

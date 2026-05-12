@@ -1,3 +1,7 @@
+/* =============================================
+   MAIN
+   ============================================= */
+
 main {
   flex: 1;
   display: flex;
@@ -22,8 +26,33 @@ main > p {
   margin-top: -12px;
 }
 
+/* =============================================
+   PAGE HEADER
+   ============================================= */
 
-/* ============================================= 
+.page-header {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.page-header h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--color-text);
+}
+
+.page-header p {
+  color: var(--color-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* =============================================
    SEARCH BAR
    ============================================= */
 
@@ -64,7 +93,7 @@ label.search input::placeholder {
   opacity: 0.6;
 }
 
-/* ============================================= 
+/* =============================================
    CATEGORY TABS
    ============================================= */
 
@@ -113,13 +142,19 @@ main > article {
   border-color: var(--color-yellow);
 }
 
-section {
+/* =============================================
+   FAQ SECTION — section tag-г зөвхөн article дотор
+   ============================================= */
+
+article > div > section,
+article > section {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-section > h2 {
+article > div > section > h2,
+article > section > h2 {
   font-size: 1.4rem;
   font-weight: 800;
   margin-bottom: 8px;
@@ -131,20 +166,20 @@ section > h2 {
   gap: 10px;
 }
 
-#faq-all:checked ~ section .faq-group {
+#faq-all:checked ~ .categories ~ section .faq-group {
   display: flex;
 }
 
-#faq-ordering:checked ~ section #faq-ordering { display: flex; }
-#faq-shipping:checked ~ section #faq-shipping { display: flex; }
-#faq-payments:checked ~ section #faq-payments { display: flex; }
+#faq-ordering:checked ~ .categories ~ section #faq-ordering { display: flex; }
+#faq-shipping:checked ~ .categories ~ section #faq-shipping { display: flex; }
+#faq-payments:checked ~ .categories ~ section #faq-payments { display: flex; }
 
-
-/* ============================================= 
+/* =============================================
    FAQ CARDS
    ============================================= */
 
-section article {
+article > div > section article,
+article > section article {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-md);
@@ -152,7 +187,8 @@ section article {
   transition: border-color 0.2s;
 }
 
-section article:hover {
+article > div > section article:hover,
+article > section article:hover {
   border-color: var(--border-accent);
 }
 
@@ -195,11 +231,12 @@ details p {
   line-height: 1.7;
 }
 
+/* =============================================
+   RESPONSIVE
+   ============================================= */
 
 @media (max-width: 767px) {
   main {
-    padding-top: 36px;
     padding-bottom: 100px;
-    gap: 20px;
   }
 }

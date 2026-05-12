@@ -1,12 +1,6 @@
-body {
-  margin: 0;
-  background-image: url('../pics/map.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  min-height: 100vh;
-}
+/* =============================================
+   MAIN
+   ============================================= */
 
 main {
   flex: 1;
@@ -29,14 +23,29 @@ main > h1 {
 }
 
 main > p {
-  color: var(--color-muted);
   font-size: 1rem;
   line-height: 1.7;
   max-width: 460px;
+  color: var(--color-muted);
+}
+
+/* =============================================
+   FORM
+   ============================================= */
+
+.form {
+  width: 100%;
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
 }
 
 .form label {
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 8px;
   font-size: 13px;
@@ -45,116 +54,7 @@ main > p {
   position: relative;
 }
 
-.form label span {
-  position: absolute;
-  left: 14px;
-  bottom: 15px;
-  font-size: 20px;
-  color: var(--color-muted);
-  pointer-events: none;
-}
-
-#tab-code:checked ~ .form label[data-tab="code"],
-#tab-phone:checked ~ .form label[data-tab="phone"] {
-  display: flex;
-}
-
-.form input {
-  width: 100%;
-  height: var(--btn-height-big);
-  padding: 0 16px 0 44px;
-  background: var(--input-bg);
-  border: 1px solid var(--input-border);
-  border-radius: var(--input-radius);
-  color: var(--color-text);
-  font-family: var(--font-base);
-  font-size: 15px;
-  outline: none;
-  transition: border-color .2s, box-shadow .2s;
-}
-
-.tabs + .form {
-  margin-top: -21px;
-}
-
-#tab-code,
-#tab-phone {
-  display: none;
-}
-
-/* tabs */
-.tabs {
-  display: flex;
-  align-items: flex-end;
-  gap: 4px;
-  width: 100%;
-  margin-top: 8px;
-}
-
-.tabs label {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 10px 20px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--color-muted);
-  cursor: pointer;
-  background: rgba(255, 255, 255, .07);
-  border: 1px solid rgba(255, 217, 0, .10);
-  border-bottom: none;
-  border-radius: 10px 10px 0 0;
-  margin-bottom: -1px;
-  transition: color .18s, background .18s;
-}
-
-.tabs label:hover {
-  color: var(--color-text);
-  background: var(--color-surface);
-}
-
-.tabs span {
-  font-size: 18px;
-  color: inherit;
-}
-
-#tab-code:checked ~ .tabs label[for="tab-code"],
-#tab-phone:checked ~ .tabs label[for="tab-phone"] {
-  background: var(--color-surface);
-  color: var(--color-yellow);
-  border-color: rgba(255, 217, 0, .25);
-  border-bottom-color: var(--color-surface);
-}
-
-/* form */
-.form {
-  width: 100%;
-  background: var(--card-bg);
-  border-radius: 0 var(--card-radius) var(--card-radius) var(--card-radius);
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  text-align: left;
-}
-
-.form input {
-  display: none;
-  width: 100%;
-  height: var(--btn-height-big);
-  padding: 0 16px;
-  background: var(--input-bg);
-  border: 1px solid var(--input-border);
-  border-radius: var(--input-radius);
-  color: var(--color-text);
-  font-family: var(--font-base);
-  font-size: 15px;
-  padding-left: 44px;
-  outline: none;
-  transition: border-color .2s, box-shadow .2s;
-}
-
+/* Icon inside the label, positioned on top of the input */
 .form label span {
   position: absolute;
   left: 14px;
@@ -165,28 +65,39 @@ main > p {
   pointer-events: none;
 }
 
+.form input {
+  display: block;
+  width: 100%;
+  height: var(--btn-height-big);
+  padding: 0 16px 0 44px;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: var(--input-radius);
+  color: var(--color-text);
+  font-family: var(--font-base);
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
 .form input::placeholder {
   color: var(--color-muted);
-  opacity: .6;
+  opacity: 0.6;
 }
 
+/* Highlight input when user clicks on it */
 .form input:focus {
   border-color: var(--border-accent);
-  box-shadow: 0 0 0 3px rgba(255, 217, 0, .12);
-}
-
-#tab-code:checked ~ .form #track-code-input,
-#tab-phone:checked ~ .form #track-phone-input {
-  display: block;
+  box-shadow: 0 0 0 3px rgba(255, 217, 0, 0.12);
 }
 
 .form button {
   width: 100%;
   height: var(--btn-height-big);
   font-size: 16px;
+  font-weight: 700;
   background: var(--btn-bg);
   color: var(--btn-color);
-  font-weight: 700;
   border: none;
   border-radius: var(--btn-radius);
   display: flex;
@@ -194,16 +105,17 @@ main > p {
   justify-content: center;
   gap: 8px;
   cursor: pointer;
-  transition: opacity .2s;
+  transition: opacity 0.2s;
 }
 
 .form button:hover {
-  opacity: .85;
+  opacity: 0.85;
 }
 
+/* =============================================
+   INFO CARDS
+   ============================================= */
 
-
-/* info cards */
 .info {
   width: 100%;
   display: grid;
@@ -237,7 +149,7 @@ main > p {
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: .08em;
+  letter-spacing: 0.08em;
   color: var(--color-muted);
 }
 
@@ -247,26 +159,18 @@ main > p {
   color: var(--color-text);
 }
 
-/* media queries */
-@media (max-width: 767px) {
-  body {
-    background-attachment: scroll;
-  }
+/* =============================================
+   RESPONSIVE
+   ============================================= */
 
+@media (max-width: 767px) {
   main {
-    padding-top: 36px;
     padding-bottom: 100px;
-    gap: 14px;
   }
 }
 
 @media (max-width: 559px) {
   .info {
     grid-template-columns: 1fr;
-  }
-
-  .tabs label {
-    flex: 1;
-    padding: 10px 12px;
   }
 }

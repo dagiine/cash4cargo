@@ -1,41 +1,44 @@
-export default function createOrder() {
+export default function createOrderPage() {
   return `
-    <h1>Захиалга үүсгэх</h1>
-    <p>Хятад Улсаас Монгол Улс руу захиалсан илгээмжийн мэдээллийг оруулна уу.</p>
+    <section class="form-wrapper">
+      <h1>Захиалга үүсгэх</h1>
+      <p>Олон бараатай захиалга үүсгэх боломжтой.</p>
 
-    <form id="order-form" class="form">
-      <label>
-        Утасны дугаар
-        <input id="phone" type="tel" placeholder="99112233">
-        <span class="material-symbols-outlined">phone</span>
-      </label>
-      <p id="phone-error"></p>
+      <form id="orderForm" class="order-form">
+        <div class="field">
+          <label>Утасны дугаар</label>
+          <input id="phone" class="inp" placeholder="99112233" inputmode="tel">
+          <small class="err-txt" id="phoneError"></small>
+        </div>
 
-      <label>
-        Хяналтын код
-        <input id="track-code" type="text" placeholder="Хяналтын код">
-        <span class="material-symbols-outlined">tag</span>
-      </label>
-      <p id="track-code-error"></p>
+        <div class="field">
+          <div class="row-between">
+            <label>Захиалсан бараанууд</label>
+            <button type="button" id="addItemBtn" class="btn btn-outline btn-sm">
+              + Нэмэх
+            </button>
+          </div>
 
-      <label>
-        Барааны тайлбар
-        <textarea id="desc" placeholder="Тайлбар..."></textarea>
-        <span class="material-symbols-outlined">inventory_2</span>
-      </label>
-      <p id="desc-error"></p>
+          <small class="err-txt" id="itemsError"></small>
 
-      <button type="submit">
-        <span class="material-symbols-outlined">add_shopping_cart</span>
-        Захиалга үүсгэх
-      </button>
+          <div class="order-items-wrapper">
+            <div class="order-items-header">
+              <span>Трак код</span>
+              <span>Нэр</span>
+              <span>Тоо</span>
+              <span></span>
+            </div>
 
-      <p id="form-message"></p>
+            <div id="itemsList"></div>
+          </div>
+        </div>
 
-      <small>
-        Захиалга үүсгэсний дараа таны мэдээллийг шалгаж баталгаажуулна. Та SMS-ээр хяналтын код хүлээн авах болно.
-      </small>
+        <div id="successMsg" class="msg success" style="display:none;"></div>
 
-    </form>
+        <button type="submit" class="btn btn-primary btn-big">
+          Захиалга үүсгэх
+        </button>
+      </form>
+    </section>
   `;
 }
