@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>China2MN Cargo | Shipping Simplified</title>
+  <link rel="stylesheet" href="../css/styles.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"/>
+</head>
+<body>
+
+  <!-- Animated background mesh -->
+  <div class="bg-gradient-mesh" aria-hidden="true"></div>
+
+ 
+  <header class="site-header">
+    <a href="#" class="logo">
+      <div class="logo-icon">
+        <span class="material-symbols-outlined" style="font-size:20px;font-variation-settings:'FILL' 1;">local_shipping</span>
+      </div>
+      <span class="logo-text">China2MN Cargo</span>
+    </a>
+
+    <nav class="main-nav" aria-label="Primary navigation">
+      <a href="#">Home</a>
+      <a href="#">Track</a>
+      <a href="#">Create Order</a>
+      <a href="#">Pricing</a>
+      <a href="#">Support</a>
+    </nav>
+
+    <button class="btn btn-primary">Get Started</button>
+  </header>
+
+  <!-- ══════════════════ HERO ══════════════════ -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span></span>
+        Trusted Cross-Border Logistics
+      </div>
+
+      <h1 class="hero-title" id="hero-heading">
+        China to Mongolia<br/>
+        <span class="accent">Shipping Simplified</span>
+      </h1>
+
+      <p class="hero-sub">
+        Fast, secure, and transparent cargo solutions. The bridge
+        between your business and the Mongolian market.
+      </p>
+
+      <label class="track-label" for="track-input">Quick Track</label>
+      <div class="track-input-wrap">
+        <input
+          id="track-input"
+          type="text"
+          placeholder="Enter Tracking Code (e.g. MN-12345)"
+          autocomplete="off"
+        />
+        <button aria-label="Search shipment">
+          <span class="material-symbols-outlined" style="font-size:20px;">search</span>
+        </button>
+      </div>
+
+      <a href="#" class="btn btn-primary btn-primary-lg">
+        <span class="material-symbols-outlined" style="font-size:18px;font-variation-settings:'FILL' 1;">add_box</span>
+        Create New Order
+      </a>
+    </div>
+
+    <!-- Hero visual -->
+    <div class="hero-image-wrap">
+      <div class="hero-image-frame">
+        <img
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqtTwBGCPnmLUOgkb7CkIQfhbNxdCX8lrzXNCinAkkNq4sAKdGpPSf4SXlHSxwQ1lXvJPaGPNUTDDxwjKtk7rt3SLKANHlqsJhmyjcEUG0QjV0SyAefMMbUxSdI9WSfDUjIuIViCKnL74fNetIwn_4IinxOr1nLQug3y3TB9_PySJ4oOS2fYA42k8qF_Ou14OD6TICSWtybZhv7xxM1tPEDi_g493sdexyHRPgvFC8nsDP39pQy0fEP-VFfD5Ly3uTUHOVXUqIA-kj"
+          alt="Modern logistics hub with cargo trucks"
+          loading="lazy"
+        />
+      </div>
+      <!-- Floating badge -->
+      <div class="hero-badge">
+        <div class="hero-badge-icon">
+          <span class="material-symbols-outlined" style="font-size:20px;font-variation-settings:'FILL' 1;">check_circle</span>
+        </div>
+        <div class="hero-badge-text">
+          <strong>98.4%</strong>
+          <span>On-Time Delivery</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ STATS ══════════════════ -->
+  <div class="stats-row-wrap">
+    <div class="stats-row" role="list" aria-label="Key statistics">
+      <div class="stat-cell" role="listitem">
+        <span class="stat-value">5,000<span style="color:var(--text-2);font-size:1.8rem;">+</span></span>
+        <span class="stat-label">Shipments Completed</span>
+      </div>
+      <div class="stat-cell" role="listitem">
+        <span class="stat-value">1,200<span style="color:var(--text-2);font-size:1.8rem;">+</span></span>
+        <span class="stat-label">Active Clients</span>
+      </div>
+      <div class="stat-cell" role="listitem">
+        <span class="stat-value">3–7</span>
+        <span class="stat-label">Delivery Days</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════ CALCULATOR ══════════════════ -->
+  <section class="calculator-section" aria-labelledby="calc-heading">
+    <div class="section-header">
+      <span class="section-tag">Instant Quote</span>
+      <h2 class="section-title" id="calc-heading">Shipping Price Calculator</h2>
+      <p class="section-sub">Enter your package dimensions and weight to get an instant estimate.</p>
+    </div>
+
+    <div class="calc-card">
+      <div class="calc-grid">
+        <div class="form-field">
+          <label class="form-label" for="weight">Weight (kg)</label>
+          <input class="form-input" id="weight" type="number" placeholder="0.00" min="0" step="0.1"/>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="length">Length (cm)</label>
+          <input class="form-input" id="length" type="number" placeholder="0" min="0"/>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="width">Width (cm)</label>
+          <input class="form-input" id="width" type="number" placeholder="0" min="0"/>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="height">Height (cm)</label>
+          <input class="form-input" id="height" type="number" placeholder="0" min="0"/>
+        </div>
+      </div>
+      <div class="calc-footer">
+        <button class="btn btn-primary btn-primary-lg">
+          <span class="material-symbols-outlined" style="font-size:18px;font-variation-settings:'FILL' 1;">calculate</span>
+          Calculate Quote
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════ SERVICES ══════════════════ -->
+  <section class="services-section" aria-labelledby="services-heading">
+    <div class="section-header">
+      <span class="section-tag">What We Offer</span>
+      <h2 class="section-title" id="services-heading">Premium Logistics Services</h2>
+      <p class="section-sub">
+        We've optimized every mile of the journey to ensure your supply chain never stops.
+      </p>
+    </div>
+
+    <div class="services-grid">
+      <article class="service-card">
+        <div class="service-icon">
+          <span class="material-symbols-outlined" style="font-size:26px;font-variation-settings:'FILL' 1;">bolt</span>
+        </div>
+        <div>
+          <h3 class="service-title">Fast Delivery</h3>
+          <p class="service-body">
+            Optimized routes and priority customs clearance ensure your goods
+            arrive in record time across the border.
+          </p>
+        </div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon">
+          <span class="material-symbols-outlined" style="font-size:26px;font-variation-settings:'FILL' 1;">verified_user</span>
+        </div>
+        <div>
+          <h3 class="service-title">Secure Cargo</h3>
+          <p class="service-body">
+            Full insurance coverage and professional handling protocols for
+            peace of mind from pickup to drop-off.
+          </p>
+        </div>
+      </article>
+
+      <article class="service-card">
+        <div class="service-icon">
+          <span class="material-symbols-outlined" style="font-size:26px;font-variation-settings:'FILL' 1;">monitoring</span>
+        </div>
+        <div>
+          <h3 class="service-title">Real-time Tracking</h3>
+          <p class="service-body">
+            Advanced GPS monitoring and automated status updates so you
+            always know exactly where your shipment is.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ══════════════════ FOOTER ══════════════════ -->
+  <footer class="site-footer" aria-label="Site footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <div class="logo-icon">
+            <span class="material-symbols-outlined" style="font-size:18px;font-variation-settings:'FILL' 1;">local_shipping</span>
+          </div>
+          <span class="logo-text">China2MN Cargo</span>
+        </a>
+        <p>The leading logistics provider specializing in seamless trade between China and Mongolia.</p>
+      </div>
+
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Solutions</h4>
+          <a href="#">Air Freight</a>
+          <a href="#">Road Transport</a>
+          <a href="#">Warehousing</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About Us</a>
+          <a href="#">Contact</a>
+          <a href="#">Careers</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2024 China2MN Cargo. All rights reserved.</p>
+      <div class="footer-social">
+        <a href="#" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg>
+        </a>
+        <a href="#" aria-label="Twitter/X">
+          <svg viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
