@@ -1,269 +1,510 @@
-.order-subtitle {
-  margin-top: 4px;
+/* css/create-order.css
+   Design: Cash4Cargo — алтан/бежевый өнгөний схем */
+
+/* ── Layout: 2/3 + 1/3 ── */
+.co-page {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+  align-items: start;
 }
 
-/* Tabs */
-.order-tabs {
-  width: auto;
+@media (min-width: 820px) {
+  .co-page {
+    grid-template-columns: 2fr 1fr;
+    gap: 32px;
+  }
+}
+
+/* ── Page header ── */
+.co-page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.co-heading {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 4px;
+  letter-spacing: -0.3px;
+}
+
+.co-subheading {
+  font-size: 13px;
+  color: #888;
+  margin: 0;
+}
+
+.co-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Шинэ товч — алтан */
+.co-btn-new {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #B8960C;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 9px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.co-btn-new:hover {
+  background: #9a7d0a;
+}
+
+/* Icon товч */
+.co-btn-icon {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  background: #fff;
+  color: #888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.co-btn-icon:hover {
+  border-color: #ccc;
+  color: #444;
+}
+
+/* ── Section label ── */
+.co-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #B8960C;
+  margin-bottom: 8px;
+}
+
+/* ── Утасны дугаар ── */
+.co-phone-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 0 16px;
+  height: 52px;
+  margin-bottom: 24px;
+  color: #aaa;
+}
+
+.co-phone-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  color: #1a1a1a;
+  background: transparent;
+  font-family: inherit;
+}
+
+.co-phone-input::placeholder {
+  color: #ccc;
+}
+
+/* ── Items header ── */
+.co-items-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.co-btn-additem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #555;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.co-btn-additem:hover {
+  border-color: #B8960C;
+  color: #B8960C;
+  background: #fdf9ee;
+}
+
+/* ── Table header ── */
+.co-table-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px 8px;
+}
+
+.co-th {
+  font-size: 12px;
+  font-weight: 500;
+  color: #aaa;
+}
+
+/* ── Items list ── */
+.co-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 60px;
+}
+
+/* ── Item row ── */
+.co-item-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  padding: 10px 12px;
+  transition: border-color 0.15s;
+}
+
+.co-item-row:hover {
+  border-color: #d8d8d8;
+}
+
+.co-item-track {
+  width: 150px;
   flex-shrink: 0;
 }
 
-.order-tab-icon {
-  font-size: 14px;
-  vertical-align: middle;
+.co-item-name {
+  flex: 1;
+  min-width: 0;
 }
 
-/* Empty State */
-.order-empty-state {
-  text-align: center;
-  padding: 40px 16px;
+.co-item-qty {
+  width: 64px;
+  flex-shrink: 0;
 }
 
-.order-empty-icon {
-  font-size: 52px;
-  color: var(--border);
-  display: block;
-  margin-bottom: 12px;
-}
-
-.order-empty-title {
-  font-weight: 700;
-  font-size: 16px;
-}
-
-.order-empty-text {
+.co-item-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid #eee;
+  border-radius: 8px;
   font-size: 13px;
-  color: var(--muted);
-  margin-top: 6px;
-  margin-bottom: 16px;
+  color: #1a1a1a;
+  background: #f9f9f9;
+  outline: none;
+  font-family: inherit;
+  box-sizing: border-box;
+  transition: border-color 0.15s, background 0.15s;
 }
 
-.order-empty-button {
-  margin: 0 auto;
+.co-item-input:focus {
+  border-color: #B8960C;
+  background: #fff;
 }
 
-/* Form */
-.order-form {
+.co-item-input::placeholder {
+  color: #ccc;
+}
+
+.co-item-input.qty-input {
+  text-align: center;
+}
+
+/* Устгах товч */
+.co-item-del {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  color: #ccc;
+  cursor: pointer;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+
+.co-item-del:hover {
+  color: #e05c3a;
+  background: #fff2ef;
+}
+
+/* Хоосон байхад */
+.co-items-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  border: 1.5px dashed #e5e5e5;
+  border-radius: 12px;
+  color: #ccc;
+  font-size: 13px;
+  gap: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.co-items-empty:hover {
+  border-color: #B8960C;
+  color: #B8960C;
+}
+
+/* ── Summary ── */
+.co-items-summary {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 4px 0;
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* ── Submit ── */
+.co-submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 52px;
+  background: #B8960C;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: background 0.15s, transform 0.1s;
+  font-family: inherit;
+}
+
+.co-submit-btn:hover {
+  background: #9a7d0a;
+}
+
+.co-submit-btn:active {
+  transform: scale(0.99);
+}
+
+/* ── Terms ── */
+.co-terms {
+  font-size: 12px;
+  color: #aaa;
+  text-align: center;
+  margin-top: 12px;
+}
+
+.co-link {
+  color: #B8960C;
+  text-decoration: underline;
+}
+
+/* ══════════════════════════════════
+   SIDEBAR — Үнэ тооцоолуур
+══════════════════════════════════ */
+.co-sidebar {
+  min-width: 0;
+}
+
+@media (min-width: 820px) {
+  .co-sidebar-card {
+    position: sticky;
+    top: 24px;
+  }
+}
+
+.co-sidebar-card {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 16px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.order-field-header {
+.co-sidebar-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  color: #333;
+}
+
+/* ── Calc fields ── */
+.co-calc-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.co-calc-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #B8960C;
+}
+
+.co-calc-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f6f6f6;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 0 12px;
+  height: 44px;
+  color: #bbb;
+}
+
+.co-calc-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  color: #1a1a1a;
+  background: transparent;
+  font-family: inherit;
+}
+
+.co-calc-input::placeholder {
+  color: #ccc;
+}
+
+/* Dimension inputs */
+.co-calc-dims {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.co-dim {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.co-dim-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #bbb;
+  letter-spacing: 0.05em;
+}
+
+.co-calc-dim-input {
+  width: 100%;
+  height: 44px;
+  background: #f6f6f6;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 15px;
+  color: #1a1a1a;
+  outline: none;
+  font-family: inherit;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.co-calc-dim-input:focus {
+  border-color: #B8960C;
+  background: #fff;
+}
+
+.co-calc-dim-input::placeholder {
+  color: #ccc;
+}
+
+/* ── Result ── */
+.co-calc-divider {
+  height: 1px;
+  background: #f0f0f0;
   margin-bottom: 8px;
 }
 
-.field-error {
-  margin-bottom: 4px;
-  display: block;
-}
-
-/* Items */
-.order-items-wrapper {
+.co-calc-breakdown {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-
-  background: var(--surf);
-  border: 1px solid var(--border);
-  border-radius: var(--r-md);
-
-  padding: 14px;
-  overflow-x: auto;
+  gap: 4px;
+  margin-bottom: 10px;
 }
 
-.order-items-header {
-  display: grid;
-  grid-template-columns: 140px 1fr 70px 40px;
-  gap: 8px;
-
-  min-width: 520px;
+.co-calc-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #888;
 }
 
-.order-item-row {
-  display: grid;
-  grid-template-columns: 140px 1fr 70px 40px;
-  gap: 8px;
+.co-calc-row span:last-child {
+  font-weight: 500;
+  color: #444;
+}
+
+.co-calc-total {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-
-  min-width: 520px;
-}
-
-.order-item-input {
-  height: 42px;
+  background: #fdf9ee;
+  border-radius: 10px;
+  padding: 11px 14px;
+  border: 1px solid #f0e4b0;
   font-size: 13px;
+  font-weight: 600;
+  color: #7a6008;
 }
 
-.order-item-input--qty {
-  text-align: center;
-  padding: 0 6px;
+.co-calc-total-val {
+  font-size: 20px;
+  font-weight: 700;
+  color: #B8960C;
 }
 
-.order-item-input--price {
-  padding: 0 8px;
-}
-
-.order-remove-item-btn {
-  width: 40px;
-  height: 42px;
-
-  border: 1px solid var(--err);
-  border-radius: var(--r-sm);
-
-  color: var(--err);
-  background: transparent;
-
-  cursor: pointer;
-
+/* ── Calc button ── */
+.co-calc-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  transition: 0.2s;
-}
-
-.order-remove-item-btn:hover {
-  background: var(--err);
-  color: white;
-}
-
-/* Total */
-.order-total-row {
-  border-top: 1px solid var(--border);
-
-  padding-top: 10px;
-  margin-top: 4px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.order-total-label {
-  font-size: 12px;
-  color: var(--muted);
+  gap: 8px;
+  width: 100%;
+  height: 46px;
+  background: #B8960C;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
   font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
 }
 
-.order-total-value {
-  font-size: 16px;
-  font-weight: 900;
-  color: var(--yel);
-}
-
-/* Note */
-.order-note-text {
-  font-size: 12px;
-  color: var(--muted);
-
-  text-align: center;
-  line-height: 1.6;
-}
-
-.order-note-highlight {
-  color: var(--yel);
-  font-weight: 700;
-}
-
-/* Calculator */
-.calc-row {
-  display: flex;
-  justify-content: space-between;
-
-  padding: 4px 0;
-  font-size: 13px;
-}
-
-.calc-row.total {
-  font-weight: 700;
-
-  border-top: 1px solid rgba(255, 217, 0, 0.2);
-
-  padding-top: 8px;
-  margin-top: 4px;
-}
-
-/* Layout */
-.order-layout {
-  display: flex;
-  gap: 24px;
-  align-items: flex-start;
-}
-
-.order-main {
-  flex: 1;
-  min-width: 0;
-}
-
-.order-sidebar {
-  flex-shrink: 0;
-  width: 320px;
-  margin-top: 3.1rem;
-
-  position: sticky;
-  top: 90px;
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-
-  .order-layout {
-    flex-direction: column;
-    gap: 18px;
-  }
-
-  .order-sidebar {
-    width: 100%;
-    margin-top: 0;
-    position: static;
-  }
-
-  .order-items-wrapper {
-    padding: 10px;
-  }
-
-  .order-items-header {
-    display: none;
-  }
-
-  .order-item-row {
-    grid-template-columns: 1fr;
-    min-width: 100%;
-
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--border);
-
-    border-radius: var(--r-md);
-
-    padding: 10px;
-  }
-
-  .order-item-input {
-    width: 100%;
-  }
-
-  .order-remove-item-btn {
-    width: 100%;
-    height: 38px;
-  }
-
-  .order-field-header {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-  }
-
-  .btn-sm {
-    width: 100%;
-  }
-
-  .order-total-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-  }
-
-  .order-form {
-    gap: 14px;
-  }
+.co-calc-btn:hover {
+  background: #9a7d0a;
 }

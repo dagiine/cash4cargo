@@ -1,175 +1,266 @@
-// pages/create-order.js
+// js/initCreateOrder.js
+// app.js-д хуудас ачаалсны дараа дуудна: initCreateOrder()
 
-export function renderCreateOrderPage() {
-  return `
-    <section class="form-wrapper">
-      <h1>Захиалга үүсгэх</h1>
-      <p>Олон бараатай захиалга үүсгэх боломжтой.</p>
+// ══ Барааны жагсаалт (state) ══
+let coItems = [];
+let coNextId = 1;
 
-      <form id="orderForm" class="order-form">
-        <div class="field">
-          <label>Утасны дугаар</label>
-          <input id="phone" class="inp" placeholder="99112233" inputmode="tel">
-          <small class="err-txt" id="phoneError"></small>
-        </div>
+// ══ INIT — хуудас render болсны дараа дуудна ══
+function initCreateOrder() {
+  coItems = [];
+  coNextId = 1;
 
-        <div class="field">
-          <div class="row-between">
-            <label>Захиалсан бараанууд</label>
-            <button type="button" id="addItemBtn" class="btn btn-outline btn-sm">
-              + Нэмэх
-            </button>
-          </div>
+  // Нэг анхны мөр нэмнэ
+  coAddItem();
 
-          <small class="err-txt" id="itemsError"></small>
-
-          <div class="order-items-wrapper">
-            <div class="order-items-header">
-              <span>Трак код</span>
-              <span>Нэр</span>
-              <span>Тоо</span>
-              <span></span>
-            </div>
-
-            <div id="itemsList"></div>
-          </div>
-        </div>
-
-        <div id="successMsg" class="msg success" style="display:none;"></div>
-
-        <button type="submit" class="btn btn-primary btn-big">
-          Захиалга үүсгэх
-        </button>
-      </form>
-    </section>
-  `;
+  // Хуудас унших үед хадгалагдсан утга байвал сэргээнэ
+  coRestorePhone();
 }
 
-export function initCreateOrderPage() {
-  const form = document.getElementById("orderForm");
-  const phoneInput = document.getElementById("phone");
-  const addItemBtn = document.getElementById("addItemBtn");
-  const itemsList = document.getElementById("itemsList");
+// ══ УТАСНЫ ДУГААР ══
+function coUpdateSub() {
+  const phone = document.getElementById('co-phone')?.value?.trim();
+  const sub = document.getElementById('co-sub');
+  if (!sub) return;
+  if (phone && phone.length >= 8) {
+    const count = coItems.filter(i => i.name || i.track).length;
+    sub.textContent = `${phone} · ${count} захиалга`;
+  } else {
+    sub.textContent = 'Утасны дугаар оруулна уу';
+  }
+}
 
-  const phoneError = document.getElementById("phoneError");
-  const itemsError = document.getElementById("itemsError");
-  const successMsg = document.getElementById("successMsg");
+function coRestorePhone() {
+  const saved = sessionStorage.getItem('co_phone');
+  if (saved) {
+    const el = document.getElementById('co-phone');
+    if (el) { el.value = saved; coUpdateSub(); }
+  }
+}
 
-  let items = [
-    { trackCode: "", name: "", qty: 1 }
-  ];
+// ══ БАРAA НЭМЭХ ══
+function coAddItem() {
+  const id = coNextId++;
+  coItems.push({ id, track: '', name: '', qty: 1 });
+  coRenderItems();
+  // Шинэ мөрийн track input-д focus
+  setTimeout(() => {
+    document.getElementById(`track-${id}`)?.focus();
+  }, 50);
+}
 
-  function renderItems() {
-    itemsList.innerHTML = items.map((item, index) => `
-      <div class="order-item-row">
-        <input 
-          class="inp order-item-input"
+// ══ БАРAA УСТГАХ ══
+function coDeleteItem(id) {
+  coItems = coItems.filter(i => i.id !== id);
+  coRenderItems();
+  coUpdateSub();
+}
+
+// ══ УТГА ӨӨРЧЛӨХ ══
+function coUpdateItem(id, field, value) {
+  const item = coItems.find(i => i.id === id);
+  if (!item) return;
+  item[field] = field === 'qty' ? (parseInt(value) || 1) : value;
+  coUpdateSummary();
+  coUpdateSub();
+}
+
+// ══ RENDER ══
+function coRenderItems() {
+  const list = document.getElementById('co-items-list');
+  if (!list) return;
+
+  if (coItems.length === 0) {
+    list.innerHTML = `
+      <div class="co-items-empty" onclick="coAddItem()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2L2 7v10l10 5 10-5V7L12 2z"/><path d="M12 22V12M2 7l10 5 10-5"/>
+        </svg>
+        <span>+ Барaa нэмэх</span>
+      </div>`;
+    coUpdateSummary();
+    return;
+  }
+
+  list.innerHTML = coItems.map(item => `
+    <div class="co-item-row" data-id="${item.id}">
+
+      <div class="co-item-track">
+        <input
+          class="co-item-input"
+          id="track-${item.id}"
+          type="text"
           placeholder="Трак код"
-          value="${item.trackCode}"
-          data-index="${index}"
-          data-field="trackCode"
-        >
+          value="${escHtml(item.track)}"
+          oninput="coUpdateItem(${item.id}, 'track', this.value)"
+        />
+      </div>
 
-        <input 
-          class="inp order-item-input"
+      <div class="co-item-name">
+        <input
+          class="co-item-input"
+          id="name-${item.id}"
+          type="text"
           placeholder="Барааны нэр"
-          value="${item.name}"
-          data-index="${index}"
-          data-field="name"
-        >
+          value="${escHtml(item.name)}"
+          oninput="coUpdateItem(${item.id}, 'name', this.value)"
+        />
+      </div>
 
-        <input 
-          class="inp order-item-input order-item-input--qty"
+      <div class="co-item-qty">
+        <input
+          class="co-item-input qty-input"
+          id="qty-${item.id}"
           type="number"
           min="1"
           value="${item.qty}"
-          data-index="${index}"
-          data-field="qty"
-        >
-
-        ${
-          items.length > 1
-            ? `<button type="button" class="order-remove-item-btn" data-remove="${index}">×</button>`
-            : `<span></span>`
-        }
+          oninput="coUpdateItem(${item.id}, 'qty', this.value)"
+        />
       </div>
-    `).join("");
-  }
 
-  function validate() {
-    let isValid = true;
+      <button class="co-item-del" onclick="coDeleteItem(${item.id})" title="Устгах">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
 
-    phoneError.textContent = "";
-    itemsError.textContent = "";
+    </div>
+  `).join('');
 
-    if (!/^[6-9]\d{7}$/.test(phoneInput.value.trim())) {
-      phoneError.textContent = "Утасны дугаар 8 оронтой байна, 6-9-өөр эхэлнэ.";
-      isValid = false;
-    }
-
-    const hasEmptyName = items.some(item => item.name.trim() === "");
-    const hasEmptyTrackCode = items.some(item => item.trackCode.trim() === "");
-
-    if (hasEmptyTrackCode) {
-      itemsError.textContent = "Бараа бүрийн трак кодыг бөглөнө үү.";
-      isValid = false;
-    } else if (hasEmptyName) {
-      itemsError.textContent = "Бараа бүрийн нэрийг бөглөнө үү.";
-      isValid = false;
-    }
-
-    return isValid;
-  }
-
-  addItemBtn.addEventListener("click", () => {
-    items.push({ trackCode: "", name: "", qty: 1 });
-    renderItems();
-  });
-
-  itemsList.addEventListener("input", (event) => {
-    const index = event.target.dataset.index;
-    const field = event.target.dataset.field;
-
-    if (index !== undefined && field) {
-      items[index][field] = event.target.value;
-    }
-  });
-
-  itemsList.addEventListener("click", (event) => {
-    const removeIndex = event.target.dataset.remove;
-
-    if (removeIndex !== undefined) {
-      items.splice(removeIndex, 1);
-      renderItems();
-    }
-  });
-
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    if (!validate()) return;
-
-    const newOrder = {
-      id: Date.now(),
-      phone: phoneInput.value.trim(),
-      status: "Захиалга үүсгэсэн",
-      createdAt: new Date().toISOString(),
-      items: items.map(item => ({
-        trackCode: item.trackCode.trim(),
-        name: item.name.trim(),
-        qty: Number(item.qty)
-      }))
-    };
-
-    console.log("Шинэ захиалга:", newOrder);
-
-    successMsg.style.display = "block";
-    successMsg.textContent = "Захиалга амжилттай үүслээ!";
-
-    phoneInput.value = "";
-    items = [{ trackCode: "", name: "", qty: 1 }];
-    renderItems();
-  });
-
-  renderItems();
+  coUpdateSummary();
 }
+
+function coUpdateSummary() {
+  const summary = document.getElementById('co-summary');
+  const countEl = document.getElementById('co-item-count');
+  const qtyEl   = document.getElementById('co-qty-sum');
+  if (!summary) return;
+
+  if (coItems.length === 0) {
+    summary.style.display = 'none';
+    return;
+  }
+
+  summary.style.display = '';
+  const totalQty = coItems.reduce((s, i) => s + (parseInt(i.qty) || 1), 0);
+  if (countEl) countEl.textContent = `${coItems.length} бараа`;
+  if (qtyEl)   qtyEl.textContent   = `Нийт ${totalQty} ш`;
+}
+
+// ══ ШИНЭ ЗАХИАЛГА ══
+function coNewOrder() {
+  if (coItems.some(i => i.track || i.name)) {
+    if (!confirm('Одоогийн бараануудыг цэвэрлэж шинэ захиалга үүсгэх үү?')) return;
+  }
+  const phoneEl = document.getElementById('co-phone');
+  if (phoneEl) phoneEl.value = '';
+  coItems = [];
+  coNextId = 1;
+  coAddItem();
+  coUpdateSub();
+  document.getElementById('calc-result')?.style && (document.getElementById('calc-result').style.display = 'none');
+}
+
+function coClearAll() {
+  if (!confirm('Бүх мэдээллийг цэвэрлэх үү?')) return;
+  const phoneEl = document.getElementById('co-phone');
+  if (phoneEl) phoneEl.value = '';
+  coItems = [];
+  coNextId = 1;
+  coRenderItems();
+  coUpdateSub();
+}
+
+// ══ SUBMIT ══
+function coSubmit() {
+  const phone = document.getElementById('co-phone')?.value?.trim();
+
+  if (!phone || phone.length < 8) {
+    alert('Утасны дугаар оруулна уу.');
+    document.getElementById('co-phone')?.focus();
+    return;
+  }
+
+  const validItems = coItems.filter(i => i.name.trim() || i.track.trim());
+  if (validItems.length === 0) {
+    alert('Дор хаяж нэг барааны мэдээлэл оруулна уу.');
+    return;
+  }
+
+  // sessionStorage-д хадгалах
+  sessionStorage.setItem('co_phone', phone);
+
+  // ← Энд API дуудлага эсвэл route-г холбоно
+  console.log('Захиалга:', { phone, items: validItems });
+  alert(`Захиалга амжилттай үүслээ!\nУтас: ${phone}\nБараа: ${validItems.length} төрөл`);
+}
+
+// ══ ҮНЭ ТООЦООЛУУР ══
+function coCalcPrice() {
+  const weight = parseFloat(document.getElementById('calc-weight')?.value) || 0;
+  const l = parseFloat(document.getElementById('calc-l')?.value) || 0;
+  const w = parseFloat(document.getElementById('calc-w')?.value) || 0;
+  const h = parseFloat(document.getElementById('calc-h')?.value) || 0;
+
+  if (!weight && (!l || !w || !h)) {
+    alert('Жин эсвэл хэмжээ оруулна уу.');
+    return;
+  }
+
+  const volWeight   = (l * w * h) / 5000;
+  const chargeableW = Math.max(weight, volWeight);
+  const isVol       = volWeight > weight && volWeight > 0;
+
+  const BASE     = 15000;
+  const RATE     = 2500;
+  const weightCost = Math.round(chargeableW * RATE);
+  const total      = BASE + weightCost;
+
+  const fmt = n => Number(n).toLocaleString('mn-MN');
+
+  const breakdownEl = document.getElementById('calc-breakdown');
+  const totalEl     = document.getElementById('calc-total-val');
+  const resultEl    = document.getElementById('calc-result');
+
+  if (breakdownEl) {
+    breakdownEl.innerHTML = `
+      <div class="co-calc-row">
+        <span>Тооцоологдох жин${isVol ? ' <span style="font-size:10px;background:#fff3e0;color:#c15a00;padding:1px 5px;border-radius:3px;font-weight:700;margin-left:4px;">Эзэлхүүн</span>' : ''}</span>
+        <span>${chargeableW.toFixed(2)} кг</span>
+      </div>
+      <div class="co-calc-row">
+        <span>Суурь төлбөр</span>
+        <span>${fmt(BASE)}₮</span>
+      </div>
+      <div class="co-calc-row">
+        <span>Жингийн төлбөр</span>
+        <span>${fmt(weightCost)}₮</span>
+      </div>
+      ${isVol ? `<div class="co-calc-row" style="font-size:11px;color:#aaa;margin-top:2px">
+        <span>Бодит жин ${weight.toFixed(2)} кг · Эзэлхүүн ${volWeight.toFixed(2)} кг</span>
+      </div>` : ''}
+    `;
+  }
+
+  if (totalEl)  totalEl.textContent = fmt(total) + '₮';
+  if (resultEl) resultEl.style.display = '';
+}
+
+// ══ HELPER ══
+function escHtml(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+// Global-д гаргана (Vanilla JS-д window-с дуудах)
+window.coAddItem    = coAddItem;
+window.coDeleteItem = coDeleteItem;
+window.coUpdateItem = coUpdateItem;
+window.coUpdateSub  = coUpdateSub;
+window.coNewOrder   = coNewOrder;
+window.coClearAll   = coClearAll;
+window.coSubmit     = coSubmit;
+window.coCalcPrice  = coCalcPrice;
+
+export { initCreateOrder };
