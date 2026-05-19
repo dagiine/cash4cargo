@@ -273,3 +273,86 @@
   }
 
 }
+/* ── Нэвтэрсэн хэрэглэгчийн тавтай морилсон мессеж ── */
+.track-welcome {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-muted);
+  margin-bottom: 12px;
+}
+
+.track-welcome strong {
+  color: var(--color-yellow);
+}
+
+/* ── Статусын түүх (details) ── */
+.track-card__history {
+  margin: 4px 0 8px;
+}
+
+.track-card__history summary {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-yellow);
+  cursor: pointer;
+  padding: 4px 0;
+  list-style: none;
+}
+
+.track-card__history summary::-webkit-details-marker {
+  display: none;
+}
+
+.track-history-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 0 4px 4px;
+}
+
+.track-history-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--color-muted);
+}
+
+.track-history-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-yellow);
+  flex-shrink: 0;
+}
+
+.track-history-date {
+  margin-left: auto;
+  font-size: 12px;
+}
+
+/* ── Нэвтэрсэн хэрэглэгч захиалгагүй ── */
+.track-welcome-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--color-muted);
+}
+
+.track-welcome-empty .material-symbols-outlined {
+  font-size: 48px;
+  color: var(--color-yellow);
+  opacity: 0.5;
+}
+
+.track-welcome-empty strong {
+  color: var(--color-yellow);
+}
+
+.track-welcome-empty .btn {
+  margin-top: 8px;
+}

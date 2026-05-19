@@ -77,3 +77,30 @@ export function initAddressCopy() {
     });
   });
 }
+// ── Нэвтэрсэн хэрэглэгчид нүүр хуудсанд мэндчилгээ харуулах ──
+import { getSession } from "./auth.js";
+
+export function initHomeSession() {
+  var session = getSession();
+  if (!session) return;
+
+  // Hero доор нэвтэрсэн мэдэгдэл нэмнэ
+  var hero = document.querySelector(".hero-text");
+  if (!hero) return;
+
+  // Давхардахгүйн тулд шалгана
+  if (document.getElementById("home-session-banner")) return;
+
+  var banner = document.createElement("div");
+  banner.id  = "home-session-banner";
+  banner.className = "home-session-banner";
+  banner.innerHTML = `
+    <span class="material-symbols-outlined">waving_hand</span>
+    <span>Тавтай морил, <strong>${session.name}</strong>! 
+      <a href="#/track">Миний захиалгууд →</a>
+    </span>
+  `;
+
+  // Hero дотор хамгийн дээр нэмнэ
+  hero.insertBefore(banner, hero.firstChild);
+}

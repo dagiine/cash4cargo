@@ -455,6 +455,45 @@ header nav ul li a.active {
   100% { transform: translateX(0); }
 }
 
-.signin-shake {
-  animation: shake 0.3s ease;
+/* ── Signin tab ── */
+.signin-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border-default);
+  margin-bottom: 20px;
+}
+
+.signin-tab {
+  flex: 1;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 8px 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-muted);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  margin-bottom: -1px;
+}
+
+.signin-tab.active {
+  color: var(--color-yellow);
+  border-bottom-color: var(--color-yellow);
+}
+
+/* ── Профайл товч header дээр ── */
+.profile-header-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 140px;
+  overflow: hidden;
+}
+
+.profile-header-btn span:last-child {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90px;
 }

@@ -1,4 +1,5 @@
 // js/initCreateOrder.js
+import { getSession, saveOrder } from "./auth.js";
 // app.js-д хуудас ачаалсны дараа дуудна: initCreateOrder()
 
 // ══ Барааны жагсаалт (state) ══
@@ -188,7 +189,15 @@ function coSubmit() {
   // sessionStorage-д хадгалах
   sessionStorage.setItem('co_phone', phone);
 
-  // ← Энд API дуудлага эсвэл route-г холбоно
+  // ── Нэвтэрсэн хэрэглэгч байвал захиалгыг хадгалах ──
+  const session = getSession();
+  if (session) {
+    saveOrder(session.id, {
+      phone:     phone,
+      items:     validItems,
+    });
+  }
+
   console.log('Захиалга:', { phone, items: validItems });
   alert(`Захиалга амжилттай үүслээ!\nУтас: ${phone}\nБараа: ${validItems.length} төрөл`);
 }

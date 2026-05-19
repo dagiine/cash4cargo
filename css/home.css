@@ -689,3 +689,28 @@
   width: 100%;
   background: #F7F7F7;
 }
+/* ── Нэвтэрсэн хэрэглэгчийн мэндчилгээ banner ── */
+.home-session-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-yellow-dim);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.home-session-banner .material-symbols-outlined {
+  color: var(--color-yellow);
+  font-size: 20px;
+}
+
+.home-session-banner a {
+  color: var(--color-yellow);
+  font-weight: 700;
+  margin-left: 4px;
+}
