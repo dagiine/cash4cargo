@@ -1,0 +1,601 @@
+/* css/create-order.css
+   Design: Cash4Cargo — алтан/бежевый өнгөний схем */
+
+/* ── Layout: 2/3 + 1/3 ── */
+.co-page {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+  align-items: start;
+}
+
+@media (min-width: 820px) {
+  .co-page {
+    grid-template-columns: 2fr 1fr;
+    gap: 32px;
+  }
+}
+
+/* ── Page header ── */
+.co-page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.co-heading {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 4px;
+  letter-spacing: -0.3px;
+}
+
+.co-subheading {
+  font-size: 13px;
+  color: #888;
+  margin: 0;
+}
+
+.co-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Шинэ товч — алтан */
+.co-btn-new {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-yellow);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 9px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.co-btn-new:hover {
+  background: var(--color-yellow-hover);
+}
+
+/* Icon товч */
+.co-btn-icon {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  background: var(--card-bg);
+  color: var(--color-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.co-btn-icon:hover {
+  border-color: var(--color-yellow);
+  color: var(--color-yellow);
+  background: var(--color-yellow-dim);
+}
+
+/* ── Section label ── */
+.co-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-yellow);
+  margin-bottom: 8px;
+}
+
+/* ── Утасны дугаар ── */
+.co-phone-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 12px;
+  padding: 0 16px;
+  height: 52px;
+  margin-bottom: 24px;
+  color: var(--color-muted);
+}
+
+.co-phone-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  color: #1a1a1a;
+  background: transparent;
+  font-family: inherit;
+}
+
+.co-phone-input::placeholder {
+  color: #ccc;
+}
+
+/* ── Items header ── */
+.co-items-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.co-btn-additem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.co-btn-additem:hover {
+  border-color: var(--color-yellow);
+  color: var(--color-yellow);
+  background: var(--color-yellow-dim);
+}
+
+/* ── Table header ── */
+.co-table-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px 8px;
+}
+
+.co-th {
+  font-size: 12px;
+  font-weight: 500;
+  color: #aaa;
+}
+
+/* ── Items list ── */
+.co-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 60px;
+}
+
+/* ── Item row ── */
+.co-item-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  transition: border-color 0.15s;
+}
+
+.co-item-row:hover {
+  border-color: var(--card-border-hover);
+}
+
+.co-item-track {
+  width: 150px;
+  flex-shrink: 0;
+}
+
+.co-item-name {
+  flex: 1;
+  min-width: 0;
+}
+
+.co-item-qty {
+  width: 64px;
+  flex-shrink: 0;
+}
+
+.co-item-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--color-text);
+  background: var(--input-bg);
+  outline: none;
+  font-family: inherit;
+  box-sizing: border-box;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.co-item-input:focus {
+  border-color: var(--color-yellow);
+  background: var(--input-bg);
+}
+
+.co-item-input::placeholder {
+  color: #ccc;
+}
+
+.co-item-input.qty-input {
+  text-align: center;
+}
+
+/* Устгах товч */
+.co-item-del {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  color: var(--color-muted);
+  cursor: pointer;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+
+.co-item-del:hover {
+  color: #e05c3a;
+  background: #fff2ef;
+}
+
+/* Хоосон байхад */
+.co-items-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  border: 1.5px dashed var(--border-default);
+  border-radius: 12px;
+  color: var(--color-muted);
+  font-size: 13px;
+  gap: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.co-items-empty:hover {
+  border-color: var(--color-yellow);
+  color: var(--color-yellow);
+}
+
+/* ── Summary ── */
+.co-items-summary {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 4px 0;
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* ── Submit ── */
+.co-submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 52px;
+  background: var(--color-yellow);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: background 0.15s, transform 0.1s;
+  font-family: inherit;
+}
+
+.co-submit-btn:hover {
+  background: var(--color-yellow-hover);
+}
+
+.co-submit-btn:active {
+  transform: scale(0.99);
+}
+
+/* ── Terms ── */
+.co-terms {
+  font-size: 12px;
+  color: #aaa;
+  text-align: center;
+  margin-top: 12px;
+}
+
+.co-link {
+  color: var(--color-yellow);
+  text-decoration: underline;
+}
+
+/* ══════════════════════════════════
+   SIDEBAR — Үнэ тооцоолуур
+══════════════════════════════════ */
+.co-sidebar {
+  min-width: 0;
+}
+
+@media (min-width: 820px) {
+  .co-sidebar-card {
+    position: sticky;
+    top: 24px;
+  }
+}
+
+.co-sidebar-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.co-sidebar-title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  color: #333;
+}
+
+/* ── Calc fields ── */
+.co-calc-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.co-calc-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-yellow);
+}
+
+.co-calc-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 10px;
+  padding: 0 12px;
+  height: 44px;
+  color: var(--color-muted);
+}
+
+.co-calc-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  color: #1a1a1a;
+  background: transparent;
+  font-family: inherit;
+}
+
+.co-calc-input::placeholder {
+  color: #ccc;
+}
+
+/* Dimension inputs */
+.co-calc-dims {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.co-dim {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.co-dim-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #bbb;
+  letter-spacing: 0.05em;
+}
+
+.co-calc-dim-input {
+  width: 100%;
+  height: 44px;
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: 10px;
+  text-align: center;
+  font-size: 15px;
+  color: var(--color-text);
+  outline: none;
+  font-family: inherit;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.co-calc-dim-input:focus {
+  border-color: var(--color-yellow);
+  background: var(--input-bg);
+}
+
+.co-calc-dim-input::placeholder {
+  color: #ccc;
+}
+
+/* ── Result ── */
+.co-calc-divider {
+  height: 1px;
+  background: #f0f0f0;
+  margin-bottom: 8px;
+}
+
+.co-calc-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.co-calc-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #888;
+}
+
+.co-calc-row span:last-child {
+  font-weight: 500;
+  color: #444;
+}
+
+.co-calc-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-yellow-dim);
+  border-radius: 10px;
+  padding: 11px 14px;
+  border: 1px solid var(--color-yellow);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-yellow-label);
+}
+
+.co-calc-total-val {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-yellow);
+}
+
+/* ── Calc button ── */
+.co-calc-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 46px;
+  background: var(--color-yellow);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.co-calc-btn:hover {
+  background: var(--color-yellow-hover);
+}
+/* ══════════════════════════════════
+   MOBILE RESPONSIVE
+══════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  /* Page padding */
+  .co-page {
+    padding: 20px 14px 40px;
+    gap: 20px;
+  }
+
+  /* Header */
+  .co-page-header {
+    flex-direction: column;
+    gap: 14px;
+    align-items: stretch;
+  }
+
+  .co-header-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .co-heading {
+    font-size: 22px;
+  }
+
+  /* Item row */
+  .co-item-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .co-item-track,
+  .co-item-name,
+  .co-item-qty {
+    width: 100%;
+  }
+
+  .co-item-del {
+    align-self: flex-end;
+  }
+
+  /* Table head hide on mobile */
+  .co-table-head {
+    display: none;
+  }
+
+  /* Phone input */
+  .co-phone-wrap {
+    height: 48px;
+    padding: 0 12px;
+  }
+
+  /* Sidebar */
+  .co-sidebar-card {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  /* Dimension inputs */
+  .co-calc-dims {
+    grid-template-columns: 1fr;
+  }
+
+  .co-calc-total {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .co-calc-total-val {
+    font-size: 18px;
+  }
+
+  /* Buttons */
+  .co-submit-btn,
+  .co-calc-btn {
+    height: 48px;
+    font-size: 14px;
+  }
+
+  .co-btn-new {
+    width: 100%;
+    justify-content: center;
+  }
+}
