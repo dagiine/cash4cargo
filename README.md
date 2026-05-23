@@ -1,254 +1,162 @@
-# Cash 4 Cargo 🚚
+# Cash 4 Cargo — Node.js + MongoDB Backend
 
-Хэрэглэгч хяналтын код эсвэл утасны дугаараараа ачааныхаа байршлыг шалгах, шинэ захиалга үүсгэх, тээвэрлэлтийн зардлыг тооцоолох боломжтой.
-
----
-
-## Файлын бүтэц
+## Төслийн бүтэц
 
 ```
-cash4cargo/
-│
-├── index.html                  # Үндсэн HTML
-├── app.js                      # Үндсэн router
-├── styles.css                  # Global CSS
-│
-├── components/                 # Бүх хуудсанд давтагдах UI хэсгүүд
-│   ├── header.js               # navigation, sign in form
-│   ├── header.css              
-│   ├── footer.js               # Footer render
-│   └── footer.css              
-│
-├── pages/                      # Хуудас бүрийн HTML template
-│   ├── home.js                 # Нүүр хуудас
-│   ├── track.js                # Захиалга хянах хуудас
-│   ├── create-order.js         # Захиалга үүсгэх хуудас
-│   ├── pricing.js              # Үнэ тооцоолох хуудас
-│   └── support.js              # Тусламжийн хуудас
-│
-├── js/                         # Хуудас бүрийн бизнес логик, UI классууд
-│   ├── trackUI.js              # CargoTracker, TrackUI класс — ачаа хайх
-│   ├── pricingUI.js            # PricingCalculator, PricingUI класс — үнэ тооцоолох
-│   ├── initHomePage.js         # Нүүр хуудаснаас захиалгаа хайх, хаяг copy хийх
-│   ├── initCreateOrder.js      # Захиалгын форм validation
-│   └── initSupportSearch.js    # FAQ хайлт, шүүлт
-│
-├── css/                        # Хуудас бүрийн тусдаа CSS (динамикаар ачаалагдана)
-│   ├── home.css                
-│   ├── track.css               
-│   ├── track-results.css       # Track үр дүн харуулах
-│   ├── create-order.css        
-│   ├── pricing.css             
-│   └── support.css             
-│
-├── data/
-│   ├── data.json               # Ачааны жишээ өгөгдөл
-│   ├── shippingData.js         # Тээвэрлэлтийн аргууд, хориотой барааны жагсаалт, тогтмолууд
-│   └── trackingData.js         # Статусын дараалал, дүрс тэмдэгтүүд, JSON URL
-│
-└── pics/                       # Зураг, лого
-```
-
----
-
-# Cash 4 Cargo — Backend API
-
-Node.js + Express + PostgreSQL backend.
-
-## Бүтэц
-
-```
-src/
-├── app.js                    # Express програм, routes
-├── db/
-│   ├── pool.js               # PostgreSQL холболт
-│   ├── migrate.js            # Хүснэгт үүсгэх
-│   └── seed.js               # Жишээ өгөгдөл
+cash4cargo-backend/         ← Node.js сервер
+├── server.js               ← Entry point
+├── seed.js                 ← MongoDB жишээ өгөгдөл оруулах
+├── .env.example            ← Орчны хувьсагчид
+├── config/
+│   └── db.js               ← MongoDB холболт
 ├── middleware/
-│   └── auth.js               # JWT шалгалт, admin guard
-├── controllers/
-│   ├── authController.js     # Нэвтрэх, бүртгэх
-│   ├── shipmentController.js # Ачааны CRUD
-│   └── orderController.js    # Захиалгын CRUD
+│   └── auth.js             ← JWT protect + adminOnly
+├── models/
+│   ├── User.js             ← Хэрэглэгчийн схем
+│   └── Shipment.js         ← Ачааны схем
 └── routes/
-    ├── auth.js
-    ├── shipments.js
-    └── orders.js
+    ├── auth.js             ← /api/auth/*
+    └── shipments.js        ← /api/shipments/*
+
+cash4cargo-frontend/        ← Одоо байгаа frontend (шинэчлэгдсэн)
+├── app.js                  ← Нэвтэрсэн үед → /track руу шилжинэ
+├── js/
+│   ├── api.js              ← Backend-тай харилцах helper
+│   └── trackUI.js          ← Нэвтэрсэн үед автоматаар утасны дугаараар хайна
+└── components/
+    └── header.js           ← Нэвтрэх/Бүртгүүлэх/Гарах + хэрэглэгчийн нэр
 ```
 
-## Эхлүүлэх
+---
 
-### 1. Суулгах
+## Backend суурилуулах
+
+### 1. Хуулж авах
+
+```bash
+cd cash4cargo-backend
+cp .env.example .env
+```
+
+### 2. `.env` засах
+
+```
+PORT=5000
+MONGO_URI=mongodb://localhost:27017/cash4cargo
+JWT_SECRET=өөрийн_нууц_түлхүүр_энд
+JWT_EXPIRES_IN=7d
+```
+
+### 3. Package суулгах
 
 ```bash
 npm install
 ```
 
-### 2. Тохиргоо
+### 4. MongoDB эхлүүлэх
 
 ```bash
-cp .env.example .env
-# .env файл засах — DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, JWT_SECRET
-```
+# Local MongoDB
+mongod
 
-### 3. PostgreSQL database үүсгэх
-
-```sql
-CREATE DATABASE cash4cargo;
-```
-
-### 4. Хүснэгт үүсгэх
-
-```bash
-npm run migrate
+# Эсвэл MongoDB Atlas URL-г .env-д тавина
+MONGO_URI=mongodb+srv://user:pass@cluster.mongodb.net/cash4cargo
 ```
 
 ### 5. Жишээ өгөгдөл оруулах
 
 ```bash
-npm run seed
-# Admin: phone=99447176  password=admin123
+node seed.js
 ```
 
-### 6. Ажиллуулах
+Seed-ийн дараах нэвтрэх мэдээлэл:
+| Утас | Нууц үг | Дүр |
+|------|---------|-----|
+| 99112233 | password123 | user (2 ачаа) |
+| 99447176 | password123 | user (1 ачаа) |
+| 88000001 | admin123 | admin |
+
+### 6. Сервер ажиллуулах
 
 ```bash
-npm run dev    # development (nodemon)
-npm start      # production
+npm start          # production
+npm run dev        # nodemon (dev)
 ```
 
 ---
 
 ## API Endpoints
 
-### 🔐 Auth
-
+### Auth
 | Method | URL | Тайлбар |
 |--------|-----|---------|
-| POST | `/api/auth/register` | Бүртгэх |
+| POST | `/api/auth/register` | Бүртгүүлэх |
 | POST | `/api/auth/login` | Нэвтрэх |
-| GET | `/api/auth/me` | Өөрийн мэдээлэл (token шаардлагатай) |
+| GET  | `/api/auth/me` | Одоогийн хэрэглэгч (Bearer token) |
 
-**Login хүсэлт:**
-```json
-{ "phone": "99447176", "password": "admin123" }
-```
-
-**Хариу:**
-```json
-{
-  "token": "eyJ...",
-  "user": { "id": 1, "name": "Админ", "phone": "99447176", "role": "admin" }
-}
-```
-
----
-
-### 📦 Shipments (Ачаа)
-
-| Method | URL | Auth | Тайлбар |
-|--------|-----|------|---------|
-| GET | `/api/shipments/track?query=...` | ❌ | Трак код / утасны дугаараар хайх |
-| GET | `/api/shipments` | Admin | Бүх ачааны жагсаалт |
-| GET | `/api/shipments/:id` | Admin | Нэг ачааны дэлгэрэнгүй |
-| POST | `/api/shipments` | Admin | Шинэ ачаа нэмэх |
-| PATCH | `/api/shipments/:id/status` | Admin | Статус шинэчлэх |
-| PATCH | `/api/shipments/:id/payment` | Admin | Төлбөр шинэчлэх |
-| DELETE | `/api/shipments/:id` | Admin | Устгах |
-
-**Хайлтын жишээ:**
-```
-GET /api/shipments/track?query=MN-12345
-GET /api/shipments/track?query=99112233
-```
-
-**Шинэ ачаа нэмэх:**
-```json
-{
-  "track_code": "MN-11111",
-  "customer_name": "Болд",
-  "customer_phone": "99001122",
-  "weight": 3.5,
-  "from_location": "Хятад - Эрээн",
-  "to_location": "Улаанбаатар",
-  "method": "Стандарт",
-  "price": 10500
-}
-```
-
-**Статус шинэчлэх:**
-```json
-{ "status": "Улаанбаатарт ирсэн", "note": "Агуулахад хүргэгдлээ" }
-```
-
-Боломжит статусууд:
-- `Захиалга үүсгэсэн`
-- `Хятадын агуулахад`
-- `Замын Үүд дээр`
-- `Улаанбаатарт ирсэн`
-- `Олгогдсон`
+### Shipments
+| Method | URL | Нэвтрэлт | Тайлбар |
+|--------|-----|----------|---------|
+| GET | `/api/shipments/track/:code` | — | Tracking code-оор хайх |
+| GET | `/api/shipments/by-phone/:phone` | — | Зочин утасны дугаараар хайх |
+| GET | `/api/shipments/my` | ✅ User | Нэвтэрсэн хэрэглэгчийн БҮГД ачаа |
+| GET | `/api/shipments` | ✅ Admin | Бүх ачааны жагсаалт |
+| POST | `/api/shipments` | ✅ Admin | Шинэ ачаа нэмэх |
+| PUT | `/api/shipments/:id/status` | ✅ Admin | Статус шинэчлэх |
+| PUT | `/api/shipments/:id` | ✅ Admin | Ачаа засах |
+| DELETE | `/api/shipments/:id` | ✅ Admin | Ачаа устгах |
 
 ---
 
-### 📋 Orders (Захиалга)
+## Frontend өөрчлөлтүүд
 
-| Method | URL | Auth | Тайлбар |
-|--------|-----|------|---------|
-| POST | `/api/orders` | ❌ / optional | Захиалга үүсгэх |
-| GET | `/api/orders` | Admin | Бүх захиалга |
-| GET | `/api/orders/:id` | Admin | Нэг захиалга |
-| PATCH | `/api/orders/:id/status` | Admin | Статус шинэчлэх |
-
-**Захиалга үүсгэх:**
-```json
-{
-  "phone": "99112233",
-  "items": [
-    { "track_code": "CN-ABC123", "name": "Гутал", "qty": 2 },
-    { "track_code": "CN-DEF456", "name": "Цүнх", "qty": 1 }
-  ]
-}
-```
-
----
-
-## Frontend-тэй холбох
-
-Frontend дахь `data/trackingData.js`-ийн `SHIPMENTS_URL`-г:
-
+### 1. Нэвтэрсэн үед home харуулахгүй
+`app.js` доторх routing логик:
 ```js
-// Одоо:
-export const SHIPMENTS_URL = "./data/data.json";
-
-// API-тай болгох:
-export const SHIPMENTS_URL = "http://localhost:3000/api/shipments/track";
-```
-
-`trackUI.js`-ийн `load()` функцийг:
-```js
-async load(query) {
-  const res = await fetch(`http://localhost:3000/api/shipments/track?query=${query}`);
-  return res.json();
+if (cleanHash === "#/" && isLoggedIn()) {
+  window.location.hash = "#/track";
+  return;
 }
 ```
 
-`initCreateOrder.js`-ийн submit handler дотор:
-```js
-await fetch("http://localhost:3000/api/orders", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(newOrder),
-});
+### 2. Track хуудас — автомат ачаалалт
+Нэвтэрсэн хэрэглэгч `/track` хуудас нээхэд:
+- `GET /api/shipments/my` дуудна
+- Утасны дугаараар бүх ачааг нь автоматаар харуулна
+- Хайлтын талбар ажилласаар байна (tracking code-оор хайх боломжтой)
+
+### 3. Header — хэрэглэгчийн нэр + Гарах товч
+Нэвтэрсний дараа header дээр:
+```
+[Хэрэглэгчийн нэр] [Гарах]
 ```
 
 ---
 
-## DB схем
+## Frontend API холбох
 
+`cash4cargo-frontend/js/api.js` дотор:
+```js
+export const API_BASE = "http://localhost:5000/api";
 ```
-users         — хэрэглэгчид (customer / admin / driver)
-orders        — захиалгын толгой
-order_items   — захиалгын барааны мөрүүд
-shipments     — ачааны дэлгэрэнгүй мэдээлэл
-status_history — статусын өөрчлөлтийн түүх
+
+Production deploy хийхдээ энэ URL-г өөрийн серверийн хаягаар сол.
+
+---
+
+## MongoDB схем
+
+### User
+```
+name, phone (unique), password_hash (bcrypt), role (user/admin)
+```
+
+### Shipment
+```
+user_phone, tracking_code (unique, MN-XXXXX),
+sender_name, receiver_name, receiver_phone,
+origin_country, destination_country,
+items[], total_weight, shipping_price,
+status, payment_status,
+status_history[], estimated_delivery
 ```

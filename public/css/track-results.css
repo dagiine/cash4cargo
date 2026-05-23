@@ -1,0 +1,271 @@
+#track-results {
+  max-width: 760px;
+  margin: 32px auto 0;
+  padding: 0 var(--space-page);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.track-summary {
+  display: flex;
+  flex-wrap: wrap;       /* Жижиг дэлгэцэнд дараагийн мөрт шилжинэ */
+  gap: 12px 20px;
+  padding: 14px 20px;
+  background: var(--color-cream);          /* Дэвсгэрээс арай тод */
+  border: 1px solid var(--color-brown);   /* Нимгэн хүрээ */
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  color: var(--color-brown);    
+  font-weight: 500;             /* Бүдэг текст */
+}
+
+.track-summary strong {
+  color: var(--color-orange);                  /* Хүрэн/цагаан — харагдахуйц */
+}
+
+/* =============================================
+   СТАТУСЫН BADGE
+   Захиалгын төлөв харуулах жижиг тэмдэглэгээ
+============================================= */
+
+/* Хүлээгдэж буй — хүрэн текст, peach дэвсгэр */
+.pending-badge {
+  background: var(--color-surface-strong);
+  color: var(--color-text);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  padding: 2px 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Хүргэгдсэн — ногоон текст, бүдэг ногоон дэвсгэр */
+.delivered-badge {
+  background: rgba(74, 222, 128, 0.12);
+  color: var(--color--success);
+  border-radius: var(--radius-sm);
+  padding: 2px 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* =============================================
+   АЧААНЫ КАРТ
+   Нэг захиалгын бүрэн мэдээлэл
+============================================= */
+
+.track-card {
+  background: var(--color-surface);          /* Дэвсгэрээс арай ялгаатай */
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Картын дээд хэсэг — дүрс + код + статус */
+.track-card__header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Картын том дүрс */
+.track-card__header .material-symbols-outlined {
+  font-size: 36px;
+  color: var(--color-brown);                 /* Хүрэн — дэвсгэртэй тод ялгаатай */
+}
+
+/* Захиалгын код */
+.track-card__code {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: 0.5px;
+}
+
+/* Статус текст */
+.track-card__status {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-muted);
+  margin-top: 2px;
+}
+
+/* =============================================
+   ЯВЦЫН АЛХМУУД
+   Захиалгын явцыг харуулах мөр
+============================================= */
+
+.track-steps {
+  list-style: none;
+  display: flex;
+  position: relative;
+}
+
+/* Алхмуудыг холбох хэвтэй шугам */
+.track-steps::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  height: 2px;
+  background: var(--border-default);
+  z-index: 0;
+}
+
+/* Нэг алхам */
+.step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  z-index: 1;            /* Шугамын дээр гарна */
+}
+
+/* Алхмын дугуй дүрс — анхдаа идэвхгүй */
+.step-icon {
+  width: 36px;
+  height: 36px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  border: 2px solid var(--border-default);
+  border-radius: 50%;
+  transition: border-color 0.2s;
+}
+
+/* Дууссан алхам — арай тодорсон хүрээ */
+.step.done .step-icon {
+  background: var(--color-surface);
+  border-color: var(--border-strong);
+}
+
+/* Одоогийн алхам — оранж хүрээ + гэрэлтэх эффект */
+.step.current .step-icon {
+  border-color: var(--color-orange);
+  box-shadow: 0 0 0 3px var(--color-yellow-dim);
+}
+
+/* Алхмын нэр — анхдаа бүдэг */
+.step-label {
+  font-size: 11px;
+  color: var(--color-muted);
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* Дууссан алхмын нэр — харагдахуйц болно */
+.step.done .step-label {
+  color: var(--color-text);
+}
+
+/* Одоогийн алхмын нэр — оранж, тод */
+.step.current .step-label {
+  color: var(--color-orange);
+  font-weight: 700;
+}
+
+/* =============================================
+   ДЭЛГЭРЭНГҮЙ МЭДЭЭЛЭЛ
+   Жин, огноо гэх мэт нэмэлт мэдээлэл
+============================================= */
+
+.track-card__details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-default);
+}
+
+/* Нэг мэдээллийн мөр */
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--color-muted);                 /* Бүдэг текст */
+}
+
+/* Мэдээллийн дүрс — хүрэн */
+.detail-item .material-symbols-outlined {
+  font-size: 18px;
+  color: var(--color-brown);                 /* Оранж биш — хэтэрхий давхардна */
+}
+
+/* =============================================
+   ХООСОН / АЛДААНЫ ТӨЛӨВ
+   Үр дүн олдоогүй эсвэл алдаа гарсан үед
+============================================= */
+
+.track-empty {
+  text-align: center;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Том дүрс — бүдэг */
+.track-empty .material-symbols-outlined {
+  font-size: 48px;
+  color: var(--border-default);
+}
+
+.track-empty p {
+  font-size: 15px;
+  color: var(--color-muted);
+}
+
+/* Санамж текст — арай бүдэг */
+.track-empty__hint {
+  font-size: 13px;
+  color: var(--color-muted);
+  opacity: 0.6;
+}
+
+/* Алдааны төлөв — улаан */
+.track-empty--error .material-symbols-outlined {
+  color: var(--color--error);
+}
+
+.track-empty--error p {
+  color: var(--color--error);
+}
+
+/* =============================================
+   RESPONSIVE — ГАР УТАС (600px-ээс нарийн)
+   Алхмуудыг хэвтээнээс босоо болгоно
+============================================= */
+
+@media (max-width: 600px) {
+
+  .track-steps {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* Хэвтэй холбох шугамыг нуух */
+  .track-steps::before {
+    display: none;
+  }
+
+  /* Дүрс + текст хажуу тийш */
+  .step {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .step-label {
+    text-align: left;
+  }
+}

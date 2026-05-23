@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cash 4 Cargo Admin</title>
+
+  <!-- Font + icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Material+Symbols+Outlined" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="#dashboard" aria-label="Dashboard">
+      <span class="brand-icon material-symbols-outlined">local_shipping</span>
+      <span>
+        <strong>Cash 4 Cargo</strong>
+        <small>Logistics Admin</small>
+      </span>
+    </a>
+
+    <nav class="side-nav" aria-label="Admin navigation">
+      <a href="#dashboard" class="nav-link active" data-page="dashboard">
+        <span class="material-symbols-outlined">grid_view</span>
+        Хянах самбар
+      </a>
+      <a href="#shipments" class="nav-link" data-page="shipments">
+        <span class="material-symbols-outlined">local_shipping</span>
+        Илгээмжүүд
+      </a>
+      <a href="#users" class="nav-link" data-page="users">
+        <span class="material-symbols-outlined">group</span>
+        Хэрэглэгчид
+      </a>
+      <a href="#faq" class="nav-link" data-page="faq">
+        <span class="material-symbols-outlined">help</span>
+        FAQ
+      </a>
+      <a href="#settings" class="nav-link" data-page="settings">
+        <span class="material-symbols-outlined">settings</span>
+        Тохиргоо
+      </a>
+    </nav>
+
+    <button class="new-btn" type="button" id="newShipmentBtn">
+      <span class="material-symbols-outlined">add</span>
+      Шинэ ачаа үүсгэх
+    </button>
+  </aside>
+
+  <div class="app">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" type="button" id="menuBtn" aria-label="Open menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+
+      <label class="search-box">
+        <span class="material-symbols-outlined">search</span>
+        <input id="searchInput" type="search" placeholder="Ачаа хайх..." />
+      </label>
+
+      <div class="top-actions">
+        <button class="icon-btn" type="button" aria-label="Notifications">
+          <span class="material-symbols-outlined">notifications</span>
+        </button>
+        <button class="icon-btn" type="button" aria-label="Apps">
+          <span class="material-symbols-outlined">apps</span>
+        </button>
+        <div class="admin-user">
+          <div>
+            <strong id="adminName">Admin</strong>
+            <small id="adminRole">АДМИН</small>
+          </div>
+          <span class="avatar" id="adminAvatar">A</span>
+          <button class="icon-btn" type="button" id="logoutBtn" aria-label="Logout">
+            <span class="material-symbols-outlined">logout</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="content" id="appContent"></main>
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+
+  <section class="login-screen" id="loginScreen">
+    <form class="login-card" id="loginForm">
+      <span class="login-icon material-symbols-outlined">admin_panel_settings</span>
+      <h1>Admin нэвтрэх</h1>
+      <p>Backend-тэй холбогдохын тулд admin эрхтэй хэрэглэгчээр нэвтэрнэ.</p>
+      <p class="login-message" id="loginMessage"></p>
+
+      <label>
+        Утасны дугаар
+        <input name="phone" type="text" placeholder="88000001" required />
+      </label>
+
+      <label>
+        Нууц үг
+        <input name="password" type="password" placeholder="admin123" required />
+      </label>
+
+      <button class="primary-btn" type="submit">Нэвтрэх</button>
+      <small>Seed admin: 88000001 / admin123</small>
+    </form>
+  </section>
+
+  <div class="modal" id="shipmentModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close icon-btn" type="button" id="closeModalBtn">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      <h2>Шинэ ачаа бүртгэх</h2>
+      <p>Илгээмжийн үндсэн мэдээллийг бөглөнө үү.</p>
+      <form id="shipmentForm" class="form-grid shipment-editor-form">
+        <label>
+          Tracking code <small>/ хоосон үлдээвэл автоматаар үүснэ</small>
+          <input name="code" placeholder="MN-12345" pattern="MN-[0-9]{5}" />
+        </label>
+        <label>
+          Захиалагч
+          <input name="customer" placeholder="Б. Тэмүүлэн" required />
+        </label>
+        <label>
+          Утасны дугаар
+          <input name="phone" placeholder="99112233" pattern="[6-9][0-9]{7}" required />
+        </label>
+        <label>
+          Төлөв
+          <select name="status">
+            <option>Захиалга үүсгэсэн</option>
+            <option>Хятадын агуулахад</option>
+            <option>Замын Үүд дээр</option>
+            <option>Улаанбаатарт ирсэн</option>
+            <option>Олгогдсон</option>
+          </select>
+        </label>
+        <label>
+          Төлбөр
+          <select name="payment_status">
+            <option>Төлөгдөөгүй</option>
+            <option>Төлөгдсөн</option>
+          </select>
+        </label>
+        <label>
+          Нийт жин /кг/
+          <input name="total_weight" type="number" step="0.1" min="0.1" placeholder="Жишээ: 2.5" required />
+        </label>
+        <div class="full-field items-editor-block">
+          <div class="items-editor-head">
+            <div>
+              <strong>Бараанууд</strong>
+              <small>Нэг илгээмж олон бараатай байж болно. Нийт жин дээрээс үнэ бодогдоно.</small>
+            </div>
+            <button class="secondary-btn compact" type="button" id="addCreateItemBtn">
+              <span class="material-symbols-outlined">add</span>Бараа нэмэх
+            </button>
+          </div>
+          <div id="createItemsBox" class="items-box"></div>
+          <div class="price-preview">
+            <span>Нийт жин: <strong id="createTotalWeight">0 кг</strong></span>
+            <span>Тооцсон үнэ: <strong id="createTotalPrice">0 ₮</strong></span>
+          </div>
+        </div>
+        <label class="full-field">
+          Тайлбар
+          <input name="description" placeholder="Нэмэлт тайлбар" />
+        </label>
+        <button class="primary-btn" type="submit">Бүртгэх</button>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="modal" id="statusModal" aria-hidden="true">
+    <div class="modal-card status-modal-card">
+      <button class="modal-close icon-btn" type="button" id="closeStatusModalBtn">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      <h2>Төлөв шинэчлэх</h2>
+      <p>Tracking code сонгоод шинэ төлөвийг хадгална уу.</p>
+      <form id="quickStatusForm" class="form-grid">
+        <label class="full-field">
+          Илгээмж
+          <select name="shipment_id" id="quickStatusShipment" required></select>
+        </label>
+        <label>
+          Шинэ төлөв
+          <select name="status" id="quickStatusValue" required>
+            <option>Захиалга үүсгэсэн</option>
+            <option>Хятадын агуулахад</option>
+            <option>Замын Үүд дээр</option>
+            <option>Улаанбаатарт ирсэн</option>
+            <option>Олгогдсон</option>
+          </select>
+        </label>
+        <label>
+          Тайлбар
+          <input name="description" placeholder="Жишээ: УБ агуулахад ирлээ" />
+        </label>
+        <button class="primary-btn" type="submit">Төлөв хадгалах</button>
+      </form>
+    </div>
+  </div>
+
+
+  <div class="modal" id="editShipmentModal" aria-hidden="true">
+    <div class="modal-card wide-modal-card">
+      <button class="modal-close icon-btn" type="button" id="closeEditModalBtn">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      <h2>Илгээмжийн жин засах</h2>
+      <p>Admin зөвхөн илгээмжийн нийт жинг засна. Үнэ нь нийт жингээс автоматаар дахин бодогдоно.</p>
+      <form id="editShipmentForm" class="form-grid shipment-editor-form">
+        <input type="hidden" name="id" />
+        <label>
+          Tracking code
+          <input name="code" disabled />
+        </label>
+        <label>
+          Захиалагч
+          <input name="customer" disabled />
+        </label>
+        <label>
+          Утасны дугаар
+          <input name="phone" disabled />
+        </label>
+        <label>
+          Одоогийн үнэ
+          <input name="current_price" disabled />
+        </label>
+        <label>
+          Шинэ нийт жин /кг/
+          <input name="total_weight" type="number" step="0.1" min="0.1" required />
+        </label>
+        <label>
+          Шинэ тооцсон үнэ
+          <input name="new_price" disabled />
+        </label>
+        <div class="full-field items-editor-block">
+          <div class="items-editor-head">
+            <div>
+              <strong>Бараанууд</strong>
+              <small>Бараанууд нэг илгээмжид багтаж, нэг нийт жинтэй байна.</small>
+            </div>
+          </div>
+          <div id="editItemsBox" class="items-box readonly-items-box"></div>
+          <div class="price-preview">
+            <span>Нийт жин: <strong id="editTotalWeight">0 кг</strong></span>
+            <span>Тооцсон үнэ: <strong id="editTotalPrice">0 ₮</strong></span>
+          </div>
+        </div>
+        <label class="full-field">
+          Засварын тайлбар
+          <input name="description" placeholder="Жишээ: Жинг шинэчиллээ" />
+        </label>
+        <button class="primary-btn" type="submit">Жин хадгалах</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

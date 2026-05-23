@@ -1,0 +1,276 @@
+:root {
+  /* ── Брэндийн өнгөнүүд ── */
+  --color-cream:        #FFFDF1;
+  --color-peach:        #FFCE99;
+  --color-orange:       #FF9644;
+  --color-brown:        #562F00;
+
+  /* ── Семантик өнгө ── */
+  --color-yellow:           var(--color-orange);
+  --color-yellow-hover:     #e07830;
+  --color-yellow-dim:       rgba(255, 150, 68, 0.18);
+  --color-yellow-dim-hover: rgba(255, 150, 68, 0.32);
+  --color-yellow-label:     var(--color-brown);
+
+  --color--error:   #ef4444;
+  --color--success: #4ade80;
+  --color-overplay: rgba(255, 255, 255, 0.5);
+
+  --color-bg:             var(--color-cream);
+  --color-surface:        rgba(255, 206, 153, 0.35);
+  --color-surface-strong: rgba(255, 206, 153, 0.55);
+  --color-text:           var(--color-brown);
+  --color-muted:          rgba(86, 47, 0, 0.65);
+
+  /* ── Хүрээ ── */
+  --border-default:      rgba(86, 47, 0, 0.35);
+  --border-strong:       rgba(86, 47, 0, 0.60);
+  --border-accent:       var(--color-orange);
+  --border-footer-faint: rgba(86, 47, 0, 0.12);
+
+  /* ── Section background colors ── */
+  --section-hero:    var(--color-cream);
+  --section-reviews: rgba(86, 47, 0, 0.06);
+
+  /* ── Үсгийн фонт ── */
+  --font-base: 'Inter', sans-serif;
+  --h1-font-size: clamp(1.25rem, 3.5vw, 2rem);
+  --h1-font-weight: 800;
+  --h1-line-height: 1.1;
+
+  /* ── Радиус ── */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  /* ── Зай ── */
+  --space-page: 40px;
+
+  /* ── Товч ── */
+  --btn-height:        40px;
+  --btn-height-big:    52px;
+  --btn-font-size:     15px;
+  --btn-font-size-big: 16px;
+  --btn-padding:       0 24px;
+  --btn-radius:        var(--radius-md);
+  --btn-bg:            var(--color-yellow);
+  --btn-color:         var(--color-cream);
+  --btn-hover-opacity: 0.88;
+
+  /* ── Лого ── */
+  --logo-icon-size:   32px;
+  --logo-icon-bg:     var(--color-brown);
+  --logo-icon-radius: var(--radius-sm);
+  --logo-icon-color:  var(--color-cream);
+
+  /* ── Card ── */
+  --card-bg:               var(--color-surface);
+  --card-border:           var(--border-default);
+  --card-border-hover:     var(--border-strong);
+  --card-icon-bg:          var(--color-yellow-dim);
+  --card-icon-bg-hover:    var(--color-orange);
+  --card-icon-color:       var(--color-brown);
+  --card-icon-color-hover: var(--color-cream);
+  --card-radius:           var(--radius-lg);
+
+  /* ── Stat ── */
+  --stat-bg:           var(--color-surface);
+  --stat-border:       var(--border-default);
+  --stat-border-hover: var(--border-strong);
+  --stat-number-color: var(--color-brown);
+  --stat-label-color:  var(--color-muted);
+  --stat-radius:       var(--radius-lg);
+
+  /* ── Input ── */
+  --input-bg:     var(--color-cream);
+  --input-border: var(--border-strong);
+  --input-radius: var(--radius-sm);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* ── Семантик өнгө ── */
+    --color-yellow:           rgba(255, 217, 0, 1);
+    --color-yellow-hover:     rgba(255, 217, 0, 0.8);
+    --color-yellow-dim:       rgba(255, 217, 0, 0.10);
+    --color-yellow-dim-hover: rgba(255, 217, 0, 0.18);
+    --color-yellow-label:     rgba(255, 217, 0, 0.85);
+    --color-orange:           var(--color-yellow-label);
+    --color-brown:            var(--color-yellow-label);
+
+    --color--error:   #ef4444;
+    --color--success: #4ade80;
+    --color-overplay: rgba(0, 0, 0, 0.5);
+
+    --color-bg:             #141720;
+    --color-surface:        #1e2433;
+    --color-surface-strong: #26304a;
+    --color-text:           #f1f5f9;
+    --color-muted:          #a8b8cc;
+    --color-peach: var(--color-surface);
+
+    /* ── Хүрээ ── */
+    --border-default:      rgba(255, 255, 255, 0.16);
+    --border-strong:       rgba(255, 255, 255, 0.28);
+    --border-accent:       var(--color-yellow);
+    --border-footer-faint: rgba(255, 217, 0, 0.06);
+
+    /* ── Товч ── */
+    --btn-bg:            var(--color-yellow);
+    --btn-color:         #141720;
+    --btn-hover-opacity: 0.85;
+
+    /* ── Лого ── */
+    --logo-icon-bg:    var(--color-yellow);
+    --logo-icon-color: #141720;
+
+    /* ── Card ── */
+    --card-bg:               var(--color-surface);
+    --card-border:           var(--border-default);
+    --card-border-hover:     var(--border-accent);
+    --card-icon-bg:          var(--color-yellow-dim);
+    --card-icon-bg-hover:    var(--color-yellow);
+    --card-icon-color:       var(--color-yellow);
+    --card-icon-color-hover: #141720;
+
+    /* ── Stat ── */
+    --stat-bg:           var(--color-surface);
+    --stat-border:       var(--border-default);
+    --stat-border-hover: var(--border-accent);
+    --stat-number-color: rgba(255, 217, 0, 0.45);
+    --stat-label-color:  rgba(148, 163, 184, 0.50);
+
+    /* ── Input ── */
+    --input-bg:     #141720;
+    --input-border: var(--border-default);
+  }
+}
+
+/* ── [data-theme="dark"] — media query-г дарж хэрэглэх ── */
+[data-theme="dark"] {
+  --color-yellow:           rgba(255, 217, 0, 1);
+  --color-yellow-hover:     rgba(255, 217, 0, 0.8);
+  --color-yellow-dim:       rgba(255, 217, 0, 0.10);
+  --color-yellow-dim-hover: rgba(255, 217, 0, 0.18);
+  --color-yellow-label:     rgba(255, 217, 0, 0.85);
+
+  --color--error:   #ef4444;
+  --color--success: #4ade80;
+
+  --color-bg:             #141720;
+  --color-surface:        #1e2433;
+  --color-surface-strong: #26304a;
+  --color-text:           #f1f5f9;
+  --color-muted:          #a8b8cc;
+
+  --border-default:      rgba(255, 255, 255, 0.16);
+  --border-strong:       rgba(255, 255, 255, 0.28);
+  --border-accent:       var(--color-yellow);
+  --border-footer-faint: rgba(255, 217, 0, 0.06);
+
+  --btn-bg:            var(--color-yellow);
+  --btn-color:         #141720;
+  --btn-hover-opacity: 0.85;
+
+  --logo-icon-bg:    var(--color-yellow);
+  --logo-icon-color: #141720;
+
+  --card-bg:               var(--color-surface);
+  --card-border:           var(--border-default);
+  --card-border-hover:     var(--border-accent);
+  --card-icon-bg:          var(--color-yellow-dim);
+  --card-icon-bg-hover:    var(--color-yellow);
+  --card-icon-color:       var(--color-yellow);
+  --card-icon-color-hover: #141720;
+
+  --stat-bg:           var(--color-surface);
+  --stat-border:       var(--border-default);
+  --stat-border-hover: var(--border-accent);
+  --stat-number-color: rgba(255, 217, 0, 0.45);
+  --stat-label-color:  rgba(148, 163, 184, 0.50);
+
+  --input-bg:     #141720;
+  --input-border: var(--border-default);
+}
+
+/* ════════════════════════════════════════
+   Reset
+   ════════════════════════════════════════ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-base);
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ── Товч ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  border: none;
+  border-radius: var(--btn-radius);
+  font-weight: 800;
+  font-size: var(--btn-font-size);
+  padding: var(--btn-padding);
+  height: var(--btn-height);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.btn:hover {
+  opacity: var(--btn-hover-opacity);
+}
+
+.btn.big {
+  height: var(--btn-height-big);
+  font-size: var(--btn-font-size-big);
+  width: 100%;
+  max-width: 26rem;
+}
+
+/* ── Лого ── */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
+  font-size: 18px;
+}
+
+.logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--logo-icon-size);
+  height: var(--logo-icon-size);
+  background: var(--logo-icon-bg);
+  border-radius: var(--logo-icon-radius);
+  color: var(--logo-icon-color);
+  overflow: hidden;
+}
+
+.logo-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

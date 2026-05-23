@@ -1,6 +1,0 @@
-node_modules/
-cash4cargo-backend/node_modules/
-
-.env
-dist/
-build/

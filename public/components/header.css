@@ -1,0 +1,719 @@
+/* ===============================
+   HEADER LAYOUT
+================================ */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 24px;
+
+  padding: 16px var(--space-page);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--border-default);
+}
+
+
+/* ===============================
+   NAVIGATION
+================================ */
+
+header nav {
+  display: flex;
+  justify-content: center;
+}
+
+header nav ul {
+  list-style: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+
+  margin: 0;
+  padding: 0;
+}
+
+header nav a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  color: var(--color-muted);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+
+  transition: color 0.2s;
+}
+
+header nav a:hover,
+header nav a.active {
+  color: var(--color-yellow);
+}
+
+.nav-icon {
+  font-size: 22px;
+}
+
+
+/* ===============================
+   HEADER BUTTONS
+================================ */
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-call-btn,
+.signin-open-btn {
+  height: var(--btn-height);
+  padding: var(--btn-padding);
+  border-radius: var(--btn-radius);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  font-size: var(--btn-font-size);
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+
+  transition: 0.2s;
+}
+
+.header-call-btn {
+  background: var(--color-surface);
+  color: var(--color-brown);
+  border: 1.5px solid var(--color-brown);
+}
+
+.signin-open-btn {
+  background: var(--color-brown);
+  color: var(--color-cream);
+  border: 1.5px solid var(--color-brown);
+}
+
+.header-call-btn:hover,
+.signin-open-btn:hover {
+  background: var(--color-orange);
+  color: var(--color-brown);
+}
+
+/* ===============================
+   DARK BACKDROP
+================================ */
+
+.call-backdrop,
+.signin-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(4px);
+}
+
+#call-toggle:checked ~ .call-backdrop,
+#signin-toggle:checked ~ .signin-backdrop {
+  display: block;
+}
+
+
+/* ===============================
+   POPUP PANELS
+================================ */
+
+.call-panel,
+.signin-panel {
+  position: fixed;
+  right: var(--space-page);
+
+  background: var(--color-bg);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 16px 48px rgba(86, 47, 0, 0.18);
+
+  display: flex;
+  flex-direction: column;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.call-panel {
+  top: 65px;
+  z-index: 120;
+  width: 320px;
+  padding: 28px 20px 20px;
+  gap: 14px;
+}
+
+.signin-panel {
+  top: 72px;
+  z-index: 100;
+  width: 340px;
+  padding: 28px 24px 24px;
+  gap: 20px;
+}
+
+#call-toggle:checked ~ .call-panel,
+#signin-toggle:checked ~ .signin-panel {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+
+/* ===============================
+   CLOSE BUTTONS
+================================ */
+
+.call-close,
+.signin-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--color-muted);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.call-close:hover,
+.signin-close:hover {
+  color: var(--color-text);
+}
+
+
+/* ===============================
+   CALL PANEL CONTENT
+================================ */
+
+.call-panel h2,
+.signin-panel h2 {
+  margin: 0;
+  color: var(--color-text);
+  font-weight: 900;
+}
+
+.call-panel h2 {
+  font-size: 18px;
+  padding-right: 36px;
+}
+
+.signin-panel h2 {
+  font-size: 20px;
+}
+
+.call-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 12px 14px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+}
+
+.call-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.call-info strong {
+  display: block;
+  color: var(--color-text);
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.call-info span {
+  color: var(--color-muted);
+  font-size: 14px;
+}
+
+.call-link {
+  flex-shrink: 0;
+
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-lg);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--color-surface);
+  color: var(--color-brown);
+  border: 1px solid var(--color-brown);
+  text-decoration: none;
+
+  transition: opacity 0.2s;
+}
+
+.call-link .material-symbols-outlined {
+  font-size: 20px;
+}
+
+.call-link:hover {
+  background: var(--color-orange);
+}
+
+
+/* ===============================
+   SIGN IN FORM
+================================ */
+
+.signin-message {
+  min-height: 18px;
+  margin: 0;
+  font-size: 13px;
+  display: none;
+}
+
+.signin-message.show {
+  display: block;
+}
+
+.signin-panel form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.signin-panel input {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+
+  background: var(--color-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+
+  color: var(--color-text);
+  font-family: var(--font-base);
+  font-size: 14px;
+
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.signin-panel input:focus {
+  border-color: var(--border-accent);
+}
+
+.signin-btn,
+.signin-create {
+  width: 100%;
+  height: 48px;
+  border-radius: var(--btn-radius);
+
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.signin-btn {
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  border: none;
+}
+
+.signin-btn:hover {
+  opacity: 0.88;
+}
+
+.signin-forgot {
+  text-align: center;
+  color: var(--color-muted);
+  font-size: 13px;
+  text-decoration: underline;
+}
+
+.signin-panel hr {
+  border: none;
+  border-top: 1px solid var(--border-default);
+}
+
+.signin-create {
+  color: var(--color-brown);
+  background: var(--color-cream);
+  border: 1.5px solid var(--color-brown);
+}
+
+.signin-create:hover {
+  background: var(--color-yellow);
+  color: #3a2000;
+}
+
+
+/* ===============================
+   TABLET
+================================ */
+
+@media (max-width: 1024px) {
+  header {
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+  }
+
+  header nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+
+    padding: 8px 0;
+    border-top: 1px solid var(--border-default);
+  }
+
+  header nav ul {
+    gap: 20px;
+  }
+
+  .header-actions {
+    justify-content: flex-end;
+  }
+}
+
+/* ===============================
+   DESKTOP + TABLET
+   Hide all header icons
+================================ */
+
+@media (min-width: 768px) {
+
+  .nav-icon {
+    display: none !important;
+  }
+
+  .signin-icon {
+    display: none !important;
+  }
+
+  .header-call-btn .material-symbols-outlined {
+    display: none !important;
+  }
+
+}
+
+/* ===============================
+   MOBILE
+================================ */
+
+@media (max-width: 767px) {
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 10px;
+    padding: 12px 14px;
+  }
+
+  .header-call-btn,
+  .signin-open-btn {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 14px;
+    gap: 0;
+  }
+
+  .call-btn-text,
+  .signin-text {
+    display: none;
+  }
+
+  .signin-icon,
+  .header-call-btn .material-symbols-outlined {
+    display: inline-flex;
+    font-size: 22px;
+  }
+
+  .signin-icon {
+    color: var(--color-cream)
+  }
+
+  .header-call-btn .material-symbols-outlined {
+    color: var(--color-brown);
+  }
+
+  header nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 100;
+
+    background: var(--color-bg);
+    border-top: 1px solid var(--border-default);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  header nav ul {
+    width: 100%;
+    gap: 0;
+    justify-content: space-around;
+  }
+
+  header nav li {
+    flex: 1;
+    min-width: 0;
+  }
+
+  header nav a {
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+
+    gap: 3px;
+    padding: 8px 2px;
+    font-size: 10px;
+  }
+
+  .nav-label {
+    display: none;
+  }
+
+  .nav-icon {
+    display: block;
+    font-size: 24px;
+  }
+
+  .nav-create {
+    flex: 1.2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-create a {
+    width: 60px;
+    height: 60px;
+    margin-top: -20px;
+
+    border-radius: 50%;
+    border: 1px solid var(--color-bg);
+    background: var(--color-yellow);
+    color: var(--color-brown) !important;
+    box-shadow: 0 4px 16px rgba(86, 47, 0, 0.22);
+
+    transition: 0.2s;
+  }
+
+  .nav-create a:hover,
+  .nav-create a.active {
+    opacity: 0.88;
+    transform: scale(1.06);
+  }
+
+  .nav-create a .nav-icon {
+    font-size: 28px;
+    font-weight: 700;
+  }
+
+  .call-panel,
+  .signin-panel {
+    top: 70px;
+    left: 12px;
+    right: 12px;
+    width: auto;
+  }
+}
+
+
+/* ===============================
+   SIGN IN SHAKE ANIMATION
+================================ */
+
+@keyframes shake {
+  0%   { transform: translateX(0); }
+  20%  { transform: translateX(-6px); }
+  40%  { transform: translateX(6px); }
+  60%  { transform: translateX(-6px); }
+  80%  { transform: translateX(6px); }
+  100% { transform: translateX(0); }
+}
+
+.signin-shake {
+  animation: shake 0.3s ease;
+}
+
+/* =========================================
+   REGISTER / SIGN UP FORM
+========================================= */
+
+/* Login and register form share same layout */
+#signin-form,
+#register-form {
+  width: 100%;
+}
+
+/* Register title */
+#register-form h2 {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--color-text);
+  margin: 0 0 4px;
+}
+
+/* Register message */
+#register-message {
+  display: none;
+  min-height: 0;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Show message only when needed */
+#register-message.show,
+#signin-message.show {
+  display: block;
+}
+
+/* Input focus effect */
+.signin-panel input:focus {
+  border-color: var(--color-yellow);
+  box-shadow: 0 0 0 3px rgba(255, 178, 44, 0.22);
+}
+
+/* Register submit button */
+#register-form .signin-btn {
+  margin-top: 4px;
+}
+
+/* Back to login button */
+#show-login-btn {
+  background: transparent;
+  color: var(--color-brown);
+  border: 1.5px solid var(--color-brown);
+}
+
+/* Hover effects */
+.signin-btn:hover {
+  filter: brightness(0.95);
+}
+
+.signin-create:hover,
+#show-login-btn:hover {
+  background: #3a2000;
+  color: var(--color-cream);
+  border-color: #3a2000;
+}
+
+/* Divider */
+.signin-panel hr {
+  width: 100%;
+  border: none;
+  border-top: 1px solid var(--border-strong);
+  margin: 4px 0;
+}
+
+/* Forgot password */
+.signin-forgot {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-muted);
+  text-align: center;
+  text-decoration: none;
+}
+
+.signin-forgot:hover {
+  color: var(--color-yellow);
+}
+
+/* Message hidden by default */
+.signin-message {
+  display: none;
+  min-height: 0;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Mobile spacing */
+@media (max-width: 767px) {
+  .signin-panel {
+    padding: 26px 20px 22px;
+  }
+
+  .signin-panel input,
+  .signin-btn,
+  .signin-create {
+    height: 46px;
+  }
+
+  #register-form h2,
+  #signin-form h2 {
+    font-size: 19px;
+  }
+}
+
+/* ===============================
+   LOGGED-IN PROFILE SHORTCUT
+================================ */
+.user-info.profile-shortcut {
+  min-height: var(--btn-height);
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border-default);
+  background: var(--color-surface);
+  color: var(--color-text);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+
+.user-info.profile-shortcut:hover,
+.user-info.profile-shortcut.active {
+  border-color: var(--color-yellow);
+  background: var(--color-yellow-dim, rgba(255, 178, 44, 0.16));
+  color: var(--color-yellow);
+}
+
+.user-info.profile-shortcut .material-symbols-outlined {
+  font-size: 24px;
+}
+
+@media (max-width: 767px) {
+  .user-info.profile-shortcut {
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 14px;
+  }
+
+  .user-info.profile-shortcut .user-name {
+    display: none;
+  }
+}

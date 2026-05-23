@@ -1,0 +1,251 @@
+/* =============================================
+   ҮНДСЭН АГУУЛГА
+============================================= */
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding: 60px var(--space-page) 80px;
+  max-width: 860px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* =============================================
+   ХУУДАСНЫ ГАРЧИГ
+============================================= */
+
+.page-header {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.page-header h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: var(--color-text);
+}
+
+.page-header p {
+  color: var(--color-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* =============================================
+   ХАЙЛТЫН ТАЛБАР
+============================================= */
+
+label.search {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: var(--color-bg);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+/* Click хийхэд хүрээ тодорно */
+label.search:focus-within {
+  border-color: var(--border-accent);
+  box-shadow: 0 0 0 3px var(--color-yellow-dim);
+}
+
+label.search .material-symbols-outlined {
+  padding: 0 14px;
+  font-size: 22px;
+  color: var(--color-muted);
+}
+
+label.search input {
+  flex: 1;
+  height: 52px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-text);
+  font-family: var(--font-base);
+  font-size: 15px;
+}
+
+label.search input::placeholder {
+  color: var(--color-muted);
+  opacity: 0.6;
+}
+
+/* =============================================
+   КАТЕГОРИЙН ТОВЧНУУД
+   Бүгд / Захиалга / Тээвэр / Төлбөр
+
+   Radio input нуугдсан байна.
+   CSS-ийн ~ selector нь: "radio checked бол
+   дараах ах дүүгээ сонго" гэсэн утгатай.
+   Энэ ажиллахын тулд input, label, section
+   бүгд нэг гэр бүлийн шууд хүүхэд байх ёстой.
+   Тиймээс .categories div-г хасав.
+============================================= */
+
+/* Radio input-уудыг нуух */
+input[name="faq"] {
+  display: none;
+}
+
+main > article {
+  width: 100%;
+}
+
+/* Категори label-уудыг мөрөнд байрлуулах */
+.categories {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+
+/* Нэг категори товч */
+.categories label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: var(--btn-height);
+  padding: var(--btn-padding);
+  border-radius: var(--btn-radius);
+  font-size: var(--btn-font-size);
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--color-bg);
+  border: 1px solid var(--border-default);
+  color: var(--color-muted);
+  transition: all 0.2s;
+}
+
+.categories label:hover {
+  border-color: var(--border-accent);
+  color: var(--color-text);
+}
+
+/* Сонгогдсон товч — оранж дэвсгэр, цагаан текст */
+#faq-all:checked      ~ .categories label[for="faq-all"],
+#faq-ordering:checked ~ .categories label[for="faq-ordering"],
+#faq-shipping:checked ~ .categories label[for="faq-shipping"],
+#faq-payments:checked ~ .categories label[for="faq-payments"] {
+  background: var(--color-orange);
+  color: var(--color-cream);
+  border-color: var(--color-orange);
+}
+
+/* =============================================
+   FAQ ХЭСЭГ
+============================================= */
+
+article > section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+article > section > h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+
+/* FAQ бүлэг — анхдаа нуугдсан */
+.faq-group {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Бүгд сонгогдсон үед бүх бүлэг харагдана */
+#faq-all:checked ~ .categories ~ section .faq-group {
+  display: flex;
+}
+
+/* Тодорхой категори сонгогдсон үед зөвхөн тухайн бүлэг */
+#faq-ordering:checked ~ .categories ~ section #faq-ordering { display: flex; }
+#faq-shipping:checked ~ .categories ~ section #faq-shipping { display: flex; }
+#faq-payments:checked ~ .categories ~ section #faq-payments { display: flex; }
+
+/* =============================================
+   FAQ КАРТ
+   details/summary ашиглан нээж хаана
+============================================= */
+
+/* Нэг FAQ карт */
+.faq-group article {
+  background: var(--color-bg);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.faq-group article:hover {
+  border-color: var(--border-accent);
+}
+
+/* Асуултын мөр */
+details summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+  cursor: pointer;
+  list-style: none;
+  transition: background 0.15s;
+}
+
+/* Chrome-д анхдаах гурвалжин нуух */
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary:hover {
+  background: var(--color-surface);
+}
+
+/* Баруун талд сум дүрс — Material icon ашиглана */
+details summary::after {
+  content: 'expand_more';
+  font-family: 'Material Symbols Outlined';
+  font-size: 22px;
+  color: var(--color-brown);
+  transition: transform 0.25s;
+  flex-shrink: 0;
+}
+
+/* Нээлттэй үед сум 180° эргэнэ */
+details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+/* Хариултын текст */
+details p {
+  padding: 14px 20px 18px;
+  font-size: 14px;
+  color: var(--color-muted);
+  line-height: 1.7;
+  border-top: 1px solid var(--border-default);
+}
+
+/* =============================================
+   RESPONSIVE — ГАР УТАС
+============================================= */
+
+@media (max-width: 767px) {
+  main {
+    padding-bottom: 100px;
+  }
+}

@@ -1,0 +1,163 @@
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;   
+  text-align: center;
+  gap: 20px;
+  padding: 60px var(--space-page) 80px;
+  max-width: 720px;
+  margin: 0 auto;       
+  width: 100%;
+}
+
+main > h1 {
+  font-size: var(--h1-font-size);
+  font-weight: var(--h1-font-weight);;
+  line-height: var(--h1-font-height);;
+}
+
+main > p {
+  font-size: 1rem;
+  max-width: 600px;
+  color: var(--color-muted);
+}
+
+/* =============================================
+   form
+============================================= */
+.form {
+  width: 100%;
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: left;
+}
+
+.form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--color-muted);
+  position: relative;
+}
+
+.form label span {
+  position: absolute;
+  left: 14px;
+  top: 65%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: var(--color-muted);
+  pointer-events: none;
+}
+
+.form input {
+  display: block;
+  width: 100%;
+  height: var(--btn-height-big);
+  padding: 0 16px 0 44px; 
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: var(--input-radius);
+  color: var(--color-text);
+  font-family: var(--font-base);
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form input::placeholder {
+  color: var(--color-muted);
+  opacity: 0.6;
+}
+
+.form input:focus {
+  border-color: var(--border-accent);
+  box-shadow: 0 0 0 3px rgba(255, 217, 0, 0.12);
+}
+
+.form button {
+  width: 100%;
+  height: var(--btn-height-big);
+  font-size: 16px;
+  font-weight: 700;
+  background: var(--btn-bg);
+  color: var(--btn-color);
+  border: none;
+  border-radius: var(--btn-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.form button:hover {
+  background: var(--color-brown);
+  transition: ease-in 0.3s;
+}
+
+/* =============================================
+   info cards
+============================================= */
+
+.info {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 тэнцүү багана */
+  gap: 12px;
+  border-top: 1px solid var(--border-footer-faint); /* Дээд хүрээ */
+  padding-top: 20px;
+}
+
+.info article {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+}
+
+.info article > span {
+  font-size: 28px;
+  color: var(--color-yellow);
+  flex-shrink: 0; /* Дүрс жижгэрэхгүй */
+}
+
+.info article div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: left;
+}
+
+.info h3 {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+}
+
+.info p {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+@media (max-width: 767px) {
+  main {
+    padding-bottom: 100px;
+  }
+}
+
+@media (max-width: 559px) {
+  .info {
+    grid-template-columns: 1fr;
+  }
+}
