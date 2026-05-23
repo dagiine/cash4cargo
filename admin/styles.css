@@ -336,12 +336,15 @@ td { font-size: 15px; }
 .code { color: var(--color-brown); font-weight: 900; letter-spacing: .03em; }
 .customer { display: flex; align-items: center; gap: 12px; }
 .customer small { display: block; color: var(--color-muted); margin-top: 2px; }
-.status { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 900; }
+.status { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 900; border: 0; }
 .status.success { background: var(--color-green-bg); color: var(--color-green); }
 .status.warning { background: var(--color-orange); color: #fff; }
 .status.pending { background: #fff0cf; color: var(--color-brown-dark); }
 .status.info { background: var(--color-blue-bg); color: var(--color-blue); }
 .status.neutral { background: #eee6df; color: var(--color-muted); }
+.status.danger { background: #fee2e2; color: #dc2626; }
+.status-click { cursor: pointer; font-family: inherit; }
+.status-click:hover { filter: brightness(0.94); transform: translateY(-1px); }
 .pagination { padding: 18px 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; color: var(--color-muted); }
 .pages { display: flex; gap: 8px; }
 .page-btn { width: 44px; height: 44px; border-radius: var(--radius-sm); border: 1px solid var(--color-border); background: transparent; cursor: pointer; }
@@ -703,4 +706,96 @@ td { font-size: 15px; }
   .row-price {
     justify-self: start;
   }
+}
+
+/* =============================================
+   FAQ CATEGORY + USER ORDER HISTORY
+============================================= */
+.category-form {
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.faq-category-card {
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-category-card h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.inner-faq-card {
+  background: var(--color-bg);
+}
+
+.user-card-click {
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.user-card-click:hover h3 {
+  color: var(--color-orange);
+}
+
+.user-orders {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border);
+}
+
+.user-order-history {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.user-order-history > strong {
+  font-size: 13px;
+  color: var(--color-muted);
+}
+
+.user-order-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  cursor: pointer;
+  text-align: left;
+}
+
+.user-order-row span {
+  font-weight: 800;
+}
+
+.user-order-row small {
+  color: var(--color-muted);
+}
+
+.user-order-row:hover {
+  border-color: var(--color-orange);
+}
+
+.user-order-empty {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 13px;
 }

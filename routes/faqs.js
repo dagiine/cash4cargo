@@ -1,29 +1,64 @@
 import express from "express";
 import Faq from "../models/Faq.js";
+import FaqCategory from "../models/FaqCategory.js";
 import { protect, adminOnly } from "../middleware/auth.js";
 
 const router = express.Router();
 
-// Public FAQ list — user талд харагдана
-router.get("/", async (req, res) => {
+// Public category list — user FAQ дээр ангилал болж харагдана.
+router.get("/categories", async (_req, res) => {
   try {
-    const filter = req.user?.role === "admin" ? {} : { is_active: true };
-    const faqs = await Faq.find(filter).sort({ createdAt: -1 });
+    const categories = await FaqCategory.find({ is_active: true }).sort({ createdAt: 1 });
+    res.json({ categories });
+  } catch (err) {
+    res.status(500).json({ message: "FAQ ангилал ачаалахад алдаа гарлаа" });
+  }
+});
+
+// Admin шинэ FAQ ангилал нэмнэ.
+router.post("/categories", protect, adminOnly, async (req, res) => {
+  try {
+    const { name, icon } = req.body;
+    if (!name?.trim()) return res.status(400).json({ message: "Ангиллын нэр оруулна уу" });
+
+    const category = await FaqCategory.findOneAndUpdate(
+      { name: name.trim() },
+      { name: name.trim(), icon: icon || "help", is_active: true },
+      { upsert: true, new: true, runValidators: true }
+    );
+
+    res.status(201).json(category);
+  } catch (err) {
+    res.status(500).json({ message: "FAQ ангилал хадгалахад алдаа гарлаа" });
+  }
+});
+
+// Public FAQ list — user талд харагдана.
+router.get("/", async (_req, res) => {
+  try {
+    const faqs = await Faq.find({ is_active: true }).sort({ createdAt: -1 });
     res.json({ faqs });
   } catch (err) {
     res.status(500).json({ message: "Серверийн алдаа" });
   }
 });
 
-// Admin FAQ нэмэх
+// Admin FAQ нэмэх.
 router.post("/", protect, adminOnly, async (req, res) => {
   try {
     const { question, answer, category, is_active } = req.body;
+    const categoryName = category?.trim() || "Захиалга";
+
+    await FaqCategory.findOneAndUpdate(
+      { name: categoryName },
+      { name: categoryName, icon: "help", is_active: true },
+      { upsert: true, new: true }
+    );
 
     const faq = await Faq.create({
       question,
       answer,
-      category: category || "Ерөнхий",
+      category: categoryName,
       is_active: is_active ?? true,
     });
 
@@ -37,7 +72,7 @@ router.post("/", protect, adminOnly, async (req, res) => {
   }
 });
 
-// Admin FAQ шинэчлэх
+// Admin FAQ шинэчлэх.
 router.put("/:id", protect, adminOnly, async (req, res) => {
   try {
     const faq = await Faq.findByIdAndUpdate(req.params.id, req.body, {
@@ -52,7 +87,7 @@ router.put("/:id", protect, adminOnly, async (req, res) => {
   }
 });
 
-// Admin FAQ устгах
+// Admin FAQ устгах.
 router.delete("/:id", protect, adminOnly, async (req, res) => {
   try {
     const faq = await Faq.findByIdAndDelete(req.params.id);

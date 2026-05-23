@@ -8,7 +8,7 @@ html {
 .warehouse-section,
 .reviews-section {
   width: 100%;
-  background: var(--color-white);
+  background: var(--color-home-bg);
 }
 
 .steps h2,
@@ -306,6 +306,12 @@ html {
   opacity: 0.5;
 }
 
+/* Web component host өөрөө grid-ийн зай авахгүй.
+   Доторх .step нь өмнөх загвараараа харагдана. */
+status-badge[variant="home"] {
+  display: contents;
+}
+
 /* 5 алхмын grid */
 .steps-grid {
   position: relative;
@@ -374,6 +380,7 @@ html {
   color: var(--color-muted);
   font-size: 12px;
   line-height: 1.65;
+  text-align: justify;
 }
 
 /* =============================================
@@ -547,7 +554,7 @@ html {
 .bottom-cta {
   width: 100%;
   padding: 56px 24px;
-  background: var(--color-peach);
+  background: var(--color-cta-bg);
 }
 
 .bottom-cta-content {
@@ -555,7 +562,7 @@ html {
   margin: 0 auto;
   padding: 44px 40px;
   text-align: center;
-  background: rgba(255, 255, 255, 0.55);
+  background: var(--color-cta);
   border: 1px solid rgba(133, 72, 54, 0.1);
   border-radius: 24px;
 }
@@ -568,8 +575,8 @@ html {
 }
 
 .bottom-cta p {
-  max-width: 600px;
-  margin: 0 auto 28px;
+  max-width: 800px;
+  margin: 0 auto 20px;
   color: var(--color-muted);
   font-size: 15px;
   line-height: 1.7;
@@ -757,6 +764,11 @@ html {
   .bottom-cta-content {
     padding: 32px 24px;
   }
+  
+  .bottom-cta P {
+    text-align: justify;
+  }
+
 
   .bottom-cta-actions {
     flex-direction: column;

@@ -1,6 +1,5 @@
 /**
  * seed.js — MongoDB-д жишээ өгөгдөл оруулах
- * Ажиллуулах: node seed.js
  */
 import "dotenv/config";
 import mongoose from "mongoose";
@@ -31,11 +30,7 @@ const users = [
   },
 ];
 
-const faqs = [
-  { question: "Ачаа хэд хоногт ирэх вэ?", answer: "Хятад агуулахаас Монгол руу гараад дунджаар 3-7 хоногт ирнэ.", category: "Хүргэлт" },
-  { question: "Үнэ хэрхэн бодогдох вэ?", answer: "Тээврийн үнэ ачааны нийт жингээр автоматаар бодогдоно. Demo тохиргоо: 1 кг = 3,500₮.", category: "Үнэ" },
-  { question: "Tracking code-оор хайж болох уу?", answer: "Тийм. Tracking code эсвэл бүртгэлтэй утасны дугаараар ачаагаа шалгаж болно.", category: "Хяналт" },
-];
+const faqs = [];
 
 const shipments = [
   {
@@ -112,31 +107,43 @@ const shipments = [
 
 async function seed() {
   await connectDB();
+  console.log("Хэрэглэгчидийг шалгаж байна...");
+  for (const user of users) {
+    await User.updateOne(
+      { phone: user.phone },
+      { $setOnInsert: user },
+      { upsert: true }
+    );
+  }
 
-  console.log("🗑️  Хуучин өгөгдөл устгаж байна...");
-  await User.deleteMany({});
-  await Shipment.deleteMany({});
-  await Faq.deleteMany({});
+  console.log("Ачаануудыг шалгаж байна...");
+  for (const shipment of shipments) {
+    await Shipment.updateOne(
+      { tracking_code: shipment.tracking_code },
+      { $setOnInsert: shipment },
+      { upsert: true }
+    );
+  }
 
-  console.log("👤 Хэрэглэгчид оруулж байна...");
-  await User.insertMany(users);
+  console.log("FAQ шалгаж байна...");
+  for (const faq of faqs) {
+    await Faq.updateOne(
+      { question: faq.question },
+      { $setOnInsert: faq },
+      { upsert: true }
+    );
+  }
 
-  console.log("📦 Ачаанууд оруулж байна...");
-  await Shipment.insertMany(shipments);
-
-  console.log("❓ FAQ оруулж байна...");
-  await Faq.insertMany(faqs);
-
-  console.log("✅ Seed амжилттай дуусав!");
-  console.log("\n📋 Нэвтрэх мэдээлэл:");
-  console.log("  Хэрэглэгч 1: 99112233 / password123  (2 ачаа)");
-  console.log("  Хэрэглэгч 2: 99447176 / password123  (1 ачаа)");
+  console.log("Seed амжилттай дууслаа!");
+  console.log("\nНэвтрэх мэдээлэл:");
+  console.log("  Хэрэглэгч 1: 99112233 / password123");
+  console.log("  Хэрэглэгч 2: 99447176 / password123");
   console.log("  Admin:       88000001 / admin123");
 
   process.exit(0);
 }
 
 seed().catch((err) => {
-  console.error("❌ Seed алдаа:", err);
+  console.error("Seed алдаа:", err);
   process.exit(1);
 });

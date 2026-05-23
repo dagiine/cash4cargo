@@ -22,13 +22,13 @@
   border: 1px solid rgba(255, 217, 0, 0.20);
   border-radius: 999px;
   padding: 6px 16px;
-  font-size: 13px;
+  font-size: var(--font-size-sm);
   font-weight: 700;
   letter-spacing: 0.04em;
 }
 
 .about-hero__badge .material-symbols-outlined {
-  font-size: 16px;
+  font-size: var(--font-size-md);
 }
 
 .about-hero h1 {
@@ -85,7 +85,7 @@
 
 .about-overview__text p {
   color: var(--color-muted);
-  font-size: 15px;
+  font-size: var(--font-size-base);
   line-height: 1.75;
   margin-bottom: 12px;
 }
@@ -122,12 +122,12 @@
 }
 
 .about-feat-card h3 {
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   font-weight: 700;
 }
 
 .about-feat-card p {
-  font-size: 13px;
+  font-size: var(--font-size-sm);
   color: var(--color-muted);
   line-height: 1.55;
 }
@@ -216,7 +216,7 @@
 }
 
 .about-team__sub {
-  font-size: 15px;
+  font-size: var(--font-size-base);
   color: var(--color-muted);
   max-width: 520px;
   margin: 0 auto 36px;
@@ -278,7 +278,7 @@
 }
 
 .about-team-card p {
-  font-size: 13px;
+  font-size: var(--font-size-sm);
   color: var(--color-muted);
   line-height: 1.65;
 }
@@ -343,12 +343,12 @@
 }
 
 .about-value-card h3 {
-  font-size: 15px;
+  font-size: var(--font-size-base);
   font-weight: 800;
 }
 
 .about-value-card p {
-  font-size: 13px;
+  font-size: var(--font-size-sm);
   color: var(--color-muted);
   line-height: 1.65;
 }
@@ -397,7 +397,7 @@
 }
 
 .about-cta__inner p {
-  font-size: 16px;
+  font-size: var(--font-size-md);
   color: var(--color-muted);
   max-width: 480px;
   line-height: 1.7;
@@ -414,7 +414,7 @@
 
 .about-cta__btns .btn {
   height: 48px;
-  font-size: 15px;
+  font-size: var(--font-size-base);
   padding: 0 28px;
 }
 
@@ -422,7 +422,7 @@
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   font-weight: 700;
   color: var(--color-muted);
   transition: color 0.2s;
@@ -433,7 +433,7 @@
 }
 
 .about-cta__link .material-symbols-outlined {
-  font-size: 18px;
+  font-size: var(--font-size-lg);
   transition: transform 0.2s;
 }
 

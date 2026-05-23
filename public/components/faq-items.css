@@ -1,0 +1,121 @@
+/* =========================================
+   FAQ ITEM COMPONENT
+   Тусламж page-ийн нэг асуулт/хариулт
+========================================= */
+
+faq-item {
+  display: block;
+}
+
+.faq-item {
+  background: var(--color-cream);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+
+  overflow: hidden;
+  color: var(--color-text);
+
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.faq-item:hover {
+  border-color: var(--color-orange);
+  box-shadow: 0 10px 26px rgba(86, 47, 0, 0.08);
+}
+
+.faq-item details {
+  width: 100%;
+}
+
+.faq-item summary {
+  min-height: 58px;
+  padding: 16px 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+
+  color: var(--color-brown);
+  font-size: 15px;
+  font-weight: 900;
+
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Баруун талын icon */
+.faq-item summary::after {
+  content: "expand_more";
+
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--color-bg);
+  color: var(--color-brown);
+
+  font-family: "Material Symbols Outlined";
+  font-size: 22px;
+  font-weight: normal;
+
+  transition: transform 0.2s, background 0.2s;
+}
+
+.faq-item details[open] summary::after {
+  transform: rotate(180deg);
+  background: var(--color-orange);
+  color: var(--color-brown);
+}
+
+.faq-item p {
+  margin: 0;
+  padding: 0 18px 18px;
+
+  color: var(--color-muted);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.65;
+}
+
+/* Нээгдсэн үед арай тод харагдана */
+.faq-item details[open] {
+  background: var(--color-cream);
+}
+
+.faq-item details[open] summary {
+  color: var(--color-brown);
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 767px) {
+  .faq-item summary {
+    min-height: 54px;
+    padding: 14px 15px;
+
+    font-size: 14px;
+    line-height: 1.35;
+  }
+
+  .faq-item p {
+    padding: 0 15px 15px;
+    font-size: 13px;
+  }
+
+  .faq-item summary::after {
+    width: 26px;
+    height: 26px;
+    font-size: 20px;
+  }
+}

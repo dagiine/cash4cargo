@@ -1,62 +1,74 @@
-import { authAPI, clearSession, isLoggedIn } from "./api.js";
+// ===============================================
+// PROFILE PAGE JS
+// Login хийсэн user-ийн profile page-г ажиллуулна.
+// Үүрэг: user info харуулах, password солих, logout хийх.
+// ===============================================
 
+import { authAPI, clearSession, isLoggedIn, getSession } from "./api.js";
+
+// Profile page дээр message харуулах helper.
 function showProfileMessage(message, type = "error") {
-  const el = document.querySelector("#profile-message");
-  if (!el) return;
+  const messageElement = document.querySelector("#profile-message");
+  if (!messageElement) return;
 
-  el.textContent = message;
-  el.className = `profile-message ${type}`;
+  messageElement.textContent = message;
+  messageElement.className = `profile-message ${type}`;
 }
 
 export function initProfile() {
+  // Login хийгээгүй бол profile үзүүлэхгүй, home руу буцаана.
   if (!isLoggedIn()) {
     window.location.hash = "#/";
     return;
   }
 
-  const form = document.querySelector("#profile-password-form");
-  const logoutBtn = document.querySelector("#profile-logout-btn");
-  const editAvatarBtn = document.querySelector(".profile-edit-avatar");
+  const session = getSession();
+  const passwordForm = document.querySelector("#profile-password-form");
+  const logoutButton = document.querySelector("#profile-logout-btn");
 
-  editAvatarBtn?.addEventListener("click", () => {
-    showProfileMessage("Зураг солих хэсгийг дараагийн хувилбарт холбож болно.", "info");
-  });
+  // HTML дээр user-ийн мэдээлэл харуулах element байвал бөглөнө.
+  const nameElement = document.querySelector("#profile-name");
+  const phoneElement = document.querySelector("#profile-phone");
 
-  logoutBtn?.addEventListener("click", () => {
+  if (nameElement) nameElement.textContent = session?.user?.name || "Хэрэглэгч";
+  if (phoneElement) phoneElement.textContent = session?.user?.phone || "-";
+
+  // Logout товч.
+  logoutButton?.addEventListener("click", function() {
     clearSession();
     window.location.hash = "#/";
     window.location.reload();
   });
 
-  form?.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  // Password update form.
+  passwordForm?.addEventListener("submit", async function(event) {
+    event.preventDefault();
 
     const currentPassword = document.querySelector("#current-password")?.value.trim();
     const newPassword = document.querySelector("#new-password")?.value.trim();
     const confirmPassword = document.querySelector("#confirm-password")?.value.trim();
 
     if (!currentPassword || !newPassword || !confirmPassword) {
-      return showProfileMessage("Бүх талбарыг бөглөнө үү", "error");
+      showProfileMessage("Бүх талбарыг бөглөнө үү.");
+      return;
     }
 
     if (newPassword.length < 6) {
-      return showProfileMessage("Шинэ нууц үг дор хаяж 6 тэмдэгт байна", "error");
+      showProfileMessage("Шинэ нууц үг дор хаяж 6 тэмдэгт байх ёстой.");
+      return;
     }
 
     if (newPassword !== confirmPassword) {
-      return showProfileMessage("Шинэ нууц үг давталттайгаа таарахгүй байна", "error");
-    }
-
-    if (currentPassword === newPassword) {
-      return showProfileMessage("Шинэ нууц үг одоогийн нууц үгээс өөр байх ёстой", "error");
+      showProfileMessage("Шинэ нууц үг давхцахгүй байна.");
+      return;
     }
 
     try {
       await authAPI.updatePassword(currentPassword, newPassword);
-      form.reset();
-      showProfileMessage("Нууц үг амжилттай шинэчлэгдлээ ✓", "success");
-    } catch (err) {
-      showProfileMessage(err.message || "Нууц үг шинэчлэхэд алдаа гарлаа", "error");
+      passwordForm.reset();
+      showProfileMessage("Нууц үг амжилттай шинэчлэгдлээ.", "success");
+    } catch (error) {
+      showProfileMessage(error.message || "Нууц үг шинэчлэхэд алдаа гарлаа.");
     }
   });
 }

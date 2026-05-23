@@ -1,79 +1,46 @@
+// ===============================================
+// HOME PAGE TRACKING INPUT
+// Нүүр хуудсан дээрх tracking input-ийг ажиллуулна.
+// User код эсвэл утас бичээд хайхад track page рүү шилжүүлнэ.
+// ===============================================
+
 export function initHomeTracking() {
-    const input = document.getElementById("home-track-input");
-    const button = document.getElementById("home-track-btn");
-    const message = document.getElementById("track-message");
+  const input = document.getElementById("home-track-input");
+  const button = document.getElementById("home-track-btn");
+  const message = document.getElementById("track-message");
 
-    if (!input || !button) 
-        return;
+  // Хэрвээ home page дээр эдгээр element байхгүй бол function зогсоно.
+  if (!input || !button) return;
 
-    function goToTrack() {
-        let value = input.value.trim().toUpperCase();
+  // Хайх товч дарахад ажиллах function.
+  function goToTrack() {
+    let value = input.value.trim().toUpperCase();
 
-        if (!value) {
-            message.textContent = "Хайх утга оруулна уу.";
-            message.style.color = "var(--color--error)";
-            return;
-        }
-
-        let type = "";
-
-        // MN12345 -> MN-12345 болгоно
-        if (/^MN\d{5}$/.test(value)) {
-            value = value.replace(/^MN/, "MN-");
-        }
-
-        if (/^MN-\d{5}$/.test(value)) {
-            type = "code";
-        }
-        else if (/^[6-9]\d{7}$/.test(value)) {
-            type = "phone";
-        }
-        else {
-            message.textContent = "Утасны дугаар эсвэл хяналтын код буруу байна.";
-            message.style.color = "var(--color--error)";
-            return;
-        }
-
-        // Track хуудас руу шилжих
-        window.location.hash = `#/track?type=${type}&query=${encodeURIComponent(value)}`;
+    if (!value) {
+      if (message) {
+        message.textContent = "Хайх утга оруулна уу.";
+        message.style.color = "var(--color--error)";
+      }
+      return;
     }
 
-    button.addEventListener("click", goToTrack);
+    // MN12345 гэж бичсэн бол MN-12345 болгож засна.
+    if (/^MN\d{5}$/.test(value)) {
+      value = value.replace(/^MN/, "MN-");
+    }
 
-    input.addEventListener("keydown", function (e) {
-        if (e.key === "Enter") {
-            e.preventDefault();
-            goToTrack();
-        }
-    });
-}
+    // Track page рүү query дамжуулна.
+    window.location.hash = `#/track?query=${encodeURIComponent(value)}`;
+  }
 
-export function initAddressCopy() {
-  const buttons = document.querySelectorAll(".warehouse button");
+  // Button click.
+  button.addEventListener("click", goToTrack);
 
-  buttons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-
-      // Товчны байгаа мөрийг олно
-      const row = btn.closest("div");
-
-      // Текстийг олно (button-ны textNode-г хасч авна)
-      const text = Array.from(row.childNodes)
-        .filter(node => node.nodeType === Node.TEXT_NODE)
-        .map(node => node.textContent.trim())
-        .join("");
-
-      // Clipboard руу хуулна
-      navigator.clipboard.writeText(text);
-
-      const icon = btn.querySelector(".material-symbols-outlined");
-      icon.textContent = "check";
-      btn.classList.add("copied");
-
-      setTimeout(() => {
-        icon.textContent = "content_copy";
-        btn.classList.remove("copied");
-      }, 1000);
-    });
+  // Enter дарахад бас хайна.
+  input.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      goToTrack();
+    }
   });
 }

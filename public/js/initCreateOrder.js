@@ -1,28 +1,46 @@
+// ===============================================
+// ЗАХИАЛГА ҮҮСГЭХ ХУУДАСНЫ JS
+// Энэ файл create-order page дээр ажиллана.
+// Үүрэг: олон бараа нэмэх, үнэ тооцох, form шалгах, backend рүү илгээх.
+// ===============================================
+
 import { shipmentAPI, getSession } from "./api.js";
 
+// 1 кг тутамд тооцох үнэ. Өөрчлөх бол зөвхөн энэ тоог солино.
 const PRICE_PER_KG = 3500;
 
+// Захиалгад нэмэгдэж байгаа бараануудыг түр хадгалах array.
+// Нэг package олон item-тэй байж болно.
 let coItems = [
   { trackCode: "", name: "", qty: 1 },
 ];
 
+// Тоог Монгол мөнгөний форматтай болгоно. Жишээ: 3500 -> 3,500 ₮
 function money(amount) {
   return Number(amount || 0).toLocaleString("mn-MN") + " ₮";
 }
 
+// Утасны дугаар авах function.
+// Login хийсэн бол user-ийн утсыг авна, login хийгээгүй бол input-оос авна.
 function getPhone() {
   const session = getSession();
+  // Login хийсэн user бол утасны input-ийг нууж, өөрийн дугаарыг ашиглана.
   if (session?.user?.phone) {
     return String(session.user.phone).replace(/\D/g, "");
   }
   return document.getElementById("co-phone")?.value.trim() || "";
 }
 
+// Нийт жин авах function.
+// Анх захиалга үүсгэх үед жин заавал оруулахгүй.
+// Admin дараа нь жин оруулсны дараа үнэ харагдана.
 function getWeight() {
   const weight = Number(document.getElementById("calc-weight")?.value || 0);
-  return weight > 0 ? weight : Math.max(coItems.length, 1) * 0.1;
+  return weight > 0 ? weight : 0;
 }
 
+// Доод талын summary хэсгийг шинэчилнэ.
+// Жишээ: 3 бараа, нийт 5 ш гэх мэт.
 function updateSummary() {
   const summary = document.getElementById("co-summary");
   const itemCount = document.getElementById("co-item-count");
@@ -36,6 +54,8 @@ function updateSummary() {
   qtySum.textContent = `Нийт ${totalQty} ш`;
 }
 
+// Item input-уудыг дэлгэц дээр дахин зурна.
+// coItems array өөрчлөгдөх бүрд энэ function дуудагдана.
 function renderItems() {
   const list = document.getElementById("co-items-list");
   if (!list) return;
@@ -83,6 +103,7 @@ function renderItems() {
   updateSummary();
 }
 
+// Form-ийн тайлбар/алдааны message харуулна.
 function setSub(text, isError = false) {
   const sub = document.getElementById("co-sub");
   if (!sub) return;
@@ -90,6 +111,7 @@ function setSub(text, isError = false) {
   sub.style.color = isError ? "var(--color--error, #ef4444)" : "";
 }
 
+// Submit хийхээс өмнө form зөв бөглөгдсөн эсэхийг шалгана.
 function validateOrder() {
   const phone = getPhone();
 
@@ -120,10 +142,15 @@ function validateOrder() {
   return true;
 }
 
+// Backend рүү илгээх data-г бэлдэнэ.
+// Backend энэ object-ийг авч MongoDB-д shipment болгон хадгална.
 function buildPayload() {
   const phone = getPhone();
-  const totalWeight = getWeight();
-  const shippingPrice = Math.ceil(totalWeight * PRICE_PER_KG);
+  // Үнийн тооцоолуур нь хэрэглэгчид зөвхөн ойролцоо дүн харуулна.
+  // Захиалга database-д анх үүсэхдээ жин/үнэгүй хадгалагдана.
+  // Admin бодит жинг оруулсны дараа үнэ автоматаар хадгалагдана.
+  const totalWeight = 0;
+  const shippingPrice = 0;
   return {
     user_phone: phone,
     receiver_phone: phone,
@@ -141,12 +168,14 @@ function buildPayload() {
   };
 }
 
+// Create order page нээгдэхэд хамгийн түрүүнд ажиллах initializer function.
 export function initCreateOrder() {
   const list = document.getElementById("co-items-list");
   const calcInputs = ["calc-weight", "calc-l", "calc-w", "calc-h"];
 
   if (!list) return;
 
+  // Item input дээр бичих бүрд coItems array-г шинэчилнэ.
   list.addEventListener("input", (event) => {
     const index = event.target.dataset.index;
     const field = event.target.dataset.field;
@@ -160,6 +189,7 @@ export function initCreateOrder() {
     updateSummary();
   });
 
+  // X товч дарвал тухайн item-ийг устгана.
   list.addEventListener("click", (event) => {
     const removeIndex = event.target.dataset.remove;
     if (removeIndex === undefined) return;
@@ -169,6 +199,7 @@ export function initCreateOrder() {
     renderItems();
   });
 
+  // Жин/урт/өргөн/өндөр өөрчлөгдөхөд үнэ дахин тооцно.
   calcInputs.forEach((id) => {
     document.getElementById(id)?.addEventListener("input", window.coCalcPrice);
   });
@@ -178,6 +209,7 @@ export function initCreateOrder() {
   const phoneWrap = document.getElementById("co-phone-wrap");
   const phoneInput = document.getElementById("co-phone");
 
+  // Login хийсэн user бол утасны input-ийг нууж, өөрийн дугаарыг ашиглана.
   if (session?.user?.phone) {
     if (phoneLabel) phoneLabel.style.display = "none";
     if (phoneWrap) phoneWrap.style.display = "none";
@@ -191,9 +223,14 @@ export function initCreateOrder() {
   window.coUpdateSub();
 }
 
+// Inline HTML onclick/oninput-аас дуудагдах function-ууд.
+// window дээр тавьснаар HTML дотроос шууд дуудаж болдог.
+
+// Утасны дугаарын доорх тайлбарыг шинэчилнэ.
 window.coUpdateSub = function coUpdateSub() {
   const phone = getPhone();
   const session = getSession();
+  // Login хийсэн user бол утасны input-ийг нууж, өөрийн дугаарыг ашиглана.
   if (session?.user?.phone) {
     setSub(`${phone} дугаартай хэрэглэгч дээр захиалга бүртгэнэ`);
   } else {
@@ -201,11 +238,13 @@ window.coUpdateSub = function coUpdateSub() {
   }
 };
 
+// Шинэ барааны мөр нэмнэ.
 window.coAddItem = function coAddItem() {
   coItems.push({ trackCode: "", name: "", qty: 1 });
   renderItems();
 };
 
+// Form-ийг цэвэрлэж анхны байдалд оруулна.
 window.coClearAll = function coClearAll() {
   if (!getSession()?.user?.phone) document.getElementById("co-phone").value = "";
   document.getElementById("calc-weight").value = "";
@@ -220,11 +259,13 @@ window.coClearAll = function coClearAll() {
   if (result) result.style.display = "none";
 };
 
+// Шинэ захиалга эхлүүлэх shortcut.
 window.coNewOrder = function coNewOrder() {
   window.coClearAll();
   if (!getSession()?.user?.phone) document.getElementById("co-phone")?.focus();
 };
 
+// Жин болон эзлэхүүн жингээр тээврийн үнийг тооцно.
 window.coCalcPrice = function coCalcPrice() {
   const weight = Number(document.getElementById("calc-weight")?.value || 0);
   const l = Number(document.getElementById("calc-l")?.value || 0);
@@ -254,6 +295,8 @@ window.coCalcPrice = function coCalcPrice() {
   totalVal.textContent = money(total);
 };
 
+// Захиалга submit хийх function.
+// Validation амжилттай бол backend рүү POST /api/shipments request явуулна.
 window.coSubmit = async function coSubmit() {
   if (!validateOrder()) return;
 

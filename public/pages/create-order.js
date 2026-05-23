@@ -13,10 +13,6 @@ function renderCreateOrderPage() {
             <p class="co-subheading" id="co-sub">Утасны дугаар оруулна уу</p>
           </div>
           <div class="co-header-actions">
-            <button class="co-btn-new" onclick="coNewOrder()">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-              Шинэ
-            </button>
             <button class="co-btn-icon" onclick="coClearAll()" title="Цэвэрлэх">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
             </button>

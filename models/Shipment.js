@@ -6,6 +6,7 @@ const STATUS_VALUES = [
   "Замын Үүд дээр",
   "Улаанбаатарт ирсэн",
   "Олгогдсон",
+  "Цуцлагдсан",
 ];
 
 const statusHistorySchema = new mongoose.Schema(

@@ -33,7 +33,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.16);
+  box-shadow: var(--shadow-card);
   overflow: hidden;
 }
 
@@ -56,7 +56,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24);
+  box-shadow: var(--shadow-card);
 }
 
 .profile-edit-avatar .material-symbols-outlined {
@@ -77,7 +77,7 @@
   align-items: center;
   gap: 8px;
   color: var(--color-muted);
-  font-size: 16px;
+  font-size: var(--font-size-md);
   font-weight: 600;
 }
 
@@ -99,7 +99,7 @@
 
 .profile-field span {
   color: var(--color-text);
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   font-weight: 800;
   letter-spacing: 0.02em;
 }
@@ -112,7 +112,7 @@
   border: 1px solid var(--border-default);
   background: var(--input-bg);
   color: var(--color-text);
-  font-size: 15px;
+  font-size: var(--font-size-base);
   font-family: var(--font-base);
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -135,7 +135,7 @@
   font-weight: 900;
   font-family: var(--font-base);
   cursor: pointer;
-  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.16);
+  box-shadow: var(--shadow-card);
   transition: opacity 0.2s, transform 0.2s;
 }
 
@@ -147,7 +147,7 @@
 .profile-message {
   min-height: 22px;
   margin: 0;
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   font-weight: 700;
 }
 
@@ -176,7 +176,7 @@
   display: inline-flex;
   align-items: center;
   gap: 14px;
-  font-size: 16px;
+  font-size: var(--font-size-md);
   font-weight: 900;
   letter-spacing: 0.02em;
   cursor: pointer;
@@ -192,7 +192,7 @@
 .profile-logout-btn .material-symbols-outlined {
   width: 48px;
   height: 48px;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   background: var(--color-surface);
   color: var(--color-muted);
   display: flex;

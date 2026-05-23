@@ -31,8 +31,8 @@ app.get("/api/health", (_, res) => res.json({ status: "ok" }));
 app.use("/admin", express.static(ADMIN_PATH));
 app.use(express.static(FRONTEND_PATH));
 
-console.log("📁 User frontend:", FRONTEND_PATH);
-console.log("📁 Admin frontend:", ADMIN_PATH);
+console.log("User frontend:", FRONTEND_PATH);
+console.log("Admin frontend:", ADMIN_PATH);
 
 // Admin fallback
 app.get("/admin/*", (req, res) => {
@@ -46,8 +46,8 @@ app.get("*", (req, res) => {
 
 // ─── Start ───────────────────────────────────────────────────
 connectDB().then(() => {
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`🚀 Server running on http://0.0.0.0:${PORT}`);
-    console.log(`🔐 Admin: http://0.0.0.0:${PORT}/admin`);
+  app.listen(PORT, () => {
+    console.log(`http://localhost:${PORT}`);
+    console.log(`Admin: http://localhost:${PORT}/admin`);
   });
 });

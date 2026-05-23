@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "Нэр оруулна уу"],
+      required: [true, "Нэрээ оруулна уу"],
       trim: true,
     },
     phone: {
@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema(
       required: [true, "Утасны дугаар оруулна уу"],
       unique: true,
       trim: true,
-      match: [/^[6-9]\d{7}$/, "Утасны дугаар буруу байна (8 оронтой, 6-9 эхэлнэ)"],
+      match: [/^[6-9]\d{7}$/, "Утасны дугаар буруу байна (8 оронтой, 6-9-аар эхэлнэ)"],
     },
     password_hash: {
       type: String,

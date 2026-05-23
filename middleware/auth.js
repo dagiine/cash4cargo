@@ -13,7 +13,7 @@ export const protect = async (req, res, next) => {
   }
 
   if (!token) {
-    return res.status(401).json({ message: "Нэвтрэлт шаардлагатай" });
+    return res.status(401).json({ message: "Нэвтрэх шаардлагатай" });
   }
 
   try {
@@ -29,7 +29,6 @@ export const protect = async (req, res, next) => {
     return res.status(401).json({ message: "Token буруу эсвэл хүчингүй" });
   }
 };
-
 
 // Token байвал хэрэглэгчийг уншина, token байхгүй бол зочноор үргэлжлүүлнэ
 export const optionalAuth = async (req, res, next) => {

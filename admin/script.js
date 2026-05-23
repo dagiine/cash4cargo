@@ -7,13 +7,15 @@ const statusClass = {
   "Улаанбаатарт ирсэн": "warning",
   "Замын Үүд дээр": "pending",
   "Хятадын агуулахад": "info",
-  "Захиалга үүсгэсэн": "neutral"
+  "Захиалга үүсгэсэн": "neutral",
+  "Цуцлагдсан": "danger"
 };
 
 const statusOptions = Object.keys(statusClass);
 let shipments = [];
 let users = [];
 let faqs = [];
+let faqCategories = [];
 let currentUser = null;
 let dateSort = "newest";
 let activeFilter = "Бүгд";
@@ -110,8 +112,8 @@ function showLoginMessage(text, type = "error") {
   loginMessage.classList.add("show");
   loginMessage.style.color = type === "error" ? "#ef4444" : "#22c55e";
 }
-function renderStatus(status) {
-  return `<span class="status ${statusClass[status] || "neutral"}"><span>•</span>${status || "-"}</span>`;
+function renderStatus(status, itemId = "") {
+  return `<button class="status status-click ${statusClass[status] || "neutral"}" type="button" data-status-edit="${itemId}" title="Төлөв солих"><span>•</span>${status || "-"}</button>`;
 }
 
 function getVisibleShipments() {
@@ -134,7 +136,7 @@ function renderShipmentRows(data = shipments.slice(0, 5)) {
       <td>${item.product}</td>
       <td>${item.weight}</td>
       <td><strong>${item.price}</strong></td>
-      <td>${renderStatus(item.status)}</td>
+      <td>${renderStatus(item.status, item.id)}</td>
       <td>${item.date}</td>
       <td><button class="table-action-btn" data-edit="${item.code}">Засах</button></td>
     </tr>
@@ -227,20 +229,51 @@ function renderShipments() {
   document.querySelectorAll(".filter-btn").forEach((btn) => btn.addEventListener("click", () => { activeFilter = btn.dataset.filter; renderShipments(); }));
 }
 
+function getUserOrders(phone) {
+  return shipments.filter((item) => item.phone === phone);
+}
+
+function renderUserOrderHistory(user) {
+  const orders = getUserOrders(user.phone);
+
+  if (!orders.length) {
+    return `<p class="user-order-empty">Энэ хэрэглэгчийн захиалга одоогоор байхгүй.</p>`;
+  }
+
+  return `
+    <div class="user-order-history">
+      <strong>Захиалгын түүх</strong>
+      ${orders.map((order) => `
+        <button class="user-order-row" type="button" data-detail="${order.code}">
+          <span>${order.code}</span>
+          <small>${order.status}</small>
+          <b>${order.price}</b>
+        </button>
+      `).join("")}
+    </div>
+  `;
+}
+
 function renderUsers() {
   appContent.innerHTML = `
     <section class="page-title">
-      <div><h1>Хэрэглэгчид</h1><p>Admin хэрэглэгч устгах эсвэл admin эрх олгох боломжтой.</p></div>
+      <div><h1>Хэрэглэгчид</h1><p>Хэрэглэгч дээр дарахад захиалгын түүх нь харагдана.</p></div>
       <button class="secondary-btn" id="refreshUsersBtn"><span class="material-symbols-outlined">sync</span>Шинэчлэх</button>
     </section>
     <section class="users-grid">
       ${users.map((user) => `
-        <article class="user-card">
-          <div class="user-card-top"><span class="avatar">${initials(user.name)}</span><div><h3>${user.name}</h3><p>+976 ${user.phone}</p></div></div>
+        <article class="user-card" data-user-card="${user.phone}">
+          <button class="user-card-top user-card-click" type="button" data-user-orders="${user.phone}">
+            <span class="avatar">${initials(user.name)}</span>
+            <div><h3>${user.name}</h3><p>+976 ${user.phone}</p></div>
+          </button>
           <div class="user-meta"><span>Role: <strong>${user.role}</strong></span><span>Бүртгэсэн: <strong>${formatDate(user.createdAt)}</strong></span></div>
           <div class="user-actions">
             <button class="secondary-btn compact" data-role-id="${user._id || user.id}" data-role="${user.role === "admin" ? "user" : "admin"}">${user.role === "admin" ? "User болгох" : "Admin болгох"}</button>
             <button class="danger-btn compact" data-delete-user="${user._id || user.id}">Устгах</button>
+          </div>
+          <div class="user-orders" hidden>
+            ${renderUserOrderHistory(user)}
           </div>
         </article>`).join("") || `<p class="empty-text">Хэрэглэгч олдсонгүй.</p>`}
     </section>`;
@@ -249,24 +282,61 @@ function renderUsers() {
 }
 
 function renderFaq() {
+  const options = faqCategories.map((category) => `
+    <option value="${category.name}">${category.name}</option>
+  `).join("");
+
   appContent.innerHTML = `
-    <section class="page-title"><div><h1>FAQ</h1><p>Хэрэглэгчийн FAQ хэсэгт харагдах асуулт, хариулт нэмнэ.</p></div></section>
+    <section class="page-title">
+      <div>
+        <h1>FAQ</h1>
+        <p>Эхлээд ангилал сонгоод, тухайн ангилал дотор асуулт нэмнэ.</p>
+      </div>
+    </section>
+
     <section class="panel faq-admin-layout">
+      <form id="categoryForm" class="form-grid category-form">
+        <label>
+          Шинэ ангиллын нэр
+          <input name="name" placeholder="Жишээ: Даатгал" required />
+        </label>
+        <label>
+          Icon нэр <small>/заавал биш/</small>
+          <input name="icon" placeholder="Жишээ: verified_user" />
+        </label>
+        <button class="secondary-btn" type="submit">Ангилал нэмэх</button>
+      </form>
+
       <form id="faqForm" class="form-grid">
+        <label>
+          Ангилал
+          <select name="category" required>
+            ${options || `<option value="Захиалга">Захиалга</option>`}
+          </select>
+        </label>
         <label>Асуулт<input name="question" placeholder="Жишээ: Ачаа хэд хоногт ирэх вэ?" required /></label>
-        <label>Ангилал<input name="category" placeholder="Ерөнхий" /></label>
         <label class="full-field">Хариулт<textarea name="answer" placeholder="Хариултаа бичнэ үү" required></textarea></label>
-        <button class="primary-btn" type="submit">FAQ нэмэх</button>
+        <button class="primary-btn" type="submit">Асуулт нэмэх</button>
       </form>
     </section>
+
     <section class="faq-list">
-      ${faqs.map((faq) => `
-        <article class="faq-card">
-          <small>${faq.category || "Ерөнхий"}</small>
-          <h3>${faq.question}</h3>
-          <p>${faq.answer}</p>
-          <button class="danger-btn compact" data-delete-faq="${faq._id}">Устгах</button>
-        </article>`).join("") || `<p class="empty-text">FAQ нэмэгдээгүй байна.</p>`}
+      ${faqCategories.map((category) => {
+        const list = faqs.filter((faq) => faq.category === category.name);
+        return `
+          <article class="faq-category-card">
+            <h2>${category.name}</h2>
+            ${list.map((faq) => `
+              <div class="faq-card inner-faq-card">
+                <small>${faq.category || "Ерөнхий"}</small>
+                <h3>${faq.question}</h3>
+                <p>${faq.answer}</p>
+                <button class="danger-btn compact" data-delete-faq="${faq._id}">Устгах</button>
+              </div>
+            `).join("") || `<p class="empty-text">Энэ ангилалд асуулт нэмэгдээгүй байна.</p>`}
+          </article>
+        `;
+      }).join("") || `<p class="empty-text">FAQ ангилал нэмэгдээгүй байна.</p>`}
     </section>`;
 }
 
@@ -280,7 +350,7 @@ function renderShipmentDetail(code) {
       <div class="actions"><button class="secondary-btn" data-edit="${item.code}">Засах</button><button class="secondary-btn" onclick="location.hash='#shipments'">← Буцах</button></div>
     </section>
     <section class="detail-grid">
-      <article class="panel"><div class="panel-header"><div><h2>Илгээмжийн явц</h2><p>Сүүлийн шинэчлэл: ${item.date}</p></div>${renderStatus(item.status)}</div><div class="timeline">${statusOptions.map((step) => `<div class="timeline-item"><span class="timeline-dot material-symbols-outlined">${step === item.status ? "radio_button_checked" : "check"}</span><div><strong>${step}</strong><span>${step === item.status ? "Одоогийн төлөв" : "Бүртгэгдсэн төлөв"}</span></div></div>`).join("")}</div></article>
+      <article class="panel"><div class="panel-header"><div><h2>Илгээмжийн явц</h2><p>Сүүлийн шинэчлэл: ${item.date}</p></div>${renderStatus(item.status, item.id)}</div><div class="timeline">${statusOptions.map((step) => `<div class="timeline-item"><span class="timeline-dot material-symbols-outlined">${step === item.status ? "radio_button_checked" : "check"}</span><div><strong>${step}</strong><span>${step === item.status ? "Одоогийн төлөв" : "Бүртгэгдсэн төлөв"}</span></div></div>`).join("")}</div></article>
       <article class="panel"><h2>Үндсэн мэдээлэл</h2><div class="details-list"><div><span>Захиалагч</span><strong>${item.customer}</strong></div><div><span>Утас</span><strong>+976 ${item.phone}</strong></div><div><span>Нийт жин</span><strong>${item.weight}</strong></div><div><span>Үнэ</span><strong>${item.price}</strong></div><div><span>Төлбөр</span><strong>${item.paymentStatus}</strong></div><div><span>Огноо</span><strong>${item.date}</strong></div></div></article>
       <article class="panel full-panel"><h2>Бараанууд</h2><div class="items-detail-list">${item.items.map((it) => `<div><strong>${it.item_name}</strong><span>${it.quantity || 1}ш</span><small>${it.description || ""}</small></div>`).join("")}</div></article>
     </section>`;
@@ -303,7 +373,6 @@ function route() {
   else if (page === "users") renderUsers();
   else if (page === "shipment") renderShipmentDetail(code);
   else if (page === "faq") renderFaq();
-  else if (page === "settings") renderEmpty("Тохиргоо", "settings");
   else renderDashboard();
 }
 
@@ -385,15 +454,15 @@ function updatePricePreview(prefix) {
   }
 }
 
-function fillStatusShipmentSelect() {
+function fillStatusShipmentSelect(selectedId = "") {
   if (!quickStatusShipment) return;
   if (!shipments.length) { quickStatusShipment.innerHTML = `<option value="">Илгээмж олдсонгүй</option>`; return; }
-  quickStatusShipment.innerHTML = shipments.map((item) => `<option value="${item.id}" data-status="${item.status}">${item.code} — ${item.customer} — ${item.status}</option>`).join("");
+  quickStatusShipment.innerHTML = shipments.map((item) => `<option value="${item.id}" data-status="${item.status}" ${item.id === selectedId ? "selected" : ""}>${item.code} — ${item.customer} — ${item.status}</option>`).join("");
   const selected = quickStatusShipment.selectedOptions[0];
   if (selected && quickStatusValue) quickStatusValue.value = selected.dataset.status;
 }
-function openStatusModal() {
-  fillStatusShipmentSelect();
+function openStatusModal(selectedId = "") {
+  fillStatusShipmentSelect(selectedId);
   statusModal.classList.add("show");
   overlay.classList.add("show");
   statusModal.setAttribute("aria-hidden", "false");
@@ -407,14 +476,23 @@ function openSidebar() { sidebar.classList.add("show"); overlay.classList.add("s
 function closeSidebar() { sidebar.classList.remove("show"); if (!modal.classList.contains("show") && !statusModal.classList.contains("show") && !editModal.classList.contains("show")) overlay.classList.remove("show"); }
 
 async function loadData() {
-  const [shipmentsResponse, usersResponse, faqsResponse] = await Promise.all([
+  const [shipmentsResponse, usersResponse, faqsResponse, categoriesResponse] = await Promise.all([
     apiFetch(`/shipments?limit=100&sort=${dateSort}`),
     apiFetch("/auth/users"),
-    apiFetch("/faqs")
+    apiFetch("/faqs"),
+    apiFetch("/faqs/categories")
   ]);
   shipments = (shipmentsResponse.shipments || []).map(mapShipment);
   users = usersResponse.users || [];
   faqs = faqsResponse.faqs || [];
+  faqCategories = categoriesResponse.categories || [];
+  const knownCategories = new Set(faqCategories.map((category) => category.name));
+  faqs.forEach((faq) => {
+    if (faq.category && !knownCategories.has(faq.category)) {
+      faqCategories.push({ name: faq.category, icon: "help" });
+      knownCategories.add(faq.category);
+    }
+  });
 }
 async function loadDataAndRender() {
   try {
@@ -460,9 +538,18 @@ appContent.addEventListener("click", async (event) => {
   const roleBtn = event.target.closest("[data-role-id]");
   const deleteUserBtn = event.target.closest("[data-delete-user]");
   const deleteFaqBtn = event.target.closest("[data-delete-faq]");
+  const statusBtn = event.target.closest("[data-status-edit]");
+  const userOrdersBtn = event.target.closest("[data-user-orders]");
+
+  if (userOrdersBtn) {
+    const card = userOrdersBtn.closest(".user-card");
+    const orders = card?.querySelector(".user-orders");
+    if (orders) orders.hidden = !orders.hidden;
+  }
 
   if (detailBtn) location.hash = `#shipment/${detailBtn.dataset.detail}`;
   if (editBtn) openEditModal(editBtn.dataset.edit);
+  if (statusBtn) openStatusModal(statusBtn.dataset.statusEdit);
 
   if (roleBtn) {
     if (!confirm(`Энэ хэрэглэгчийг ${roleBtn.dataset.role} болгох уу?`)) return;
@@ -484,12 +571,32 @@ appContent.addEventListener("click", async (event) => {
 });
 
 appContent.addEventListener("submit", async (event) => {
-  if (event.target.id !== "faqForm") return;
-  event.preventDefault();
-  const form = new FormData(event.target);
-  await apiFetch("/faqs", { method: "POST", body: JSON.stringify({ question: form.get("question"), answer: form.get("answer"), category: form.get("category") || "Ерөнхий" }) });
-  event.target.reset();
-  await loadDataAndRender();
+  if (event.target.id === "categoryForm") {
+    event.preventDefault();
+    const form = new FormData(event.target);
+    await apiFetch("/faqs/categories", {
+      method: "POST",
+      body: JSON.stringify({ name: form.get("name"), icon: form.get("icon") || "help" })
+    });
+    event.target.reset();
+    await loadDataAndRender();
+    return;
+  }
+
+  if (event.target.id === "faqForm") {
+    event.preventDefault();
+    const form = new FormData(event.target);
+    await apiFetch("/faqs", {
+      method: "POST",
+      body: JSON.stringify({
+        question: form.get("question"),
+        answer: form.get("answer"),
+        category: form.get("category") || "Захиалга"
+      })
+    });
+    event.target.reset();
+    await loadDataAndRender();
+  }
 });
 
 searchInput.addEventListener("input", () => {
