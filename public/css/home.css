@@ -8,7 +8,7 @@ html {
 .warehouse-section,
 .reviews-section {
   width: 100%;
-  background: #FFFDF8;
+  background: var(--color-white);
 }
 
 .steps h2,

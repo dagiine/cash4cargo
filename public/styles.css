@@ -4,6 +4,7 @@
   --color-peach:        #FFCE99;
   --color-orange:       #FF9644;
   --color-brown:        #562F00;
+  --color-white:        #FFFDF8;
 
   /* ── Семантик өнгө ── */
   --color-yellow:           var(--color-orange);
@@ -97,6 +98,7 @@
     --color-yellow-label:     rgba(255, 217, 0, 0.85);
     --color-orange:           var(--color-yellow-label);
     --color-brown:            var(--color-yellow-label);
+    --color-white:        #1e2433;
 
     --color--error:   #ef4444;
     --color--success: #4ade80;
