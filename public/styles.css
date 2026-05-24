@@ -1,332 +1,234 @@
 :root {
-  /* =========================================
-     BRAND COLORS - LIGHT MODE
-  ========================================= */
+  /* ── Брэндийн өнгөнүүд ── */
+  --color-cream:        #FFFDF1;
+  --color-peach:        #FFCE99;
+  --color-orange:       #FF9644;
+  --color-brown:        #562F00;
 
-  --color-cream: #FFFDF1;
-  --color-peach: #FFCE99;
-  --color-orange: #FF9644;
-  --color-brown: #562F00;
-
-  /* =========================================
-     DARK MODE COLORS
-     Dark mode дээр ашиглах үндсэн өнгөнүүд
-  ========================================= */
-
-  --dark-yellow: rgba(255, 217, 0, 1);
-  --dark-bg: #141720;
-  --dark-surface: #1e2433;
-  --dark-surface-strong: #26304a;
-  --dark-text: #f1f5f9;
-  --dark-muted: #a8b8cc;
-
-  /* =========================================
-     SEMANTIC COLORS
-  ========================================= */
-
-  --color-yellow: var(--color-orange);
-  --color-yellow-hover: #e07830;
-  --color-yellow-dim: rgba(255, 150, 68, 0.18);
+  /* ── Семантик өнгө ── */
+  --color-yellow:           var(--color-orange);
+  --color-yellow-hover:     #e07830;
+  --color-yellow-dim:       rgba(255, 150, 68, 0.18);
   --color-yellow-dim-hover: rgba(255, 150, 68, 0.32);
-  --color-yellow-label: var(--color-brown);
-  --color-home-bg: #FFFDF8;
-  --color-cta-bg: var(--color-peach);
+  --color-yellow-label:     var(--color-brown);
 
-  --color--error: #ef4444;
-  --color--success: #22c55e;
+  --color--error:   #ef4444;
+  --color--success: #4ade80;
   --color-overplay: rgba(255, 255, 255, 0.5);
 
-  --color-bg: var(--color-cream);
-  --color-surface: rgba(255, 206, 153, 0.35);
+  --color-bg:             var(--color-cream);
+  --color-surface:        rgba(255, 206, 153, 0.35);
   --color-surface-strong: rgba(255, 206, 153, 0.55);
-  --color-text: var(--color-brown);
-  --color-muted: rgba(86, 47, 0, 0.65);
-  --color-cta: rgba(255, 255, 255, 0.55);
+  --color-text:           var(--color-brown);
+  --color-muted:          rgba(86, 47, 0, 0.65);
 
-  /* =========================================
-     BORDER COLORS
-  ========================================= */
-
-  --border-default: rgba(86, 47, 0, 0.28);
-  --border-strong: rgba(86, 47, 0, 0.55);
-  --border-accent: var(--color-orange);
+  /* ── Хүрээ ── */
+  --border-default:      rgba(86, 47, 0, 0.35);
+  --border-strong:       rgba(86, 47, 0, 0.60);
+  --border-accent:       var(--color-orange);
   --border-footer-faint: rgba(86, 47, 0, 0.12);
 
-  /* =========================================
-     SECTION COLORS
-  ========================================= */
-
-  --section-hero: var(--color-cream);
+  /* ── Section background colors ── */
+  --section-hero:    var(--color-cream);
   --section-reviews: rgba(86, 47, 0, 0.06);
 
-  /* =========================================
-     FONT
-  ========================================= */
-
-  --font-base: "Inter", sans-serif;
-
-  --h1-font-size: clamp(1.25rem, 3.5vw, 2rem);
+  /* ── Үсгийн фонт ── */
+  --font-base: 'Inter', sans-serif;
+  --h1-font-size: clamp(1.85rem, 5vw, 3.15rem);
   --h1-font-weight: 800;
   --h1-line-height: 1.1;
-
   --h2-font-size: clamp(1.15rem, 2.4vw, 1.55rem);
   --h2-font-weight: 800;
   --h2-line-height: 1.2;
 
+  /* ── Радиус ── */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  /* ── Зай ── */
+  --space-page: 40px;
+
+  /* ── Товч ── */
+  --btn-height:        40px;
+  --btn-height-big:    52px;
+  --btn-font-size:     15px;
+  --btn-font-size-big: 16px;
+  --btn-padding:       0 24px;
+  --btn-radius:        var(--radius-md);
+  --btn-bg:            var(--color-yellow);
+  --btn-color:         var(--color-cream);
+  --btn-hover-opacity: 0.88;
+
+  /* ── Лого ── */
+  --logo-icon-size:   32px;
+  --logo-icon-bg:     var(--color-brown);
+  --logo-icon-radius: var(--radius-sm);
+  --logo-icon-color:  var(--color-cream);
+
+  /* ── Card ── */
+  --card-bg:               var(--color-surface);
+  --card-border:           var(--border-default);
+  --card-border-hover:     var(--border-strong);
+  --card-icon-bg:          var(--color-yellow-dim);
+  --card-icon-bg-hover:    var(--color-orange);
+  --card-icon-color:       var(--color-brown);
+  --card-icon-color-hover: var(--color-cream);
+  --card-radius:           var(--radius-lg);
+
+  /* ── Stat ── */
+  --stat-bg:           var(--color-surface);
+  --stat-border:       var(--border-default);
+  --stat-border-hover: var(--border-strong);
+  --stat-number-color: var(--color-brown);
+  --stat-label-color:  var(--color-muted);
+  --stat-radius:       var(--radius-lg);
+
+  /* ── Input ── */
+  --input-bg:     var(--color-cream);
+  --input-border: var(--border-strong);
+  --input-radius: var(--radius-sm);
+
+  /* ── Common text / layout helpers ── */
   --font-size-xs: 12px;
   --font-size-sm: 14px;
   --font-size-base: 15px;
   --font-size-md: 16px;
   --font-size-lg: 18px;
   --font-size-xl: 22px;
-
-  /* =========================================
-     RADIUS
-  ========================================= */
-
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-
-  /* =========================================
-     SPACING
-  ========================================= */
-
-  --space-page: 40px;
   --page-padding-y: 60px;
   --page-padding-bottom: 80px;
   --section-gap: 28px;
   --card-padding: 20px;
-
-  /* =========================================
-     BUTTONS
-  ========================================= */
-
-  --btn-height: 40px;
-  --btn-height-big: 52px;
-  --btn-font-size: 15px;
-  --btn-font-size-big: 16px;
-  --btn-padding: 0 24px;
-  --btn-radius: var(--radius-md);
-  --btn-bg: var(--color-yellow);
-  --btn-color: var(--color-cream);
-  --btn-hover-opacity: 0.88;
-
-  /* =========================================
-     LOGO
-  ========================================= */
-
-  --logo-icon-size: 32px;
-  --logo-icon-bg: var(--color-brown);
-  --logo-icon-radius: var(--radius-sm);
-  --logo-icon-color: var(--color-cream);
-
-  /* =========================================
-     CARD
-  ========================================= */
-
-  --card-bg: var(--color-surface);
-  --card-border: var(--border-default);
-  --card-border-hover: var(--border-strong);
-  --card-icon-bg: var(--color-yellow-dim);
-  --card-icon-bg-hover: var(--color-orange);
-  --card-icon-color: var(--color-brown);
-  --card-icon-color-hover: var(--color-cream);
-  --card-radius: var(--radius-lg);
-
-  /* =========================================
-     STATS
-  ========================================= */
-
-  --stat-bg: var(--color-surface);
-  --stat-border: var(--border-default);
-  --stat-border-hover: var(--border-strong);
-  --stat-number-color: var(--color-brown);
-  --stat-label-color: var(--color-muted);
-  --stat-radius: var(--radius-lg);
-
-  /* =========================================
-     INPUTS
-  ========================================= */
-
-  --input-bg: var(--color-cream);
-  --input-border: var(--border-strong);
-  --input-radius: var(--radius-sm);
-
-  /* =========================================
-     SHADOW / TRANSITION
-  ========================================= */
-
-  --shadow-card: 0 12px 34px rgba(86, 47, 0, 0.08);
-  --shadow-strong: 0 18px 50px rgba(86, 47, 0, 0.16);
   --transition-fast: 0.2s ease;
 
-  /* =========================================
-     STATE BACKGROUNDS
-  ========================================= */
-
+  /* ── Shadow / State backgrounds ── */
+  --shadow-card: 0 12px 34px rgba(86, 47, 0, 0.08);
   --color-success-bg: rgba(34, 197, 94, 0.12);
   --color-error-bg: rgba(239, 68, 68, 0.09);
 }
 
-/* =========================================
-   DARK MODE
-   System dark mode асаалттай үед автоматаар ажиллана.
-   Хэрвээ html дээр data-theme="light" байвал dark mode ажиллахгүй.
-========================================= */
-
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --color-yellow: var(--dark-yellow);
-    --color-yellow-hover: rgba(255, 217, 0, 0.86);
-    --color-yellow-dim: rgba(255, 217, 0, 0.12);
-    --color-yellow-dim-hover: rgba(255, 217, 0, 0.2);
-    --color-yellow-label: var(--dark-yellow);
+    /* ── Семантик өнгө ── */
+    --color-yellow:           rgba(255, 217, 0, 1);
+    --color-yellow-hover:     rgba(255, 217, 0, 0.8);
+    --color-yellow-dim:       rgba(255, 217, 0, 0.10);
+    --color-yellow-dim-hover: rgba(255, 217, 0, 0.18);
+    --color-yellow-label:     rgba(255, 217, 0, 0.85);
+    --color-orange:           var(--color-yellow-label);
+    --color-brown:            var(--color-yellow-label);
 
-    --color-orange: var(--dark-yellow);
-    --color-brown: var(--color-muted);
-    --color-cream: var(--dark-bg);
-    --color-peach: var(--dark-surface);
+    --color--error:   #ef4444;
+    --color--success: #4ade80;
+    --color-overplay: rgba(0, 0, 0, 0.5);
 
-    --color-bg: var(--dark-bg);
-    --color-home-bg: #1d2331;
-    --color-surface: var(--dark-surface);
-    --color-surface-strong: var(--dark-surface-strong);
-    --color-text: var(--dark-text);
-    --color-muted: var(--dark-muted);
-    --color-overplay: rgba(0, 0, 0, 0.55);
-    --color-cta-bg: #4B5694;
+    --color-bg:             #141720;
+    --color-surface:        #1e2433;
+    --color-surface-strong: #26304a;
+    --color-text:           #f1f5f9;
+    --color-muted:          #a8b8cc;
+    --color-peach: var(--color-surface);
 
-    --border-default: rgba(168, 184, 204, 0.18);
-    --border-strong: rgba(168, 184, 204, 0.34);
-    --border-accent: var(--dark-yellow);
-    --border-footer-faint: rgba(168, 184, 204, 0.12);
+    /* ── Хүрээ ── */
+    --border-default:      rgba(255, 255, 255, 0.16);
+    --border-strong:       rgba(255, 255, 255, 0.28);
+    --border-accent:       var(--color-yellow);
+    --border-footer-faint: rgba(255, 217, 0, 0.06);
 
-    --section-hero: var(--dark-bg);
-    --section-reviews: var(--dark-surface);
+    /* ── Товч ── */
+    --btn-bg:            var(--color-yellow);
+    --btn-color:         #141720;
+    --btn-hover-opacity: 0.85;
 
-    --btn-bg: var(--dark-yellow);
-    --btn-color: var(--dark-bg);
-    --btn-hover-opacity: 0.9;
+    /* ── Лого ── */
+    --logo-icon-bg:    var(--color-yellow);
+    --logo-icon-color: #141720;
 
-    --logo-icon-bg: var(--dark-yellow);
-    --logo-icon-color: var(--dark-bg);
+    /* ── Card ── */
+    --card-bg:               var(--color-surface);
+    --card-border:           var(--border-default);
+    --card-border-hover:     var(--border-accent);
+    --card-icon-bg:          var(--color-yellow-dim);
+    --card-icon-bg-hover:    var(--color-yellow);
+    --card-icon-color:       var(--color-yellow);
+    --card-icon-color-hover: #141720;
 
-    --card-bg: var(--dark-surface);
-    --card-border: var(--border-default);
-    --card-border-hover: var(--border-accent);
-    --card-icon-bg: rgba(255, 217, 0, 0.12);
-    --card-icon-bg-hover: var(--dark-yellow);
-    --card-icon-color: var(--dark-yellow);
-    --card-icon-color-hover: var(--dark-bg);
-
-    --stat-bg: var(--dark-surface);
-    --stat-border: var(--border-default);
+    /* ── Stat ── */
+    --stat-bg:           var(--color-surface);
+    --stat-border:       var(--border-default);
     --stat-border-hover: var(--border-accent);
-    --stat-number-color: var(--dark-yellow);
-    --stat-label-color: var(--dark-muted);
+    --stat-number-color: rgba(255, 217, 0, 0.45);
+    --stat-label-color:  rgba(148, 163, 184, 0.50);
 
-    --input-bg: var(--dark-bg);
-    --input-border: rgba(168, 184, 204, 0.34);
-
-    --shadow-card: 0 14px 36px rgba(0, 0, 0, 0.28);
-    --shadow-strong: 0 22px 60px rgba(0, 0, 0, 0.36);
-    --color-cta: rgba(0, 0, 0, 0.55);
-
-    --color-success-bg: rgba(34, 197, 94, 0.14);
-    --color-error-bg: rgba(239, 68, 68, 0.14);
+    /* ── Input ── */
+    --input-bg:     #141720;
+    --input-border: var(--border-default);
   }
 }
 
-/* =========================================
-   MANUAL DARK MODE
-========================================= */
-
+/* ── [data-theme="dark"] — media query-г дарж хэрэглэх ── */
 [data-theme="dark"] {
-  --color-yellow: var(--dark-yellow);
-  --color-yellow-hover: rgba(255, 217, 0, 0.86);
-  --color-yellow-dim: rgba(255, 217, 0, 0.12);
-  --color-yellow-dim-hover: rgba(255, 217, 0, 0.2);
-  --color-yellow-label: var(--dark-yellow);
+  --color-yellow:           rgba(255, 217, 0, 1);
+  --color-yellow-hover:     rgba(255, 217, 0, 0.8);
+  --color-yellow-dim:       rgba(255, 217, 0, 0.10);
+  --color-yellow-dim-hover: rgba(255, 217, 0, 0.18);
+  --color-yellow-label:     rgba(255, 217, 0, 0.85);
 
-  --color-orange: var(--dark-yellow);
-  --color-brown: var(--dark-yellow);
-  --color-cream: var(--dark-bg);
-  --color-peach: var(--dark-surface);
+  --color--error:   #ef4444;
+  --color--success: #4ade80;
 
-  --color-bg: var(--dark-bg);
-  --color-surface: var(--dark-surface);
-  --color-surface-strong: var(--dark-surface-strong);
-  --color-text: var(--dark-text);
-  --color-muted: var(--dark-muted);
-  --color-overplay: rgba(0, 0, 0, 0.55);
+  --color-bg:             #141720;
+  --color-surface:        #1e2433;
+  --color-surface-strong: #26304a;
+  --color-text:           #f1f5f9;
+  --color-muted:          #a8b8cc;
 
-  --border-default: rgba(168, 184, 204, 0.18);
-  --border-strong: rgba(168, 184, 204, 0.34);
-  --border-accent: var(--dark-yellow);
-  --border-footer-faint: rgba(168, 184, 204, 0.12);
+  --border-default:      rgba(255, 255, 255, 0.16);
+  --border-strong:       rgba(255, 255, 255, 0.28);
+  --border-accent:       var(--color-yellow);
+  --border-footer-faint: rgba(255, 217, 0, 0.06);
 
-  --section-hero: var(--dark-bg);
-  --section-reviews: var(--dark-surface);
+  --btn-bg:            var(--color-yellow);
+  --btn-color:         #141720;
+  --btn-hover-opacity: 0.85;
 
-  --btn-bg: var(--dark-yellow);
-  --btn-color: var(--dark-bg);
-  --btn-hover-opacity: 0.9;
+  --logo-icon-bg:    var(--color-yellow);
+  --logo-icon-color: #141720;
 
-  --logo-icon-bg: var(--dark-yellow);
-  --logo-icon-color: var(--dark-bg);
+  --card-bg:               var(--color-surface);
+  --card-border:           var(--border-default);
+  --card-border-hover:     var(--border-accent);
+  --card-icon-bg:          var(--color-yellow-dim);
+  --card-icon-bg-hover:    var(--color-yellow);
+  --card-icon-color:       var(--color-yellow);
+  --card-icon-color-hover: #141720;
 
-  --card-bg: var(--dark-surface);
-  --card-border: var(--border-default);
-  --card-border-hover: var(--border-accent);
-  --card-icon-bg: rgba(255, 217, 0, 0.12);
-  --card-icon-bg-hover: var(--dark-yellow);
-  --card-icon-color: var(--dark-yellow);
-  --card-icon-color-hover: var(--dark-bg);
-
-  --stat-bg: var(--dark-surface);
-  --stat-border: var(--border-default);
+  --stat-bg:           var(--color-surface);
+  --stat-border:       var(--border-default);
   --stat-border-hover: var(--border-accent);
-  --stat-number-color: var(--dark-yellow);
-  --stat-label-color: var(--dark-muted);
+  --stat-number-color: rgba(255, 217, 0, 0.45);
+  --stat-label-color:  rgba(148, 163, 184, 0.50);
 
-  --input-bg: var(--dark-bg);
-  --input-border: rgba(168, 184, 204, 0.34);
-
-  --shadow-card: 0 14px 36px rgba(0, 0, 0, 0.28);
-  --shadow-strong: 0 22px 60px rgba(0, 0, 0, 0.36);
-
-  --color-success-bg: rgba(34, 197, 94, 0.14);
-  --color-error-bg: rgba(239, 68, 68, 0.14);
+  --input-bg:     #141720;
+  --input-border: var(--border-default);
 }
 
-/* =========================================
-   RESET
-========================================= */
+/* ════════════════════════════════════════
+   Reset
+   ════════════════════════════════════════ */
 
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html {
-  background: var(--color-bg);
-  color-scheme: light dark;
-  scroll-behavior: smooth;
-}
-
 body {
-  min-height: 100vh;
   font-family: var(--font-base);
   background: var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
-  transition:
-    background-color var(--transition-fast),
-    color var(--transition-fast);
 }
 
 a {
@@ -334,86 +236,56 @@ a {
   text-decoration: none;
 }
 
-button,
-input,
-textarea,
-select {
-  font-family: inherit;
-}
-
 img {
   display: block;
   max-width: 100%;
 }
 
-/* =========================================
-   COMMON BUTTON
-========================================= */
-
+/* ── Товч ── */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
-  height: var(--btn-height);
-  padding: var(--btn-padding);
-
   background: var(--btn-bg);
   color: var(--btn-color);
   border: none;
   border-radius: var(--btn-radius);
-
-  font-size: var(--btn-font-size);
   font-weight: 800;
+  font-size: var(--btn-font-size);
+  padding: var(--btn-padding);
+  height: var(--btn-height);
   cursor: pointer;
-
-  transition:
-    opacity var(--transition-fast),
-    transform var(--transition-fast),
-    background-color var(--transition-fast),
-    color var(--transition-fast);
+  transition: opacity 0.2s;
 }
 
 .btn:hover {
   opacity: var(--btn-hover-opacity);
-  transform: translateY(-1px);
-}
-
-.btn:active {
-  transform: translateY(0);
 }
 
 .btn.big {
-  width: 100%;
-  max-width: 26rem;
   height: var(--btn-height-big);
   font-size: var(--btn-font-size-big);
+  width: 100%;
+  max-width: 26rem;
 }
 
-/* =========================================
-   LOGO
-========================================= */
-
+/* ── Лого ── */
 .logo {
   display: flex;
   align-items: center;
   gap: 10px;
-
-  color: var(--color-text);
-  font-size: 18px;
   font-weight: 900;
+  font-size: 18px;
 }
 
 .logo-icon {
-  width: var(--logo-icon-size);
-  height: var(--logo-icon-size);
-  border-radius: var(--logo-icon-radius);
-
   display: flex;
   align-items: center;
   justify-content: center;
-
+  width: var(--logo-icon-size);
+  height: var(--logo-icon-size);
   background: var(--logo-icon-bg);
+  border-radius: var(--logo-icon-radius);
   color: var(--logo-icon-color);
   overflow: hidden;
 }
@@ -424,123 +296,44 @@ img {
   object-fit: cover;
 }
 
-/* =========================================
-   SHARED PAGE HEADINGS
-   Home page өөрийн hero heading style-тэй.
-========================================= */
-
-:is(main:not(.home), .page-header, .co-page, .track-page, .profile-page, .support-page, .about-page) h1 {
-  color: var(--color-text);
+/* Non-home pages use shared heading custom properties */
+main:not(.home) h1,
+.page-header h1 {
   font-size: var(--h1-font-size);
   font-weight: var(--h1-font-weight);
   line-height: var(--h1-line-height);
 }
 
-:is(main:not(.home), .page-header, .co-page, .track-page, .profile-page, .support-page, .about-page) h2 {
-  color: var(--color-text);
+main:not(.home) h2,
+.page-header h2 {
   font-size: var(--h2-font-size);
   font-weight: var(--h2-font-weight);
   line-height: var(--h2-line-height);
 }
 
-.page-header p {
-  color: var(--color-muted);
+/* ===============================
+   SHARED PAGE HEADINGS
+   Home page өөрийн hero style-тэй тул энд оруулаагүй.
+================================ */
+
+.page-header h1,
+.co-page h1,
+.track-page h1,
+.profile-page h1,
+.support-page h1,
+.about-page h1 {
+  font-size: var(--h1-font-size);
+  font-weight: var(--h1-font-weight);
+  line-height: var(--h1-line-height);
 }
 
-/* =========================================
-   COMMON FORM ELEMENTS
-========================================= */
-
-input,
-textarea,
-select {
-  background: var(--input-bg);
-  color: var(--color-text);
-  border: 1px solid var(--input-border);
-}
-
-input::placeholder,
-textarea::placeholder {
-  color: var(--color-muted);
-}
-
-input:focus,
-textarea:focus,
-select:focus {
-  outline: none;
-  border-color: var(--border-accent);
-  box-shadow: 0 0 0 3px var(--color-yellow-dim);
-}
-
-/* =========================================
-   DARK MODE FIXES
-   Хэрвээ зарим хуудсанд hard-coded white үлдсэн бол
-   dark mode дээр зөөлөн засаж өгнө.
-========================================= */
-
-[data-theme="dark"] :where(
-  header,
-  footer,
-  .card,
-  .track-card,
-  .order-card,
-  .faq-item,
-  .signin-panel,
-  .call-panel,
-  .co-card,
-  .profile-card,
-  .support-card
-) {
-  background: var(--color-surface);
-  color: var(--color-text);
-  border-color: var(--border-default);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) :where(
-    header,
-    footer,
-    .card,
-    .track-card,
-    .order-card,
-    .faq-item,
-    .signin-panel,
-    .call-panel,
-    .co-card,
-    .profile-card,
-    .support-card
-  ) {
-    background: var(--color-surface);
-    color: var(--color-text);
-    border-color: var(--border-default);
-  }
-}
-
-[data-theme="dark"] :where(.btn, .signin-btn, .signin-create):hover {
-  opacity: 0.92;
-}
-
-[data-theme="dark"] .material-symbols-outlined {
-  color: inherit;
-}
-
-/* =========================================
-   RESPONSIVE
-========================================= */
-
-@media (max-width: 767px) {
-  :root {
-    --space-page: 16px;
-    --page-padding-y: 42px;
-    --page-padding-bottom: 72px;
-    --card-padding: 16px;
-  }
-
-  .logo {
-    font-size: 15px;
-  }
-
-  .btn.big {
-    max-width: 100%;
-  }
+.page-header h2,
+.co-page h2,
+.track-page h2,
+.profile-page h2,
+.support-page h2,
+.about-page h2 {
+  font-size: var(--h2-font-size);
+  font-weight: var(--h2-font-weight);
+  line-height: var(--h2-line-height);
 }

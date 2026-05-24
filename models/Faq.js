@@ -14,7 +14,7 @@ const faqSchema = new mongoose.Schema(
     },
     category: {
       type: String,
-      default: "Захиалга",
+      default: "Төлбөр",
       trim: true,
     },
     is_active: {

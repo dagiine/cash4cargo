@@ -30,6 +30,7 @@ export const protect = async (req, res, next) => {
   }
 };
 
+
 // Token байвал хэрэглэгчийг уншина, token байхгүй бол зочноор үргэлжлүүлнэ
 export const optionalAuth = async (req, res, next) => {
   let token;

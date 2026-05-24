@@ -1,277 +1,132 @@
 // ===============================================
 // ЗАХИАЛГА ҮҮСГЭХ ХУУДАСНЫ JS
 // Энэ файл create-order page дээр ажиллана.
-// Үүрэг: олон бараа нэмэх, үнэ тооцох, form шалгах, backend рүү илгээх.
+// Гол үүрэг: event listener холбох, inline onclick function-уудыг window дээр тавих.
+// Жижиг helper logic-уудыг ./create-order/createOrderHelpers.js файл руу салгасан.
 // ===============================================
 
 import { shipmentAPI, getSession } from "./api.js";
+import { PRICE_PER_KG, addItem, buildPayload, getPhone, money, removeItem, renderItems, resetItems, setSub, setupPhoneField, updateItem, updateSummary, validateOrder } from "./create-order/createOrderHelpers.js";
 
-// 1 кг тутамд тооцох үнэ. Өөрчлөх бол зөвхөн энэ тоог солино.
-const PRICE_PER_KG = 3500;
-
-// Захиалгад нэмэгдэж байгаа бараануудыг түр хадгалах array.
-// Нэг package олон item-тэй байж болно.
-let coItems = [
-  { trackCode: "", name: "", qty: 1 },
-];
-
-// Тоог Монгол мөнгөний форматтай болгоно. Жишээ: 3500 -> 3,500 ₮
-function money(amount) {
-  return Number(amount || 0).toLocaleString("mn-MN") + " ₮";
-}
-
-// Утасны дугаар авах function.
-// Login хийсэн бол user-ийн утсыг авна, login хийгээгүй бол input-оос авна.
-function getPhone() {
-  const session = getSession();
-  // Login хийсэн user бол утасны input-ийг нууж, өөрийн дугаарыг ашиглана.
-  if (session?.user?.phone) {
-    return String(session.user.phone).replace(/\D/g, "");
-  }
-  return document.getElementById("co-phone")?.value.trim() || "";
-}
-
-// Нийт жин авах function.
-// Анх захиалга үүсгэх үед жин заавал оруулахгүй.
-// Admin дараа нь жин оруулсны дараа үнэ харагдана.
-function getWeight() {
-  const weight = Number(document.getElementById("calc-weight")?.value || 0);
-  return weight > 0 ? weight : 0;
-}
-
-// Доод талын summary хэсгийг шинэчилнэ.
-// Жишээ: 3 бараа, нийт 5 ш гэх мэт.
-function updateSummary() {
-  const summary = document.getElementById("co-summary");
-  const itemCount = document.getElementById("co-item-count");
-  const qtySum = document.getElementById("co-qty-sum");
-
-  if (!summary || !itemCount || !qtySum) return;
-
-  const totalQty = coItems.reduce((sum, item) => sum + Number(item.qty || 0), 0);
-  summary.style.display = coItems.length ? "flex" : "none";
-  itemCount.textContent = `${coItems.length} бараа`;
-  qtySum.textContent = `Нийт ${totalQty} ш`;
-}
-
-// Item input-уудыг дэлгэц дээр дахин зурна.
-// coItems array өөрчлөгдөх бүрд энэ function дуудагдана.
-function renderItems() {
-  const list = document.getElementById("co-items-list");
-  if (!list) return;
-
-  list.innerHTML = coItems.map((item, index) => `
-    <div class="co-item-row">
-      <div class="co-item-track">
-        <input
-          class="co-item-input"
-          value="${item.trackCode}"
-          placeholder="Трак код"
-          data-index="${index}"
-          data-field="trackCode"
-        />
-      </div>
-
-      <div class="co-item-name">
-        <input
-          class="co-item-input"
-          value="${item.name}"
-          placeholder="Барааны нэр"
-          data-index="${index}"
-          data-field="name"
-        />
-      </div>
-
-      <div class="co-item-qty">
-        <input
-          class="co-item-input qty-input"
-          type="number"
-          min="1"
-          value="${item.qty}"
-          data-index="${index}"
-          data-field="qty"
-        />
-      </div>
-
-      ${coItems.length > 1
-        ? `<button class="co-item-del" type="button" data-remove="${index}">×</button>`
-        : `<span style="width:30px"></span>`
-      }
-    </div>
-  `).join("");
-
-  updateSummary();
-}
-
-// Form-ийн тайлбар/алдааны message харуулна.
-function setSub(text, isError = false) {
-  const sub = document.getElementById("co-sub");
-  if (!sub) return;
-  sub.textContent = text;
-  sub.style.color = isError ? "var(--color--error, #ef4444)" : "";
-}
-
-// Submit хийхээс өмнө form зөв бөглөгдсөн эсэхийг шалгана.
-function validateOrder() {
-  const phone = getPhone();
-
-  if (!/^[6-9]\d{7}$/.test(phone)) {
-    setSub("Утасны дугаар буруу байна. Жишээ: 99112233", true);
-    return false;
-  }
-
-  const hasEmptyTrack = coItems.some((item) => !item.trackCode.trim());
-  const hasEmptyName = coItems.some((item) => !item.name.trim());
-  const hasBadQty = coItems.some((item) => Number(item.qty) < 1);
-
-  if (hasEmptyTrack) {
-    setSub("Бараа бүрийн трак кодыг бөглөнө үү.", true);
-    return false;
-  }
-
-  if (hasEmptyName) {
-    setSub("Бараа бүрийн нэрийг бөглөнө үү.", true);
-    return false;
-  }
-
-  if (hasBadQty) {
-    setSub("Барааны тоо ширхэг 1-ээс их байна.", true);
-    return false;
-  }
-
-  return true;
-}
-
-// Backend рүү илгээх data-г бэлдэнэ.
-// Backend энэ object-ийг авч MongoDB-д shipment болгон хадгална.
-function buildPayload() {
-  const phone = getPhone();
-  // Үнийн тооцоолуур нь хэрэглэгчид зөвхөн ойролцоо дүн харуулна.
-  // Захиалга database-д анх үүсэхдээ жин/үнэгүй хадгалагдана.
-  // Admin бодит жинг оруулсны дараа үнэ автоматаар хадгалагдана.
-  const totalWeight = 0;
-  const shippingPrice = 0;
-  return {
-    user_phone: phone,
-    receiver_phone: phone,
-    sender_name: getSession()?.user?.name || "Захиалагч",
-    receiver_name: getSession()?.user?.name || "Захиалагч",
-    total_weight: totalWeight,
-    shipping_price: shippingPrice,
-    status: "Захиалга үүсгэсэн",
-    payment_status: "Төлөгдөөгүй",
-    items: coItems.map((item) => ({
-      item_name: item.name.trim(),
-      quantity: Number(item.qty),
-      description: `Трак код: ${item.trackCode.trim()}`,
-    })),
-  };
-}
+// Жин/урт/өргөн/өндөр input-ийн id-ууд.
+// Array болгосноор давталтаар event listener нэмэхэд амар байна.
+const CALC_INPUT_IDS = ["calc-weight", "calc-l", "calc-w", "calc-h"];
 
 // Create order page нээгдэхэд хамгийн түрүүнд ажиллах initializer function.
 export function initCreateOrder() {
   const list = document.getElementById("co-items-list");
-  const calcInputs = ["calc-weight", "calc-l", "calc-w", "calc-h"];
 
+  // Энэ page биш бол цааш ажиллуулахгүй.
   if (!list) return;
 
-  // Item input дээр бичих бүрд coItems array-г шинэчилнэ.
+  connectItemInputEvents(list);
+  connectItemRemoveEvents(list);
+  connectCalculatorEvents();
+
+  setupPhoneField();
+  renderItems();
+  window.coUpdateSub();
+}
+
+// ===============================================
+// ITEM INPUT EVENT-ҮҮД
+// ===============================================
+
+// Item input дээр бичих бүрд item array-г шинэчилнэ.
+function connectItemInputEvents(list) {
   list.addEventListener("input", (event) => {
     const index = event.target.dataset.index;
     const field = event.target.dataset.field;
 
     if (index === undefined || !field) return;
 
-    coItems[index][field] = field === "qty"
-      ? Math.max(1, Number(event.target.value || 1))
-      : event.target.value;
-
+    updateItem(index, field, event.target.value);
     updateSummary();
   });
-
-  // X товч дарвал тухайн item-ийг устгана.
-  list.addEventListener("click", (event) => {
-    const removeIndex = event.target.dataset.remove;
-    if (removeIndex === undefined) return;
-
-    coItems.splice(Number(removeIndex), 1);
-    if (!coItems.length) coItems.push({ trackCode: "", name: "", qty: 1 });
-    renderItems();
-  });
-
-  // Жин/урт/өргөн/өндөр өөрчлөгдөхөд үнэ дахин тооцно.
-  calcInputs.forEach((id) => {
-    document.getElementById(id)?.addEventListener("input", window.coCalcPrice);
-  });
-
-  const session = getSession();
-  const phoneLabel = document.getElementById("co-phone-label");
-  const phoneWrap = document.getElementById("co-phone-wrap");
-  const phoneInput = document.getElementById("co-phone");
-
-  // Login хийсэн user бол утасны input-ийг нууж, өөрийн дугаарыг ашиглана.
-  if (session?.user?.phone) {
-    if (phoneLabel) phoneLabel.style.display = "none";
-    if (phoneWrap) phoneWrap.style.display = "none";
-    if (phoneInput) phoneInput.value = String(session.user.phone).replace(/\D/g, "");
-  } else {
-    if (phoneLabel) phoneLabel.style.display = "";
-    if (phoneWrap) phoneWrap.style.display = "";
-  }
-
-  renderItems();
-  window.coUpdateSub();
 }
 
-// Inline HTML onclick/oninput-аас дуудагдах function-ууд.
-// window дээр тавьснаар HTML дотроос шууд дуудаж болдог.
+// X товч дарвал тухайн item-ийг устгана.
+function connectItemRemoveEvents(list) {
+  list.addEventListener("click", (event) => {
+    const removeIndex = event.target.dataset.remove;
+
+    if (removeIndex === undefined) return;
+
+    removeItem(removeIndex);
+    renderItems();
+  });
+}
+
+// Жин/урт/өргөн/өндөр өөрчлөгдөхөд үнэ дахин тооцно.
+function connectCalculatorEvents() {
+  CALC_INPUT_IDS.forEach((id) => {
+    document.getElementById(id)?.addEventListener("input", window.coCalcPrice);
+  });
+}
+
+// ===============================================
+// INLINE HTML-ЭЭС ДУУДАГДАХ FUNCTION-УУД
+// HTML дотор onclick/oninput ашигласан тул эдгээрийг window дээр тавьж байна.
+// ===============================================
 
 // Утасны дугаарын доорх тайлбарыг шинэчилнэ.
 window.coUpdateSub = function coUpdateSub() {
   const phone = getPhone();
   const session = getSession();
-  // Login хийсэн user бол утасны input-ийг нууж, өөрийн дугаарыг ашиглана.
+
   if (session?.user?.phone) {
     setSub(`${phone} дугаартай хэрэглэгч дээр захиалга бүртгэнэ`);
-  } else {
-    setSub(phone ? `${phone} дугаартай захиалга бүртгэнэ` : "Нэвтрээгүй бол утасны дугаараа оруулаад захиалга үүсгэнэ");
+    return;
   }
+
+  const message = phone
+    ? `${phone} дугаартай захиалга бүртгэнэ`
+    : "Нэвтрэх шаардлагагүйгээр утасны дугаараа оруулаад захиалга үүсгээрэй";
+
+  setSub(message);
 };
 
 // Шинэ барааны мөр нэмнэ.
 window.coAddItem = function coAddItem() {
-  coItems.push({ trackCode: "", name: "", qty: 1 });
+  addItem();
   renderItems();
 };
 
 // Form-ийг цэвэрлэж анхны байдалд оруулна.
 window.coClearAll = function coClearAll() {
-  if (!getSession()?.user?.phone) document.getElementById("co-phone").value = "";
-  document.getElementById("calc-weight").value = "";
-  document.getElementById("calc-l").value = "";
-  document.getElementById("calc-w").value = "";
-  document.getElementById("calc-h").value = "";
-  coItems = [{ trackCode: "", name: "", qty: 1 }];
+  if (!getSession()?.user?.phone) {
+    const phoneInput = document.getElementById("co-phone");
+    if (phoneInput) phoneInput.value = "";
+  }
+
+  clearCalculatorInputs();
+  resetItems();
   renderItems();
   window.coUpdateSub();
-
-  const result = document.getElementById("calc-result");
-  if (result) result.style.display = "none";
+  hideCalculatorResult();
 };
 
 // Шинэ захиалга эхлүүлэх shortcut.
 window.coNewOrder = function coNewOrder() {
   window.coClearAll();
-  if (!getSession()?.user?.phone) document.getElementById("co-phone")?.focus();
+
+  if (!getSession()?.user?.phone) {
+    document.getElementById("co-phone")?.focus();
+  }
 };
 
 // Жин болон эзлэхүүн жингээр тээврийн үнийг тооцно.
+// Энэ тооцоо зөвхөн хэрэглэгчид ойролцоо үнэ харуулах зориулалттай.
 window.coCalcPrice = function coCalcPrice() {
   const weight = Number(document.getElementById("calc-weight")?.value || 0);
-  const l = Number(document.getElementById("calc-l")?.value || 0);
-  const w = Number(document.getElementById("calc-w")?.value || 0);
-  const h = Number(document.getElementById("calc-h")?.value || 0);
-  const volumetricWeight = l && w && h ? (l * w * h) / 6000 : 0;
+  const length = Number(document.getElementById("calc-l")?.value || 0);
+  const width = Number(document.getElementById("calc-w")?.value || 0);
+  const height = Number(document.getElementById("calc-h")?.value || 0);
+
+  const volumetricWeight = length && width && height
+    ? (length * width * height) / 6000
+    : 0;
+
   const finalWeight = Math.max(weight, volumetricWeight);
   const total = Math.ceil(finalWeight * PRICE_PER_KG);
 
@@ -304,21 +159,45 @@ window.coSubmit = async function coSubmit() {
   const oldText = button?.innerHTML;
 
   try {
-    if (button) {
-      button.disabled = true;
-      button.textContent = "Илгээж байна...";
-    }
-
+    setSubmitLoading(button, true);
     const shipment = await shipmentAPI.create(buildPayload());
+
     setSub(`Захиалга амжилттай үүслээ. Код: ${shipment.tracking_code}`, false);
     window.coClearAll();
+
     window.location.hash = `#/track?query=${encodeURIComponent(shipment.tracking_code)}`;
   } catch (err) {
     setSub(err.message || "Захиалга үүсгэхэд алдаа гарлаа.", true);
   } finally {
-    if (button) {
-      button.disabled = false;
-      button.innerHTML = oldText;
-    }
+    setSubmitLoading(button, false, oldText);
   }
 };
+
+// ===============================================
+// ЖИЖИГ ТУСЛАХ FUNCTION-УУД
+// ===============================================
+
+// Calculator input-уудыг хоосолно.
+function clearCalculatorInputs() {
+  CALC_INPUT_IDS.forEach((id) => {
+    const input = document.getElementById(id);
+    if (input) input.value = "";
+  });
+}
+
+// Тооцооллын үр дүнг нууж өгнө.
+function hideCalculatorResult() {
+  const result = document.getElementById("calc-result");
+
+  if (result) {
+    result.style.display = "none";
+  }
+}
+
+// Submit button-г loading байдалтай болгоно.
+function setSubmitLoading(button, isLoading, oldText = "") {
+  if (!button) return;
+
+  button.disabled = isLoading;
+  button.innerHTML = isLoading ? "Илгээж байна..." : oldText;
+}

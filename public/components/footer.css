@@ -53,9 +53,7 @@ footer {
 }
 
 .footer-contact-item
-.material-symbols-outlined,
-.footer-contact-item
-.fa-brands {
+.material-symbols-outlined {
   font-size: 18px;
   color: var(--color-yellow);
   flex-shrink: 0;

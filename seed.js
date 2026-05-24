@@ -1,5 +1,6 @@
 /**
  * seed.js — MongoDB-д жишээ өгөгдөл оруулах
+ * Ажиллуулах: node seed.js
  */
 import "dotenv/config";
 import mongoose from "mongoose";
@@ -107,7 +108,7 @@ const shipments = [
 
 async function seed() {
   await connectDB();
-  console.log("Хэрэглэгчидийг шалгаж байна...");
+  
   for (const user of users) {
     await User.updateOne(
       { phone: user.phone },
@@ -116,7 +117,6 @@ async function seed() {
     );
   }
 
-  console.log("Ачаануудыг шалгаж байна...");
   for (const shipment of shipments) {
     await Shipment.updateOne(
       { tracking_code: shipment.tracking_code },
@@ -125,7 +125,6 @@ async function seed() {
     );
   }
 
-  console.log("FAQ шалгаж байна...");
   for (const faq of faqs) {
     await Faq.updateOne(
       { question: faq.question },
@@ -134,7 +133,7 @@ async function seed() {
     );
   }
 
-  console.log("Seed амжилттай дууслаа!");
+  console.log("Seed амжилттай дууслаа.");
   console.log("\nНэвтрэх мэдээлэл:");
   console.log("  Хэрэглэгч 1: 99112233 / password123");
   console.log("  Хэрэглэгч 2: 99447176 / password123");

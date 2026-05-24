@@ -9,7 +9,8 @@ function renderCreateOrderPage() {
 
         <div class="co-page-header">
           <div>
-            <h1 class="co-heading">Захиалга</h1>
+            <h2 class="co-heading">Захиалга</h2>
+            
             <p class="co-subheading" id="co-sub">Утасны дугаар оруулна уу</p>
           </div>
           <div class="co-header-actions">
@@ -104,11 +105,6 @@ function renderCreateOrderPage() {
               <span class="co-calc-total-val" id="calc-total-val"></span>
             </div>
           </div>
-
-          <button class="co-calc-btn" onclick="coCalcPrice()">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 7h8M8 12h4M8 17h2"/></svg>
-            Тооцоолох
-          </button>
         </div>
       </div>
 

@@ -1,91 +1,115 @@
 # Cash 4 Cargo
 
-**Cash 4 Cargo** нь Хятад → Монгол чиглэлийн карго захиалга үүсгэх, илгээмж хянах, admin талаас төлөв/жин/FAQ/хэрэглэгч удирдах web system юм. Project нь нэг backend server дээр ажиллана: хэрэглэгчийн сайт `/`, admin dashboard `/admin` дээр нээгдэнэ.
+**Cash 4 Cargo** нь Хятад → Монгол чиглэлийн карго илгээмж бүртгэл, хяналтын вэб систем юм.  
+Node.js + Express + MongoDB backend, хэрэглэгчийн SPA frontend, мөн admin dashboard-оос бүрдэнэ.
+
+---
 
 ## Гол боломжууд
 
-### Хэрэглэгчийн тал
+### Хэрэглэгчийн вэб сайт
+- Нэвтрэхгүйгээр захиалга үүсгэх боломжтой
+- Нэг илгээмж дотор олон бараа бүртгэнэ
+- Хяналтын код (`MN-XXXXX`) эсвэл утасны дугаараар илгээмж хайна
+- Тээврийн үнэ нийт жингээр автоматаар тооцогдоно
+- Нэвтэрсэн хэрэглэгч profile хэсгийг ашиглана
+- Admin account-аар нэвтэрвэл автоматаар `/admin` руу шилжинэ
 
-- Хэрэглэгч нэвтрэхгүйгээр захиалга үүсгэж болно.
-- Нэг захиалга буюу нэг package дотор олон бараа нэмнэ.
-- Нэг package зөвхөн нэг нийт жинтэй байна.
-- Шинэ захиалга үүсэх үед төлөв нь **`Захиалга үүсгэсэн`**, нийт жин **`0 кг`**, үнэ **`0 ₮`** гэж хадгалагдана.
-- Admin дараа нь бодит жинг оруулах үед үнэ автоматаар бодогдоно.
-- Хэрэглэгч track code эсвэл утасны дугаараар захиалгаа хайна.
-- Нэвтэрсэн хэрэглэгч `Захиалга хянах` page дээр form бөглөхгүй, өөрийн захиалгуудыг шууд харна.
-- `Захиалга үүсгэсэн` болон `Хятадын агуулахад` төлөвтэй үед захиалга цуцлах боломжтой.
-- Тусламж/FAQ page дээр category болон асуулт-хариултууд харагдана.
+### Admin dashboard
+- `/admin` хаягаар нэвтэрнэ
+- Бүх илгээмжийг харах, хайх, эрэмбэлэх
+- Илгээмжийн төлөв болон нийт жинг засах (жин өөрчлөгдөхөд үнэ дахин бодогдоно)
+- FAQ асуулт/хариулт нэмэх, засах, устгах
+- Хэрэглэгчдийн жагсаалт харах, эрх солих, устгах
 
-### Admin тал
-
-- Admin `/admin` хаягаар нэвтэрнэ.
-- Бүх илгээмжийг харах, хайх, огноогоор эрэмбэлэх боломжтой.
-- Илгээмжийн төлөвийг шинэчилнэ.
-- Илгээмжийн **нийт жин** засна.
-- Жин өөрчлөгдөхөд үнэ автоматаар дахин бодогдоно.
-- FAQ category болон асуулт-хариулт нэмэх/устгах боломжтой.
-- Хэрэглэгчдийн жагсаалт харах, user устгах, user/admin role солих боломжтой.
-- Хэрэглэгч дээр дарахад тухайн хэрэглэгчийн захиалгын түүх харагдана.
+---
 
 ## Ашигласан технологи
 
-- Frontend: HTML, CSS, JavaScript SPA
-- Web component: `status-badge`, `order-card`, `faq-item`
-- Backend: Node.js, Express.js
-- Database: MongoDB + Mongoose
-- Authentication: JWT token
+| Давхарга | Технологи |
+|---|---|
+| Frontend | Vanilla JS SPA, HTML, CSS |
+| Admin | HTML, CSS, JS |
+| Backend | Node.js, Express.js |
+| Database | MongoDB + Mongoose |
+| Auth | JWT (JSON Web Token) |
+| Нууц үг | bcryptjs |
 
-## Project бүтэц
+---
+
+## Project-ийн бүтэц
 
 ```text
 cash4cargo-backend/
-├── admin/                  # Admin dashboard
+├── admin/                  # Admin dashboard frontend
 │   ├── index.html
 │   ├── styles.css
-│   └── script.js
+│   ├── script.js
+│   └── js/
+│       └── faqAdmin.js
 │
-├── public/                 # Хэрэглэгчийн frontend
+├── public/                 # Хэрэглэгчийн SPA frontend
 │   ├── index.html
-│   ├── app.js              # SPA router
-│   ├── styles.css          # Global custom properties
-│   ├── components/         # Web components
-│   │   ├── status-badge.js
-│   │   ├── status-badge.css
-│   │   ├── order-card.js
-│   │   ├── order-card.css
-│   │   ├── faq-item.js
-│   │   └── faq-item.css
-│   ├── css/                # Page CSS
-│   ├── js/                 # Page JS logic
-│   ├── pages/              # Page templates
-│   └── pics/               # Images
+│   ├── app.js              # Hash-based router
+│   ├── styles.css
+│   ├── components/         # Header, Footer, OrderCard
+│   ├── css/                # Хуудас тус бүрийн CSS
+│   ├── js/                 # Page init + track логик
+│   ├── pages/              # Хуудасны JS файлууд
+│   └── pics/
 │
-├── config/db.js            # MongoDB холболт
-├── middleware/auth.js      # JWT auth + admin check + optional auth
-├── models/                 # MongoDB models
-├── routes/                 # API routes
-├── seed.js                 # Test data нэмэх
-├── server.js               # Express server
+├── config/
+│   └── db.js               # MongoDB холболт
+│
+├── middleware/
+│   └── auth.js             # protect / adminOnly / optionalAuth
+│
+├── models/
+│   ├── User.js             # Хэрэглэгчийн схем
+│   ├── Shipment.js         # Илгээмжийн схем (sub-doc: items, status_history)
+│   ├── Faq.js              # FAQ схем
+│   └── FaqCategory.js      # FAQ ангиллын схем
+│
+├── routes/
+│   ├── auth.js             # /api/auth
+│   ├── shipments.js        # /api/shipments
+│   └── faqs.js             # /api/faqs
+│
+├── .env.example
 ├── package.json
-└── .env.example
+├── seed.js                 # Туршилтын өгөгдөл үүсгэгч
+└── server.js               # Express сервер
 ```
 
-## Суулгах
+---
+
+## Суулгах заавар
+
+### Шаардлагатай зүйлс
+- Node.js
+- npm
+- MongoDB (локал эсвэл MongoDB Atlas)
+
+### Алхам 1 — Dependency суулгах
 
 ```bash
 cd cash4cargo-backend
 npm install
 ```
 
-`.env.example`-оос `.env` файл үүсгэнэ.
+### Алхам 2 — Environment тохируулах
 
-Windows PowerShell:
+`.env.example`-ээс `.env` файл үүсгэнэ:
 
-```powershell
+```bash
+# Linux / macOS
+cp .env.example .env
+
+# Windows PowerShell
 Copy-Item .env.example .env
 ```
 
-`.env` жишээ:
+`.env` файлын агуулга:
 
 ```env
 PORT=5000
@@ -95,224 +119,112 @@ JWT_EXPIRES_IN=7d
 SHIPPING_RATE_PER_KG=3500
 ```
 
-## Database seed хийх
-
-Test user, admin, жишээ shipment нэмэхийн тулд:
+### Алхам 3 — Туршилтын өгөгдөл үүсгэх (заавал биш)
 
 ```bash
 npm run seed
 ```
 
-`seed.js` нь байгаа data-г устгахгүй. Байхгүй default data-г л нэмнэ.
+> `seed` командыг олон удаа ажиллуулж болно — одоо байгаа өгөгдлийг устгахгүй, зөвхөн байхгүй default өгөгдлийг нэмнэ.
 
-## Ажиллуулах
+### Алхам 4 — Server асаах
 
 ```bash
+# Development (автомат restart)
 npm run dev
+
+# Энгийн start
+npm start
 ```
 
-Дараа нь browser дээр:
+Server амжилттай ассан бол:
 
-```text
-Хэрэглэгчийн сайт: http://localhost:5000
-Admin dashboard:  http://localhost:5000/admin
-Health check:     http://localhost:5000/api/health
+```
+Хэрэглэгчийн вэб:  http://localhost:5000
+Admin panel:        http://localhost:5000/admin
+Health check:       http://localhost:5000/api/health
 ```
 
-## Test account
+---
 
-Admin:
+## Туршилтын account-ууд
 
-```text
-Утас: 88000001
-Нууц үг: admin123
+| Эрх | Утас | Нууц үг |
+|---|---|---|
+| Admin | `88000001` | `admin123` |
+| Энгийн хэрэглэгч | `99112233` | `password123` |
+
+> Захиалга үүсгэхийн тулд account шаардагдахгүй.
+
+---
+
+## Илгээмжийн төлөвүүд
+
+```
+Захиалга үүсгэсэн  →  Хятадын агуулахад  →  Замын Үүд дээр  →  Улаанбаатарт ирсэн  →  Олгогдсон
+                                                                                          ↓
+                                                                                     Цуцлагдсан
 ```
 
-Энгийн хэрэглэгч:
+Хэрэглэгч зөвхөн **"Захиалга үүсгэсэн"** болон **"Хятадын агуулахад"** төлөвт байх үед цуцалж болно.
 
-```text
-Утас: 99112233
-Нууц үг: password123
-```
+---
 
-## Захиалга үүсэх logic
+## API лавлагаа
 
-Хэрэглэгч захиалга үүсгэхэд frontend дараах API руу илгээнэ:
-
-```text
-POST /api/shipments
-```
-
-Шинэ захиалга үүсэх үед backend дараах байдлаар хадгална:
-
-```js
-status: "Захиалга үүсгэсэн"
-total_weight: 0
-shipping_price: 0
-payment_status: "Төлөгдөөгүй"
-```
-
-Ингэснээр хэрэглэгч анх захиалга үүсгэх үед жин болон үнэ бодогдохгүй. Admin бодит нийт жинг оруулах үед үнэ автоматаар бодогдоно.
-
-## Үнэ бодох logic
-
-1 кг-ийн үнэ `.env` доторх `SHIPPING_RATE_PER_KG` утгаар бодогдоно.
-
-Жишээ:
-
-```text
-SHIPPING_RATE_PER_KG=3500
-2 кг × 3500₮ = 7000₮
-```
-
-Admin жин засах API:
-
-```text
-PUT /api/shipments/:id
-```
-
-## Төлөвүүд
-
-```text
-Захиалга үүсгэсэн
-Хятадын агуулахад
-Замын Үүд дээр
-Улаанбаатарт ирсэн
-Олгогдсон
-Цуцлагдсан
-```
-
-Төлөв шинэчлэгдэх бүрд `status_history` дотор огноотойгоо хадгалагдана. User талын order card дээр одоогийн төлөвийн доор `Шинэчлэгдсэн: огноо` дараагийн мөрөнд харагдана.
-
-## Web component-ууд
-
-### `status-badge`
-
-Нэг component 3 variant-тай:
-
-```html
-<status-badge variant="home"></status-badge>
-<status-badge variant="header"></status-badge>
-<status-badge variant="timeline"></status-badge>
-```
-
-- `home` — нүүр хуудасны steps дээр
-- `header` — order card-ийн дээд төлөв дээр
-- `timeline` — order card-ийн status timeline дээр
-
-### `order-card`
-
-Track result дээр нэг захиалгын card зурна. Утас, жин, үнэ, барааны жагсаалт, төлөвийн timeline, цуцлах button зэргийг харуулна.
-
-### `faq-item`
-
-Тусламж page дээр нэг FAQ асуулт/хариултыг component хэлбэрээр харуулна.
-
-## API товч жагсаалт
-
-### Auth
+### Auth — `/api/auth`
 
 | Method | Route | Эрх | Тайлбар |
 |---|---|---|---|
-| POST | `/api/auth/register` | Public | User бүртгэх |
-| POST | `/api/auth/login` | Public | Login, token авах |
-| GET | `/api/auth/me` | User | Одоогийн user авах |
-| PUT | `/api/auth/password` | User | Нууц үг солих |
-| GET | `/api/auth/users` | Admin | User list |
-| PUT | `/api/auth/users/:id/role` | Admin | Role солих |
-| DELETE | `/api/auth/users/:id` | Admin | User устгах |
+| POST | `/register` | Public | Шинэ хэрэглэгч бүртгэх |
+| POST | `/login` | Public | Нэвтрэх, JWT token авах |
+| GET | `/me` | Нэвтэрсэн | Одоогийн хэрэглэгчийн мэдээлэл |
+| PUT | `/password` | Нэвтэрсэн | Нууц үг шинэчлэх |
+| GET | `/users` | Admin | Бүх хэрэглэгч харах |
+| PUT | `/users/:id/role` | Admin | Хэрэглэгчийн эрх солих |
+| DELETE | `/users/:id` | Admin | Хэрэглэгч устгах |
 
-### Shipments
-
-| Method | Route | Эрх | Тайлбар |
-|---|---|---|---|
-| POST | `/api/shipments` | Public / optional login | Шинэ захиалга үүсгэх |
-| GET | `/api/shipments/track/:code` | Public | Track code-оор хайх |
-| GET | `/api/shipments/by-phone/:phone` | Public | Утсаар хайх |
-| GET | `/api/shipments/my` | User | Login хийсэн user-ийн захиалгууд |
-| GET | `/api/shipments` | Admin | Бүх shipment авах |
-| PUT | `/api/shipments/:id/status` | Admin | Төлөв шинэчлэх |
-| PUT | `/api/shipments/:id` | Admin | Нийт жин засах, үнэ дахин бодох |
-| PUT | `/api/shipments/:id/cancel` | User/Admin | Захиалга цуцлах |
-| DELETE | `/api/shipments/:id` | Admin | Shipment устгах |
-
-### FAQ
+### Shipments — `/api/shipments`
 
 | Method | Route | Эрх | Тайлбар |
 |---|---|---|---|
-| GET | `/api/faqs` | Public | FAQ list авах |
-| GET | `/api/faqs/categories` | Public | FAQ category авах |
-| POST | `/api/faqs` | Admin | FAQ нэмэх |
-| PUT | `/api/faqs/:id` | Admin | FAQ засах |
-| DELETE | `/api/faqs/:id` | Admin | FAQ устгах |
+| POST | `/` | Public / optional | Захиалга үүсгэх |
+| GET | `/track/:code` | Public | Хяналтын кодоор хайх |
+| GET | `/by-phone/:phone` | Public | Утасны дугаараар хайх |
+| GET | `/my` | Нэвтэрсэн | Өөрийн илгээмжүүд |
+| PUT | `/:id/cancel` | Нэвтэрсэн | Захиалга цуцлах |
+| GET | `/` | Admin | Бүх илгээмж (filter, pagination) |
+| PUT | `/:id/status` | Admin | Төлөв шинэчлэх |
+| PUT | `/:id` | Admin | Нийт жин засах (үнэ автоматаар дахин бодогдоно) |
+| DELETE | `/:id` | Admin | Илгээмж устгах |
 
-## 2 computer дээр адил data харах
+### FAQs — `/api/faqs`
 
-`localhost` нь зөвхөн тухайн computer-ийг заадаг. Нөгөө computer дээр адил data харахын тулд нэг computer дээр backend ажиллуулаад нөгөө computer нь тухайн computer-ийн IPv4 address-аар орно.
+| Method | Route | Эрх | Тайлбар |
+|---|---|---|---|
+| GET | `/` | Public | FAQ жагсаалт авах |
+| POST | `/` | Admin | FAQ нэмэх |
+| PUT | `/:id` | Admin | FAQ засах |
+| DELETE | `/:id` | Admin | FAQ устгах |
+| GET | `/categories` | Public | FAQ ангиллын жагсаалт |
+| POST | `/categories` | Admin | FAQ ангилал нэмэх |
 
-Жишээ:
+---
 
-```text
-Server computer IP: 172.20.10.2
-User computer URL:  http://172.20.10.2:5000
-Admin URL:          http://172.20.10.2:5000/admin
-```
+## Хөгжүүлэлтийн тэмдэглэл
 
-`server.js` дотор listen хэсэг:
+- `.env` файлыг GitHub-д upload хийхгүй байх — `.gitignore`-д оруулна
+- Real deployment хийхэд `JWT_SECRET`-ийг заавал солих
+- API route өөрчлөхөд frontend JS болон `admin/script.js`-г хамт шинэчлэх
+- `SHIPPING_RATE_PER_KG` environment variable-аар тариф тохируулна (default: 3500 ₮/кг)
 
-```js
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server running on port ${PORT}`);
-});
-```
+---
 
-## Алдаа засах
-
-### MongoDB connection error
-
-```text
-connect ECONNREFUSED 127.0.0.1:27017
-```
-
-MongoDB ажиллаж байгаа эсэх, `.env` доторх `MONGO_URI` зөв эсэхийг шалгана.
-
-### Guest order дээр 401 гарах
-
-Guest order login шаардах ёсгүй. Browser дээр хуучин token хадгалагдсан бол DevTools Console дээр:
-
-```js
-localStorage.clear()
-```
-
-гээд refresh хийнэ.
-
-### Шинэ захиалга 0 жин/үнэтэй харагдахгүй байвал
-
-1. `routes/shipments.js` шинэчлэгдсэн эсэхийг шалгана.
-2. Server-ээ `Ctrl + C` дараад дахин `npm run dev` хийж restart хийнэ.
-3. Өмнө нь DB-д хадгалагдсан хуучин shipment бол хуучин утгаа хадгалсан байж болно. Шинээр үүсгэсэн order дээр `total_weight: 0`, `shipping_price: 0` байх ёстой.
-
-### CSS өөрчлөлт харагдахгүй бол
-
-Browser cache цэвэрлэхийн тулд hard refresh хийнэ:
-
-```text
-Ctrl + F5
-```
-
-Мөн `public/index.html` дээр дараах CSS link байгаа эсэхийг шалгана:
-
-```html
-<link rel="stylesheet" href="./components/status-badge.css" />
-<link rel="stylesheet" href="./components/faq-item.css" />
-<link rel="stylesheet" href="./components/order-card.css" />
-```
-
-## Түгээмэл command
+## Түгээмэл команд
 
 ```bash
-npm install      # package суулгах
-npm run seed     # test data нэмэх
-npm run dev      # development mode
-npm start        # production маягаар асаах
+npm install      # Dependency суулгах
+npm run seed     # Туршилтын өгөгдөл нэмэх
+npm run dev      # Development mode (nodemon)
+npm start        # Production mode
 ```

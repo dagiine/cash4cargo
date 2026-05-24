@@ -1,3 +1,5 @@
+import { getFaqCategoriesWithMissing, handleFaqAdminClick, handleFaqAdminSubmit, renderFaqAdmin } from "./js/faqAdmin.js";
+
 const API_BASE = `${window.location.origin}/api`;
 const TOKEN_KEY = "cash4cargo_admin_token";
 const SHIPPING_RATE_PER_KG = 3500;
@@ -282,62 +284,8 @@ function renderUsers() {
 }
 
 function renderFaq() {
-  const options = faqCategories.map((category) => `
-    <option value="${category.name}">${category.name}</option>
-  `).join("");
-
-  appContent.innerHTML = `
-    <section class="page-title">
-      <div>
-        <h1>FAQ</h1>
-        <p>Эхлээд ангилал сонгоод, тухайн ангилал дотор асуулт нэмнэ.</p>
-      </div>
-    </section>
-
-    <section class="panel faq-admin-layout">
-      <form id="categoryForm" class="form-grid category-form">
-        <label>
-          Шинэ ангиллын нэр
-          <input name="name" placeholder="Жишээ: Даатгал" required />
-        </label>
-        <label>
-          Icon нэр <small>/заавал биш/</small>
-          <input name="icon" placeholder="Жишээ: verified_user" />
-        </label>
-        <button class="secondary-btn" type="submit">Ангилал нэмэх</button>
-      </form>
-
-      <form id="faqForm" class="form-grid">
-        <label>
-          Ангилал
-          <select name="category" required>
-            ${options || `<option value="Захиалга">Захиалга</option>`}
-          </select>
-        </label>
-        <label>Асуулт<input name="question" placeholder="Жишээ: Ачаа хэд хоногт ирэх вэ?" required /></label>
-        <label class="full-field">Хариулт<textarea name="answer" placeholder="Хариултаа бичнэ үү" required></textarea></label>
-        <button class="primary-btn" type="submit">Асуулт нэмэх</button>
-      </form>
-    </section>
-
-    <section class="faq-list">
-      ${faqCategories.map((category) => {
-        const list = faqs.filter((faq) => faq.category === category.name);
-        return `
-          <article class="faq-category-card">
-            <h2>${category.name}</h2>
-            ${list.map((faq) => `
-              <div class="faq-card inner-faq-card">
-                <small>${faq.category || "Ерөнхий"}</small>
-                <h3>${faq.question}</h3>
-                <p>${faq.answer}</p>
-                <button class="danger-btn compact" data-delete-faq="${faq._id}">Устгах</button>
-              </div>
-            `).join("") || `<p class="empty-text">Энэ ангилалд асуулт нэмэгдээгүй байна.</p>`}
-          </article>
-        `;
-      }).join("") || `<p class="empty-text">FAQ ангилал нэмэгдээгүй байна.</p>`}
-    </section>`;
+  // FAQ-ийн HTML болон category logic admin/js/faqAdmin.js дотор байгаа.
+  appContent.innerHTML = renderFaqAdmin(faqs, faqCategories);
 }
 
 function renderShipmentDetail(code) {
@@ -485,14 +433,7 @@ async function loadData() {
   shipments = (shipmentsResponse.shipments || []).map(mapShipment);
   users = usersResponse.users || [];
   faqs = faqsResponse.faqs || [];
-  faqCategories = categoriesResponse.categories || [];
-  const knownCategories = new Set(faqCategories.map((category) => category.name));
-  faqs.forEach((faq) => {
-    if (faq.category && !knownCategories.has(faq.category)) {
-      faqCategories.push({ name: faq.category, icon: "help" });
-      knownCategories.add(faq.category);
-    }
-  });
+  faqCategories = getFaqCategoriesWithMissing(faqs, categoriesResponse.categories || []);
 }
 async function loadDataAndRender() {
   try {
@@ -564,39 +505,15 @@ appContent.addEventListener("click", async (event) => {
   }
 
   if (deleteFaqBtn) {
-    if (!confirm("Энэ FAQ-г устгах уу?")) return;
-    await apiFetch(`/faqs/${deleteFaqBtn.dataset.deleteFaq}`, { method: "DELETE" });
-    await loadDataAndRender();
+    await handleFaqAdminClick(event, apiFetch, loadDataAndRender);
+    return;
   }
 });
 
 appContent.addEventListener("submit", async (event) => {
-  if (event.target.id === "categoryForm") {
-    event.preventDefault();
-    const form = new FormData(event.target);
-    await apiFetch("/faqs/categories", {
-      method: "POST",
-      body: JSON.stringify({ name: form.get("name"), icon: form.get("icon") || "help" })
-    });
-    event.target.reset();
-    await loadDataAndRender();
-    return;
-  }
-
-  if (event.target.id === "faqForm") {
-    event.preventDefault();
-    const form = new FormData(event.target);
-    await apiFetch("/faqs", {
-      method: "POST",
-      body: JSON.stringify({
-        question: form.get("question"),
-        answer: form.get("answer"),
-        category: form.get("category") || "Захиалга"
-      })
-    });
-    event.target.reset();
-    await loadDataAndRender();
-  }
+  // FAQ/category form-уудын logic admin/js/faqAdmin.js дотор салсан.
+  const faqHandled = await handleFaqAdminSubmit(event, apiFetch, loadDataAndRender);
+  if (faqHandled) return;
 });
 
 searchInput.addEventListener("input", () => {

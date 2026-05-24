@@ -1,294 +1,372 @@
 /* =========================================
    ORDER CARD COMPONENT
-   Захиалга хянах result card
+   Нэг захиалгын card-ийн CSS.
+   Track page-ийн бусад CSS-ээс тусад нь салгасан.
 ========================================= */
 
-.order-card {
-  width: 100%;
+order-card {
+  display: block;
+}
 
+/* Card суурь */
+.track-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 22px;
   background: var(--color-cream);
   border: 1px solid var(--border-default);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card, 0 12px 30px rgba(86, 47, 0, 0.08));
-
-  padding: 20px;
-  color: var(--color-text);
+  box-shadow: var(--shadow-card);
 }
 
-/* Олгогдсон захиалга dim харагдана */
-.order-card.is-delivered {
-  opacity: 0.62;
-  background: color-mix(in srgb, var(--color-cream) 80%, white 20%);
+.track-card:hover {
+  border-color: var(--border-strong);
 }
 
-.order-card.is-delivered * {
-  color: var(--color-muted);
+/* Олгогдсон болон цуцлагдсан үед бүдэг харагдуулна */
+.track-card--delivered,
+.track-card--canceled {
+  background: var(--color-surface);
+  opacity: 0.78;
 }
 
-/* =========================================
-   TOP AREA
-========================================= */
+.track-card--delivered .track-card__code,
+.track-card--delivered .track-card__status,
+.track-card--delivered .track-card__date,
+.track-card--delivered .step-label,
+.track-card--delivered .step-date,
+.track-card--delivered .track-card__items,
+.track-card--delivered .track-card__items * {
+  color: var(--color-muted) !important;
+}
 
-.order-card__top {
+/* Card header */
+.track-card__header {
   display: flex;
-  justify-content: space-between;
   align-items: flex-start;
+  justify-content: space-between;
   gap: 16px;
-
-  padding-bottom: 16px;
+  padding-bottom: 14px;
   border-bottom: 1px solid var(--border-default);
 }
 
-.order-card__code {
-  margin: 0 0 6px;
+.track-card__main {
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
 
+.track-card__icon {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+  border: 1px solid var(--border-default);
   color: var(--color-brown);
-  font-size: 20px;
+}
+
+.track-card__icon .material-symbols-outlined {
+  font-size: 24px;
+}
+
+.track-card__content {
+  min-width: 0;
+  text-align: left;
+}
+
+.track-card__code {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-lg);
   font-weight: 900;
   line-height: 1.2;
 }
 
-.order-card__cancel {
-  flex-shrink: 0;
+.track-card__status {
+  margin: 5px 0 0;
+  color: var(--color-brown);
+  font-size: var(--font-size-sm);
+  font-weight: 900;
+}
 
-  height: 38px;
+.track-card__date {
+  margin: 8px 0 0;
+  color: var(--color-muted);
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+}
+
+/* Цуцлах товч */
+.cancel-order-btn {
+  flex-shrink: 0;
+  min-height: 38px;
   padding: 0 14px;
   border-radius: var(--btn-radius);
-
-  background: transparent;
+  border: 1px solid var(--color-brown);
+  background: var(--color-cream);
   color: var(--color-brown);
-  border: 1.5px solid var(--color-brown);
-
-  font-size: 13px;
-  font-weight: 800;
+  font-family: var(--font-base);
+  font-size: var(--font-size-sm);
+  font-weight: 900;
   cursor: pointer;
-
-  transition: 0.2s;
+  transition: var(--transition-fast);
 }
 
-.order-card__cancel:hover {
-  background: var(--color-orange);
-  color: var(--color-brown);
-  border-color: var(--color-orange);
-}
-
-/* =========================================
-   MAIN INFO
-   Утас, жин, үнэ
-========================================= */
-
-.order-card__info {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-
-  margin-top: 16px;
-}
-
-.order-card__info-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  padding: 0;
-  background: transparent;
-  border: none;
-}
-
-.order-card__info-icon {
-  flex-shrink: 0;
-
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
+.cancel-order-btn:hover {
   background: var(--color-brown);
   color: var(--color-cream);
 }
 
-.order-card__info-icon .material-symbols-outlined {
-  font-size: 19px;
+.cancel-order-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
-.order-card__info-text {
+/* Утас / жин / үнэ */
+.track-card__mini-details {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.order-card__info-text span {
-  color: var(--color-muted);
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.order-card__info-text strong {
-  color: var(--color-brown);
-  font-size: 15px;
-  font-weight: 900;
-}
-
-/* Үнэ илүү тод харагдана */
-.order-card__info-item.is-price {
-  padding: 10px 12px;
-  border-radius: var(--radius-md);
-  background: rgba(255, 178, 44, 0.16);
-  border: 1px solid rgba(255, 178, 44, 0.45);
-}
-
-.order-card__info-item.is-price .order-card__info-icon {
-  background: var(--color-orange);
-  color: var(--color-brown);
-}
-
-.order-card__info-item.is-price strong {
-  color: var(--color-orange);
-}
-
-/* =========================================
-   ITEMS LIST
-   Захиалгад байгаа бараанууд
-========================================= */
-
-.order-card__items {
-  margin-top: 18px;
-}
-
-.order-card__section-title {
-  margin: 0 0 10px;
-
-  color: var(--color-brown);
-  font-size: 14px;
-  font-weight: 900;
-}
-
-.order-card__item-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.order-card__item {
-  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-
-  padding: 10px 12px;
-  border-radius: var(--radius-md);
-  background: var(--color-bg);
-  border: 1px solid var(--border-default);
+  gap: 10px 18px;
+  margin-top: 14px;
 }
 
-.order-card__item-name {
-  color: var(--color-text);
-  font-size: 14px;
-  font-weight: 800;
-}
-
-.order-card__item-qty {
+.detail-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   color: var(--color-muted);
-  font-size: 13px;
+  font-size: var(--font-size-sm);
   font-weight: 700;
 }
 
-/* =========================================
-   TIMELINE
-========================================= */
-
-.order-card__timeline {
-  margin-top: 18px;
+.detail-pill strong {
+  color: var(--color-text);
+  font-weight: 900;
 }
 
-.order-card__status-list {
-  position: relative;
+.detail-pill .material-symbols-outlined {
+  color: var(--color-brown);
+  font-size: 20px;
+}
 
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+.detail-pill--price {
+  padding: 7px 10px;
+  border-radius: var(--radius-md);
+  background: var(--color-yellow-dim);
+  border: 1px solid var(--color-orange);
+  color: var(--color-brown);
+}
 
+.detail-pill--price strong {
+  color: var(--color-brown);
+  font-size: var(--font-size-base);
+}
+
+/* Барааны жагсаалт */
+.track-card__items {
+  text-align: left;
+  padding: 14px 16px;
+  background: var(--color-surface);
+  border: 1px dashed var(--border-default);
+  border-radius: var(--radius-md);
+}
+
+.track-card__items strong {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  font-weight: 900;
+}
+
+.track-card__items ul {
   margin: 0;
-  padding: 0;
-  list-style: none;
+  padding-left: 18px;
+  color: var(--color-text);
 }
 
-/* Босоо зураас */
-.order-card__status-list::before {
+.track-card__items li + li {
+  margin-top: 7px;
+}
+
+.track-card__items span {
+  font-weight: 900;
+}
+
+.track-card__items small {
+  display: block;
+  margin-top: 2px;
+  color: var(--color-muted);
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+}
+
+/* Status timeline */
+.track-steps {
+  list-style: none;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin: 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--border-default);
+}
+
+.track-steps::before {
   content: "";
   position: absolute;
-  top: 18px;
-  bottom: 18px;
-  left: 17px;
-
-  width: 2px;
+  top: 32px;
+  left: 8%;
+  right: 8%;
+  height: 2px;
   background: var(--border-default);
 }
 
-/* Timeline badge зурааснаас дээр харагдана */
-.order-card__status-list status-badge {
+.step {
   position: relative;
   z-index: 1;
-}
-
-/* =========================================
-   EMPTY / MESSAGE
-========================================= */
-
-.order-card__message {
-  margin-top: 14px;
-  padding: 12px 14px;
-
-  border-radius: var(--radius-md);
-  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  text-align: center;
   color: var(--color-muted);
-
-  font-size: 13px;
-  font-weight: 700;
 }
 
-/* =========================================
-   MOBILE
-========================================= */
+/* Step icon-той дугуй */
+.step-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-cream);
+  border: 2px solid var(--border-default);
+  color: var(--color-muted);
+}
+
+.step-dot .material-symbols-outlined {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.step.done .step-dot {
+  background: var(--color-brown);
+  border-color: var(--color-brown);
+  color: var(--color-cream);
+}
+
+.step.current .step-dot {
+  background: var(--color-orange);
+  border-color: var(--color-orange);
+  color: var(--color-brown);
+  box-shadow: 0 0 0 4px var(--color-yellow-dim);
+}
+
+.step-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.step-label {
+  color: var(--color-muted);
+  font-size: var(--font-size-xs);
+  font-weight: 850;
+  line-height: 1.25;
+}
+
+.step.done .step-label,
+.step.current .step-label {
+  color: var(--color-brown);
+}
+
+.step-date {
+  display: block;
+  color: var(--color-muted);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.step.current .step-date {
+  color: var(--color-brown);
+  font-weight: 900;
+}
+
+/* Цуцлагдсан тэмдэглэл */
+.track-canceled-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-default);
+  background: var(--color-surface);
+  color: var(--color-brown);
+  font-size: var(--font-size-sm);
+  font-weight: 900;
+}
 
 @media (max-width: 767px) {
-  .order-card {
-    padding: 16px;
+  .track-card {
+    padding: 18px 16px;
   }
 
-  .order-card__top {
+  .track-card__header {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .track-card__main {
+    width: 100%;
+  }
+
+  .cancel-order-btn {
+    width: 100%;
+  }
+
+  .track-card__mini-details {
+    flex-direction: column;
     align-items: flex-start;
+    gap: 9px;
+  }
+
+  .track-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 16px 0 0 2px;
+  }
+
+  .track-steps::before {
+    top: 30px;
+    bottom: 22px;
+    left: 14px;
+    right: auto;
+    width: 2px;
+    height: auto;
+  }
+
+  .step {
+    min-height: 58px;
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
     gap: 12px;
   }
 
-  .order-card__code {
-    font-size: 18px;
-  }
-
-  .order-card__cancel {
-    height: 36px;
-    padding: 0 12px;
-    font-size: 12px;
-  }
-
-  .order-card__info {
-    grid-template-columns: 1fr;
-  }
-
-  .order-card__info-item.is-price {
-    padding: 10px;
-  }
-
-  .order-card__item {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 4px;
+  .step-dot {
+    flex-shrink: 0;
   }
 }

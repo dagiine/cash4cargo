@@ -71,40 +71,45 @@ export default function home() {
 
         <div class="steps-grid">
 
-          <status-badge
-            variant="home"
-            icon="send"
-            status="Захиалга үүсгэсэн"
-            description="Та захиалгаа манай системд бүртгүүлснээр илгээмжний мэдээлэл үүснэ. Энэ шатанд захиалгын мэдээллээ засах эсвэл цуцлах боломжтой."
-          ></status-badge>
+          <article class="step">
+            <div class="step-icon">
+              <span class="material-symbols-outlined">send</span>
+            </div>
+            <span class="step-label">Захиалга үүсгэсэн</span>
+            <p>Та захиалгаа манай системд бүртгүүлснээр илгээмжний мэдээлэл үүснэ. Энэ шатанд захиалгын мэдээллээ засах эсвэл цуцлах боломжтой.</p>
+          </article>
 
-          <status-badge
-            variant="home"
-            icon="inventory_2"
-            status="Хятадын агуулахад"
-            description="Таны илгээмж Хятад дахь агуулахад ирж, жин хэмжилт хийгдэнэ. Ачаа ихэвчлэн тухайн өдөр эсвэл маргааш нь тээвэрлэгдэнэ."
-          ></status-badge>
+          <article class="step">
+            <div class="step-icon">
+              <span class="material-symbols-outlined">inventory_2</span>
+            </div>
+            <span class="step-label">Хятадын агуулахад</span>
+            <p>Таны илгээмж Хятад дахь агуулахад ирж, жин хэмжилт хийгдэнэ. Ачаа ихэвчлэн тухайн өдөр эсвэл маргааш нь тээвэрлэгдэнэ.</p>
+          </article>
 
-          <status-badge
-            variant="home"
-            icon="local_shipping"
-            status="Замын Үүд дээр"
-            description="Илгээмж хилээр нэвтрэх гаалийн бүрдүүлэлтэд орно. Гаалийн шалгалт дундажаар 3–24 цаг орчим үргэлжилдэг."
-          ></status-badge>
+          <article class="step">
+            <div class="step-icon">
+              <span class="material-symbols-outlined">local_shipping</span>
+            </div>
+            <span class="step-label">Замын Үүд дээр</span>
+            <p>Илгээмж хилээр нэвтрэх гаалийн бүрдүүлэлтэд орно. Гаалийн шалгалт дундажаар 3–24 цаг орчим үргэлжилдэг.</p>
+          </article>
 
-          <status-badge
-            variant="home"
-            icon="warehouse"
-            status="Улаанбаатарт ирсэн"
-            description="Илгээмжээ хүлээн авахдаа хяналтын код эсвэл бүртгэлтэй утасны дугаараа баталгаажуулна."
-          ></status-badge>
+          <article class="step">
+            <div class="step-icon">
+              <span class="material-symbols-outlined">warehouse</span>
+            </div>
+            <span class="step-label">Улаанбаатарт ирсэн</span>
+            <p>Илгээмжээ хүлээн авахдаа хяналтын код эсвэл бүртгэлтэй утасны дугаараа баталгаажуулна.</p>
+          </article>
 
-          <status-badge
-            variant="home"
-            icon="check_circle"
-            status="Олгогдсон"
-            description="Та илгээмжээ хүлээн авч, захиалга амжилттай дуусгавар болно."
-          ></status-badge>
+          <article class="step">
+            <div class="step-icon">
+              <span class="material-symbols-outlined">check_circle</span>
+            </div>
+            <span class="step-label">Олгогдсон</span>
+            <p>Та илгээмжээ хүлээн авч, захиалга амжилттай дуусгавар болно.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -177,7 +182,7 @@ export default function home() {
     <section class="bottom-cta">
       <div class="bottom-cta-content">
         <h2>Захиалга үүсгэх үү?</h2>
-        <p>Бид таны захиалсан бараа бүтээгдэхүүнийг БНХАУ-ын бүх хотоос Улаанбаатар хот хүртэл хамгийн найдвартай, хурдан шуурхай бөгөөд аюулгүйгээр тээвэрлэн ирүүлнэ.</p>
+        <p>Захиалгаа үүсгээд илгээмжээ бодит хугацаанд хянах боломжтой.</p>
 
         <div class="bottom-cta-actions">
           <a href="#/create-order" class="btn">Захиалга үүсгэх</a>

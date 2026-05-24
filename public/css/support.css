@@ -215,8 +215,3 @@ details p {
     padding: 0 12px;
   }
 }
-
-/* FAQ web component нь энгийн block шиг ажиллана */
-faq-item {
-  display: block;
-}

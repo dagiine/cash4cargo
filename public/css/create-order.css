@@ -49,9 +49,9 @@
 .co-heading {
   margin: 0 0 6px;
   color: var(--color-text);
-  font-size: var(--h1-font-size);
-  font-weight: var(--h1-font-weight);
-  line-height: var(--h1-line-height);
+  font-size: var(--h2-font-size);
+  font-weight: var(--h2-font-weight);
+  line-height: var(--h2-line-height);
 }
 
 .co-subheading {
@@ -71,8 +71,7 @@
    ТОВЧНУУД
 ========================================= */
 
-.co-submit-btn,
-.co-calc-btn {
+.co-submit-btn {
   border: 0;
   background: var(--color-orange);
   color: var(--color-cream);
@@ -82,8 +81,7 @@
   transition: var(--transition-fast);
 }
 
-.co-submit-btn:hover,
-.co-calc-btn:hover {
+.co-submit-btn:hover {
   opacity: var(--btn-hover-opacity);
 }
 
@@ -443,17 +441,6 @@
   color: var(--color-brown);
   font-size: var(--font-size-xl);
   font-weight: 900;
-}
-
-.co-calc-btn {
-  width: 100%;
-  height: 46px;
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-size: var(--font-size-sm);
 }
 
 /* =========================================

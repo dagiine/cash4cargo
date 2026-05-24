@@ -78,7 +78,7 @@ export default function about() {
           <div class="about-team-card__avatar">
             <span class="material-symbols-outlined">person</span>
           </div>
-          <h3>Дагиина</h3>
+          <h3>Дагиймаа</h3>
           <span class="about-team-card__role">Үүсгэн байгуулагч &amp; CEO</span>
           <p>Логистик салбарт 6 жил ажилласан туршлагатай. Монголын карго үйлчилгээг шинэ түвшинд гаргах зорилго тавьсан.</p>
         </div>
@@ -94,7 +94,7 @@ export default function about() {
           <div class="about-team-card__avatar">
             <span class="material-symbols-outlined">person</span>
           </div>
-          <h3>Бат-Эрдэнэ</h3>
+          <h3>Бадрах</h3>
           <span class="about-team-card__role">Гаалийн мэргэжилтэн</span>
           <p>Хятад-Монголын хилийн гаалийн бүрдүүлэлтэд 8 жилийн туршлагатай мэргэжилтэн.</p>
         </div>

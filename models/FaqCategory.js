@@ -4,7 +4,7 @@ const faqCategorySchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "Ангиллын нэр оруулна уу"],
+      required: [true, "Ангиллын нэрийг оруулна уу"],
       trim: true,
       unique: true,
     },

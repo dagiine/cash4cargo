@@ -5,19 +5,6 @@
    Orange өнгийг зөвхөн онцлох хэсэгт ашиглав.
 ========================================= */
 
-order-card {
-  display: block;
-}
-
-/* Status badge component track page дээр timeline-ийн child шиг ажиллана */
-status-badge[variant="timeline"] {
-  display: contents;
-}
-
-status-badge[variant="header"] {
-  display: block;
-}
-
 #track-results {
   width: 100%;
   max-width: 880px;
@@ -90,8 +77,6 @@ status-badge[variant="header"] {
 
 .track-card--delivered .track-card__code,
 .track-card--delivered .track-card__status,
-.track-card--delivered .status-badge--header,
-.track-card--delivered .status-badge--header *,
 .track-card--delivered .step-label,
 .track-card--delivered .step-date,
 .track-card--delivered .track-card__items,
@@ -349,8 +334,8 @@ status-badge[variant="header"] {
 
 .step.done .step-icon {
   border-color: var(--color-brown);
-  background: var(--color-surface);
-  color: var(--color-brown);
+  background: var(--color-brown);
+  color: var(--color-cream);
 }
 
 .step.current .step-icon {
@@ -499,4 +484,9 @@ status-badge[variant="header"] {
   .step-date {
     display: block;
   }
+}
+
+/* Web component өөрөө block element шиг ажиллана */
+order-card {
+  display: block;
 }

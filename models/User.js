@@ -10,10 +10,10 @@ const userSchema = new mongoose.Schema(
     },
     phone: {
       type: String,
-      required: [true, "Утасны дугаар оруулна уу"],
+      required: [true, "Утасны дугаараа оруулна уу"],
       unique: true,
       trim: true,
-      match: [/^[6-9]\d{7}$/, "Утасны дугаар буруу байна (8 оронтой, 6-9-аар эхэлнэ)"],
+      match: [/^[6-9]\d{7}$/, "Утасны дугаар буруу байна (8 оронтой, 6-9 эхэлнэ)"],
     },
     password_hash: {
       type: String,
